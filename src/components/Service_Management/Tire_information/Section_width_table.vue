@@ -1,18 +1,10 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <p class="Head">
-        Total<span class="Total">{{ items.length }}</span> number of views
+      <p class="card1">
+        Total<span class="card2">{{ items.length }}</span> number of views
       </p>
       <v-spacer></v-spacer>
-      <v-btn
-        @click="this.$router.push({ path: '/insert_product' })"
-        class="text-none text-subtitle-1"
-        color="#346DDB"
-        variant="flat"
-      >
-        Product registration
-      </v-btn>
       <div class="items-per-page">
         <select
           v-model="itemsPerPage"
@@ -39,16 +31,8 @@
               />
             </th>
             <th>Number</th>
-            <th>Display</th>
-            <th>Category</th>
-            <th>Service</th>
-            <th>Price standard</th>
-            <th>Product image</th>
-            <th>Product name</th>
-            <th>Price</th>
-            <th>Store availability</th>
-            <th>Company name</th>
-            <th>Registration date</th>
+            <th>Division</th>
+            <th>Section width</th>
             <th>Management</th>
           </tr>
           <tr v-for="item in visibleItems" :key="item.id">
@@ -60,23 +44,14 @@
               />
             </td>
             <td>{{ item.Number }}</td>
+            <td>{{ item.Division }}</td>
+            <td class="td3">{{ item.Section }}</td>
+
             <td>
-              <p class="td2">{{ item.Display }}</p>
-            </td>
-            <td>{{ item.Category }}</td>
-            <td>{{ item.Service }}</td>
-            <td>{{ item.standard }}</td>
-            <td >{{ item.image }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.Price }}</td>
-            <td>{{ item.Store }}</td>
-            <td>{{ item.Company }}</td>
-            <td>{{ item.date }}</td>
-            <td>
-              <v-btn size="x-small" flat @click="editItem(item)" class="management"
+              <v-btn flat @click="editItem(item)" class="management"
                 >수정</v-btn
               >
-              <v-btn size="x-small" flat @click="confirmDelete(item)" class="management"
+              <v-btn flat @click="confirmDelete(item)" class="management"
                 >삭제</v-btn
               >
             </td>
@@ -92,19 +67,18 @@
      const page =ref(1);
   const itemsPerPage  =ref(10);
   const items = ref([
-  {
-    Number: 1,
-    Display: '진열',
-    Category: '셀프/대여',
-    Service: '셀프 세차장',
-    standard: '이용시간',
-    image: '이용시간',
-    name: '상품명',
-    Price: '10,000 원',
-    Store: '입점',
-    Company: '업체명',
-    date: 'YYYY-MM-DD'
-  },  ]);
+  { Number: 1, Division: 'Brand', Section: '145'}, 
+  { Number: 2, Division: 'Brand', Section: '145'}, 
+  { Number: 3, Division: 'Brand', Section: '145'}, 
+  { Number: 4, Division: 'Brand', Section: '145'}, 
+  { Number: 5, Division: 'Brand', Section: '145'}, 
+  { Number: 6, Division: 'Brand', Section: '145'}, 
+  { Number: 7, Division: 'Brand', Section: '145'}, 
+  { Number: 8, Division: 'Brand', Section: '145'}, 
+  { Number: 9, Division: 'Brand', Section: '145'}, 
+  { Number: 10, Division: 'Brand', Section: '145'}, 
+
+]);
   
   const selectAll = ref(false);
   
@@ -138,5 +112,82 @@
   };
      </script>
     <style scoped>
+.items_per {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #8899a8;
+  width: 85px;
+  height: 35px;
+  border: 1px solid #e3e8ed;
+  margin: 5px;
+}
+.management {
+  height: 18px;
+  text-align: center;
+  color: #7d92a1;
+  border: 1px solid #7d92a1;
+  margin-left: 5px;
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+.td3 {
+  width: 788px;
+  height: 36px;
+  padding: 4px, 8px, 4px, 8px;
+  border: 1px, 0px, 0px, 1px;
+  gap: 8px;
+}
 
+.card1 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: 10px;
+  color: #242424;
+}
+.card2 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: 10px;
+  color: #346ddb;
+}
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Noto Sans KR;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.custom-table th {
+  background-color: #f5f8fa;
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+.custom-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.btn {
+  color: white;
+  background-color: #346ddb;
+  font-family: Noto Sans KR;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  height: 32px;
+}
 </style>

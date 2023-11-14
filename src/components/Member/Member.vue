@@ -3,8 +3,8 @@
     <v-app style="background-color: #e3e8ed">
       <div>
         <div class="pb-5">
-          <p class="H-Title">Member list</p>
-          <p class="Title">Member Management > Member List</p>
+          <p class="Page_name">Member list</p>
+          <p class="Page_name_title">Member Management > Member List</p>
         </div>
         <div class="pb-5">
           <Search_requirement />
@@ -22,18 +22,5 @@
   
   </script>
   <style scoped>
-  .H-Title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #242424;
-    margin-left: 5%;
-    margin-top: 2%;
-  }
-  .Title {
-    font-size: 12px;
-    font-weight: 500;
-    color: #8899a8;
-    margin-left: 5%;
-  }
-  
+  @import '/src/assets/css/style.css';
   </style>

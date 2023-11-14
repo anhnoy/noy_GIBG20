@@ -51,6 +51,11 @@ const routes = [
     component: () => import('../components/Member/Member.vue')
   },
   {
+    path: '/reservation',
+    name: 'Reservation',
+    component: () => import('../components/Reservation/Reservation.vue')
+  },
+  {
     path: '/administrator',
     name: 'Administrator',
     component: () => import('../components/Member/Administrator.vue')
@@ -66,9 +71,19 @@ const routes = [
     component: () => import('../components/Service_Management/Product_list.vue')
   },
   {
+    path: '/tire_information',
+    name: 'Tire_information',
+    component: () => import('../components/Service_Management/Tire_information.vue')
+  },
+  {
     path: '/insert',
     name: 'Insert',
     component: () => import('../components/Partner/insert/insert.vue')
+  },
+  {
+    path: '/modify(partner)',
+    name: 'Modify(partner)',
+    component: () => import('../components/Partner/Detail(Modify)/modify.vue')
   },
   {
     path: '/insert_Admin',

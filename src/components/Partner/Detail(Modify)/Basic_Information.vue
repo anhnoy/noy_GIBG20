@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <span class="card1">Basic product information</span>
+      <span class="card1">Basic Information</span>
 
       <v-spacer></v-spacer>
 
@@ -18,92 +18,75 @@
         <v-container fluid>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* category</span>
+              <span class="T-search">* category </span>
             </v-col>
             <v-col>
-              <select id="CAT" name="CAT" class="input">
-                <option value="" disabled selected>Manager</option>
-                <option
-                  v-for="Manager in Managers"
-                  :key="Manager.value"
-                  :value="Manager.value"
-                >
-                  {{ Manager.label }}
-                </option>
-              </select>
+              <label for="vehicle1"
+                ><input type="checkbox" id="vehicle1" /> Maintenance/Car
+                Wash</label
+              >
+              <label for="vehicle2" class="checkbox"
+                ><input type="checkbox" id="vehicle2" /> Business visit</label
+              >
+              <label for="vehicle3" class="checkbox"
+                ><input type="checkbox" id="vehicle3" /> Self/Rental</label
+              >
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* Service </span>
-            </v-col>
-            <v-col>
-              <input
-                type="radio"
-                name="Service"
-                value="engineOilChange"
-                @change="updateSelection('engineOilChange')"
-              />
-              <label> Engine oil change</label>
-
-              <input
-                type="radio"
-                name="Service"
-                value="tireChange"
-                class="checkbox"
-                @change="updateSelection('tireChange')"
-              />
-              <label> tire change</label>
-
-              <input
-                type="radio"
-                name="Service"
-                value="carWash"
-                class="checkbox"
-                @change="updateSelection('carWash')"
-              />
-              <label> car wash</label>
-            </v-col>
-          </v-row>
-          <v-row v-if="selection === 'tireChange'">
-            <v-col cols="2">
-              <span class="T-search">* Brand name</span>
-            </v-col>
-            <v-col>
-              <select id="CAT" name="CAT" class="input">
-                <option value="" disabled selected>Brand</option>
-                <option
-                  v-for="Manager in Managers"
-                  :key="Manager.value"
-                  :value="Manager.value"
-                >
-                  {{ Manager.label }}
-                </option>
-              </select>
-            </v-col>
-          </v-row>
-          <v-row v-if="selection !== 'tireChange'">
-            <v-col cols="2">
-              <span class="T-search">* Product name</span>
+              <span class="T-search">* company name</span>
             </v-col>
             <v-col>
               <input
                 type="text"
-                class="input1"
-                placeholder="Please enter the product name."
+                class="input"
+                placeholder="Please enter the company name."
               />
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">Product Description</span>
+              <span class="T-search">* Representative number</span>
             </v-col>
             <v-col>
               <input
                 type="text"
-                class="textarea"
-                placeholder="Please enter a product description."
+                class="input"
+                placeholder="Please enter your phone number."
+              /><br />
+              <span class="hint">※ Please enter including the hyphen (-).</span>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="2">
+              <span class="T-search">* address</span>
+            </v-col>
+            <v-col>
+              <input type="text" class="input1" placeholder="address search" />
+              <label class="custom-file-label">search address</label>
+              <br />
+              <input
+                type="text"
+                class="input"
+                placeholder="Please enter your address."
               />
+              <input
+                type="text"
+                class="input"
+                placeholder="Please enter the detailed address."
+              />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="2">
+              <span class="T-search">* Latitude/Longitude</span>
+            </v-col>
+            <v-col>
+              <input type="text" class="input" placeholder="" />
+              <input type="text" class="input" placeholder="text" />
+              <br />
+              <span class="hint">※ Please enter including the hyphen (-).</span>
             </v-col>
           </v-row>
           <v-row>
@@ -118,13 +101,11 @@
               />
               <input
                 type="file"
-                id="fileInput2"
+                id="fileInput"
                 @change="previewImage"
                 style="display: none"
               />
-              <label for="fileInput2" class="custom-file-label"
-                >Find file</label
-              >
+              <label for="fileInput" class="custom-file-label">Find file</label>
               <br />
               <v-row class="pt-5 ml-2">
                 <div v-for="(img, index) in imagePreviews" :key="index">
@@ -138,24 +119,53 @@
               </v-row>
             </v-col>
           </v-row>
+          <v-row>
+            <v-col cols="2">
+              <span class="T-search">* Store availability </span>
+            </v-col>
+            <v-col>
+              <input type="radio" name="Store availability" />
+              <label> Not in stores</label>
+              <input type="radio" name="Store availability" class="checkbox" />
+              <label> Store entry</label>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="2">
+              <span class="T-search">* Exposure</span>
+            </v-col>
+            <v-col>
+              <input type="radio" name="Exposure" />
+              <label> Hiding</label>
+
+              <input type="radio" name="Exposure" class="checkbox" />
+              <label> Exposure</label>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="2">
+              <span class="T-search">* Business status </span>
+            </v-col>
+            <v-col>
+              <input type="radio" name="Business status" />
+              <label> Open</label>
+              <input type="radio" name="Business status" class="checkbox" />
+              <label> Business suspension</label>
+              <input type="radio" name="Business status" class="checkbox" />
+              <label> Closed down</label>
+            </v-col>
+          </v-row>
         </v-container>
       </div>
     </v-expand-transition>
   </v-card>
 </template>
-   <script setup lang="js">
-   import { ref } from 'vue';
-   import { defineEmits } from 'vue';
-   const selection = ref(null);
-   const emit = defineEmits(['selection']);
-   function updateSelection(value) {
-  selection.value = value;
-  emit('selection', value);
-}
-   
-   
+  <script setup lang="js">
+  import { ref } from 'vue';
+     
    const show = ref(false);
-   const imagePreviews = ref([]);
+  
+  const imagePreviews = ref([]);
   
   const previewImage = (event) => {
     const selectedImage = event.target.files[0];
@@ -165,7 +175,7 @@
   const removeImage = (index) => {
     imagePreviews.value.splice(index, 1);
   };
-   </script>
+  </script>
   <style scoped>
 .img-wrapper {
   position: relative; /* The parent container should be relative */
@@ -197,14 +207,6 @@ button.remove-button {
   line-height: 16px; /* Vertically centering the "X" text */
   text-align: center; /* Horizontally centering the "X" text */
 }
-.textarea {
-  width: 100%;
-  height: 100px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  padding: 8px 10px;
-  font-size: 13px;
-}
 .card1 {
   font-size: 16px;
   font-weight: 700;
@@ -214,6 +216,7 @@ button.remove-button {
   font-size: 14px;
   font-weight: 700;
   color: #7d92a1;
+  margin: 5px 20px 5px 0px;
 }
 .input {
   width: 250px;
@@ -225,28 +228,19 @@ button.remove-button {
   font-weight: 400;
 }
 .input1 {
-  width: 100%;
+  width: 148px;
   height: 35px;
   padding: 8px 10px;
   border: 1px solid #ccc;
-  margin-right: 10px;
+  margin: 0px 10px 10px 0px;
   font-size: 13px;
   font-weight: 400;
 }
-.input2 {
-  width: 106px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
+
 .input3 {
   width: 350px;
   height: 35px;
   padding: 8px 10px;
-  margin-right: 10px;
   font-size: 13px;
   font-weight: 400;
 }

@@ -1,54 +1,267 @@
-.v-card-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #394956;
-  }
-  .v-card-text {
-    font-size: 16px;
-    font-weight: 400;
-    color: #394956;
-  }
-  .caption {
-    font-size: 12px;
-    font-weight: 400;
-    color: #8899a8;
-  }
-  .validate {
-    font-size: 12px;
-    font-weight: 400;
-    color: #d93025;
-  }
-  .l-under {
-    font-size: 12px;
-    font-weight: 500;
-    color: #aab8c2;
-    margin-left: 4%;
-  }
-  .r-under {
-    font-size: 12px;
-    font-weight: 500;
-    color: #394956;
-    margin-right: 4%;
-  }
-  .time {
-    font-size: 15px;
-    font-weight: 700;
-    color: #346ddb;
-  }
-  .before-input-color {
-    background-color: red;
-  }
-  .success-btn {
-    background-color: #346ddb;
-    font-size: 15px;
-    font-weight: 500;
-    color: #ffffff;
-  }
-  
-  .error-btn {
-    background-color: #e3e8ed;
-    font-size: 15px;
-    font-weight: 500;
-    color: #7d92a1;
-  }
+.Page_name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #242424;
+  margin-left: 5%;
+  margin-top: 2%;
+}
+.Page_name_title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8899a8;
+  margin-left: 5%;
+}
+.hidden-checkbox {
+  display: none; /* Hide the actual checkbox */
+}
+
+.checkbox-label {
+  cursor: pointer;
+  position: relative;
+  padding-left: 35px;
+}
+
+.custom-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  border: 1px solid #e3e8ed;
+  margin-left: 5px;
+}
+
+.hidden-checkbox:checked + .custom-checkbox:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 7px;
+  height: 14px;
+  left: 5px;
+  border: 1px solid #346ddb;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+.hidden-radio {
+  display: none; /* Hide the actual radio input */
+}
+
+.radio-label {
+  padding-left: 30px;
+  position: relative;
+  cursor: pointer;
+  margin-right: 10px; /* Space between each radio button */
+  display: inline-block;
+}
+
+.radio-label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  transition: border-color 0.2s;
+}
+
+.radio-label:after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: #346DDB;
+  border-radius: 50%;
+  transform: translateY(-50%) scale(0);
+  transition: transform 0.2s ease;
+}
+
+.hidden-radio:checked + .radio-label:after {
+  transform: translateY(-50%) scale(1); /* Show the inner circle when selected */
+}
+.img-wrapper {
+  position: relative; /* The parent container should be relative */
+  display: inline-block;
+  margin: 5px;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button.remove-button {
+  width: 16px;
+  height: 16px;
+  background-color: #394956;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0; /* Resetting any default padding */
+  border: none; /* Remove default border */
+  position: absolute; /* Absolute positioning */
+  top: -5px; /* Positioning it slightly above the top of the image */
+  right: -5px; /* Positioning it slightly to the right of the image */
+  border-radius: 50%; /* Making the button round */
+  line-height: 16px; /* Vertically centering the "X" text */
+  text-align: center; /* Horizontally centering the "X" text */
+}
+.hint {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8899a8;
+}
+.Head {
+  font-size: 16px;
+  font-weight: 700;
+  color: #242424;
+  margin-left: 10px;
+}
+.Title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #7d92a1;
+  margin-right: 5%;
+}
+.Total {
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: 10px;
+  color: #346ddb;
+}
+.input {
+  width: 200px;
+  height: 35px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  font-weight: 400;
+  margin-right: 5px;
+  margin-top: 5px;
+
+}
+.dropdown {
+  width: 200px;
+  height: 35px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  font-size: 13px;
+  font-weight: 400;
+}
+::placeholder {
+  color: #8899a8;
+}
+.custom-file-label {
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  font-size: 13px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #7d92a1;
+  cursor: pointer;
+}
+.button {
+  margin: 5px;
+}
+.date-input {
+  width: 150px;
+  height: 35px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.items_per {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #8899a8;
+  width: 85px;
+  height: 35px;
+  border: 1px solid #e3e8ed;
+  margin: 5px;
+}
+.management {
+  width: 60px;
+  text-align: center;
+  color: #7d92a1;
+  border: 1px solid #7d92a1;
+  margin-left: 5px;
+  text-align: center;
+  font-family: Noto Sans KR;
+font-size: 10px;
+font-weight: 500;
+text-align: center;
+
+}
+.td3 {
+  font-family: Noto Sans KR;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #346ddb;
+}
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Noto Sans KR;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.custom-table th {
+  background-color: #f5f8fa;
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+.custom-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+.row {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  width: 50px;
+}
+.col_Break {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  width: auto;
+}
+
+.input-col input {
+  width: 100px;
+  padding: 5px 10px;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+}
 

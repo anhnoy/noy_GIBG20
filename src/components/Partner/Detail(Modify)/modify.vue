@@ -3,31 +3,32 @@
   <v-app style="background-color: #e3e8ed">
     <div>
       <div class="pb-5">
-        <p class="H-Title">Product registration</p>
+        <p class="H-Title">Company details</p>
         <p class="Title">
-          Service Management > Product List > Product Registration
+          Company Management > Company List > Company Details
         </p>
       </div>
       <div class="pb-5">
-        <company_information />
+        <Basic_Information />
       </div>
       <div class="pb-5">
-        <Basic_product_information @selection="handleSelection" />
-      </div>
-      <div class="pb-5" v-if="showPriceInformation">
-        <Price_information />
+        <Store_Information />
       </div>
       <div class="pb-5">
-        <Product_Management />
+        <Business_hours />
+      </div>
+      <div class="pb-5">
+        <Facility_information />
+      </div>
+      <div class="pb-5">
+        <Payment />
+      </div>
+      <div class="pb-5">
+        <Pricing />
       </div>
       <v-row>
         <v-col align="center" justify="center">
-          <v-btn
-            variant="outlined"
-            color="#346DDB"
-            class="button"
-            @click="this.$router.push({ path: '/product_list' })"
-          >
+          <v-btn variant="outlined" color="#346DDB" class="button" @click="this.$router.push({ path: '/partner' })" >
             cancellation
           </v-btn>
           <v-btn elevation="0" color="#346DDB" class="button">
@@ -39,19 +40,13 @@
   </v-app>
 </template>
 <script setup lang="js">
-import { ref } from 'vue';
-  import company_information from "@/components/Service_Management/Product_list/insert/Company_information.vue";
-  import Basic_product_information from "@/components/Service_Management/Product_list/insert/Basic_product_information.vue";
-  import Price_information from "@/components/Service_Management/Product_list/insert/Price_information.vue";
-  import Product_Management from "@/components/Service_Management/Product_list/insert/Product_Management.vue";
+import Basic_Information from "@/components/Partner/insert/Basic_Information.vue";
+import Store_Information from "@/components/Partner/insert/Store_information.vue";
+import Business_hours from "@/components/Partner/insert/Business_hours.vue";
+import Facility_information from "@/components/Partner/insert/Facility_information.vue";
+import Payment from "@/components/Partner/insert/Payment.vue";
+import Pricing from "@/components/Partner/insert/Pricing_information.vue";
 
-
-  const showPriceInformation = ref(true);
-
-const handleSelection = (serviceType) => {
-  // Assuming you only want to hide the Price_information when "tireChange" is selected
-  showPriceInformation.value = serviceType !== 'tireChange';
-};
 </script>
   <style scoped>
 .button {

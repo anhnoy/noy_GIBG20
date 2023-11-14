@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <span class="Head">Store information</span>
+      <span class="card1">Store information</span>
 
       <v-spacer></v-spacer>
 
@@ -18,33 +18,18 @@
         <v-container fluid>
           <v-row>
             <v-col cols="2">
-              <span class="Title">* Business classification</span>
+              <span class="T-search">* Business classification</span>
             </v-col>
             <v-col>
-              <input
-                type="radio"
-                id="Corporate_business"
-                name="store"
-                class="hidden-radio"
-              />
-              <label for="Corporate_business" class="radio-label"
-                >Corporate business</label
-              >
-
-              <input
-                type="radio"
-                id="Sole_proprietor"
-                name="store"
-                class="hidden-radio"
-              />
-              <label for="Sole_proprietor" class="radio-label"
-                >Sole proprietor</label
-              >
+              <input type="radio" name="sole proprietor" />
+              <label> Corporate business</label>
+              <input type="radio" name="sole proprietor" class="radio" />
+              <label> Sole proprietor</label>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="Title">* Business Number</span>
+              <span class="T-search">* Business Number</span>
             </v-col>
             <v-col>
               <input
@@ -60,7 +45,7 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="Title">* Representative name</span>
+              <span class="T-search">* Representative name</span>
             </v-col>
             <v-col>
               <input
@@ -72,7 +57,7 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="Title">* Business status</span>
+              <span class="T-search">* Business status</span>
             </v-col>
             <v-col>
               <input
@@ -87,7 +72,7 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="Title">* Sectors</span>
+              <span class="T-search">* Sectors</span>
             </v-col>
             <v-col>
               <input
@@ -102,7 +87,7 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="Title">* id</span>
+              <span class="T-search">* id</span>
             </v-col>
             <v-col>
               <input
@@ -111,12 +96,12 @@
                 placeholder="Please enter your ID."
               />
               <label class="custom-file-label">Double check</label>
-              <br />
+            <br />
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="Title">* password</span>
+              <span class="T-search">* password</span>
             </v-col>
             <v-col cols="5">
               <input
@@ -128,7 +113,7 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="Title">* email</span>
+              <span class="T-search">* email</span>
             </v-col>
             <v-col>
               <input
@@ -140,9 +125,7 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="Title"
-                >* Contact information for person in charge</span
-              >
+              <span class="T-search">* Contact information for person in charge</span>
             </v-col>
             <v-col>
               <input
@@ -156,7 +139,7 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="Title">Company photo</span>
+              <span class="T-search">Company photo</span>
             </v-col>
             <v-col>
               <input
@@ -170,9 +153,7 @@
                 @change="previewImage"
                 style="display: none"
               />
-              <label for="fileInput2" class="custom-file-label"
-                >Find file</label
-              >
+              <label for="fileInput2" class="custom-file-label">Find file</label>
               <br />
               <v-row class="pt-5 ml-2">
                 <div v-for="(img, index) in imagePreviews" :key="index">
@@ -207,4 +188,108 @@
   };
    </script>
   <style scoped>
+  .img-wrapper {
+  position: relative; /* The parent container should be relative */
+  display: inline-block;
+  margin: 5px;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button.remove-button {
+  width: 16px;
+  height: 16px;
+  background-color: #394956;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0; /* Resetting any default padding */
+  border: none; /* Remove default border */
+  position: absolute; /* Absolute positioning */
+  top: -5px; /* Positioning it slightly above the top of the image */
+  right: -5px; /* Positioning it slightly to the right of the image */
+  border-radius: 50%; /* Making the button round */
+  line-height: 16px; /* Vertically centering the "X" text */
+  text-align: center; /* Horizontally centering the "X" text */
+}
+.card1 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #242424;
+}
+.T-search {
+  font-size: 14px;
+  font-weight: 700;
+  color: #7d92a1;
+}
+.input {
+  width: 250px;
+  height: 35px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  font-size: 13px;
+  font-weight: 400;
+}
+.input1 {
+  width: 148px;
+  height: 35px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  font-size: 13px;
+  font-weight: 400;
+}
+.input2 {
+  width: 106px;
+  height: 35px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  font-size: 13px;
+  font-weight: 400;
+}
+.input3 {
+  width: 350px;
+  height: 35px;
+  padding: 8px 10px;
+  margin-right: 10px;
+  font-size: 13px;
+  font-weight: 400;
+}
+::placeholder {
+  color: #8899a8;
+}
+.hint {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8899a8;
+}
+.checkbox {
+  margin-left: 20px;
+}
+.radio {
+  margin-left: 20px;
+}
+.button {
+  margin: 5px;
+}
+.custom-file-label {
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  font-size: 13px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #7d92a1;
+  cursor: pointer;
+}
 </style>

@@ -21,28 +21,72 @@
             information
           </div>
           <v-row>
-            <div class="row">
-              <div v-for="item in products" :key="item.price">
-              <div class="col">{{ item.type }}</div>
-              <div class="checkbox-col">
-                <input
-                  :disabled="item.isChecked"
-                  v-model="item.startTime"
-                  :style="{
-                    backgroundColor: item.isChecked ? '#E3E8ED' : '',
-                  }"
-                  placeholder="price"
-                  class="price"
-                />
-                <input
-                  type="checkbox"
-                  v-model="item.isChecked"
-                  @change="updateSelectAll"
-                />
+            <v-col cols="4">
+              <div v-for="item in products" :key="item.price" class="row">
+                <div class="col">{{ item.type }}</div>
+                <div class="checkbox-col">
+                  <input
+                    :disabled="item.isChecked"
+                    v-model="item.startTime"
+                    :style="{
+                      backgroundColor: item.isChecked ? '#E3E8ED' : '',
+                    }"
+                    placeholder="price"
+                    class="price"
+                  />
+                  <input
+                    type="checkbox"
+                    v-model="item.isChecked"
+                    @change="updateSelectAll"
+                  />
+                </div>
+                <div class="col">{{ item.price }}</div>
               </div>
-              <div class="col">{{ item.price }}</div>
-            </div>
-            </div>    
+            </v-col>
+            <v-col cols="4">
+              <div v-for="item in product2" :key="item.price" class="row">
+                <div class="col">{{ item.type }}</div>
+                <div class="checkbox-col">
+                  <input
+                    :disabled="item.isChecked"
+                    v-model="item.startTime"
+                    :style="{
+                      backgroundColor: item.isChecked ? '#E3E8ED' : '',
+                    }"
+                    placeholder="price"
+                    class="price"
+                  />
+                  <input
+                    type="checkbox"
+                    v-model="item.isChecked"
+                    @change="updateSelectAll"
+                  />
+                </div>
+                <div class="col">{{ item.price }}</div>
+              </div>
+            </v-col>
+            <v-col cols="4">
+              <div v-for="item in product3" :key="item.price" class="row">
+                <div class="col">{{ item.type }}</div>
+                <div class="checkbox-col">
+                  <input
+                    :disabled="item.isChecked"
+                    v-model="item.startTime"
+                    :style="{
+                      backgroundColor: item.isChecked ? '#E3E8ED' : '',
+                    }"
+                    placeholder="price"
+                    class="price"
+                  />
+                  <input
+                    type="checkbox"
+                    v-model="item.isChecked"
+                    @change="updateSelectAll"
+                  />
+                </div>
+                <div class="col">{{ item.price }}</div>
+              </div>
+            </v-col>
           </v-row>
         </v-container>
       </div>
@@ -59,8 +103,8 @@ const selectAll = ref(false);
 
 
 watch(selectAll, (newValue) => {
-  products.value.forEach((item) => {
-    item.isChecked = newValue;
+  [...products.value, ...product2.value, ...product3.value].forEach((product) => {
+    product.isChecked = newValue;
   });
 });
 
@@ -107,6 +151,9 @@ const products = ref([
     isChecked: false,
     type:"Large"
   },
+ 
+]);
+const product2 = ref([
   {
     price: "No pricing information",
     isChecked: false,
@@ -138,6 +185,8 @@ const products = ref([
     isChecked: false,
     type:"Large SUV"
   },
+]);
+const product3 = ref([
   {
     price: "No pricing information",
     isChecked: false,
@@ -145,11 +194,14 @@ const products = ref([
   },
  
 ]);
+
 </script>
 
     <style scoped>
 .row {
-  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
 }
 .col {
   width: 120px;

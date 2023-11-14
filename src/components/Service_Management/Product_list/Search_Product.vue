@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <span class="card1">Search conditions</span>
+      <span class="Head">Search conditions</span>
       <v-spacer></v-spacer>
       <v-btn
         :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
@@ -15,26 +15,41 @@
 
         <v-container fluid>
           <v-row align="center" justify="center">
-            <v-col>
-              <span class="T-search">Join date</span>
-
-              <input type="date" class="date" />
-              <span>~</span>
-              <input type="date" class="date" />
+            <v-col cols="4">
+              <span class="Title">Join date</span>
+              <input type="date" class="date-input" v-model="startDate" />
+              <span> ~ </span>
+              <input type="date" class="date-input" v-model="endDate" />
             </v-col>
             <v-col>
-              <span class="T-search">Display classification</span>
-              <input type="radio" name="store" />
-              <label> Entire</label>
-              <input type="radio" name="store" class="radio" />
-              <label> Exhibition</label>
-              <input type="radio" name="store" class="radio" />
-              <label> Hiding</label>
+              <span class="Title">Display classification</span>
+              <input
+                type="radio"
+                id="Entire"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="Entire" class="radio-label">Entire</label>
+
+              <input
+                type="radio"
+                id="Exhibition"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="Exhibition" class="radio-label">Exhibition</label>
+              <input
+                type="radio"
+                id="Hiding"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="Hiding" class="radio-label">Hiding</label>
             </v-col>
           </v-row>
           <v-row>
-            <v-col>
-              <span class="T-search">category</span>
+            <v-col cols="5">
+              <span class="Title">category</span>
               <select id="CAT" name="CAT" class="input">
                 <option value="" disabled selected>
                   Please select a category.
@@ -60,34 +75,49 @@
                 </option>
               </select>
             </v-col>
-             <v-col>
-                <span class="T-search">Product name</span>
-                <input
-                  type="text"
-                  class="input"
-                  placeholder="Please enter your search term"
-                />
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <span class="T-search">Store availability</span>
-                <input type="radio" name="Business status" />
-                <label> Entire</label>
-                <input type="radio" name="Business status" class="radio" />
-                <label> Store entry</label>
-                <input type="radio" name="Business status" class="radio" />
-                <label> Not in stores</label>
-              </v-col>
-              <v-col>
-                <span class="T-search">Company name</span>
-                <input
-                  type="text"
-                  class="input"
-                  placeholder="Please enter the company name."
-                />
-              </v-col>
-            </v-row>
+            <v-col>
+              <span class="Title">Product name</span>
+              <input
+                type="text"
+                class="input"
+                placeholder="Please enter your search term"
+              />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="4">
+              <span class="Title">Store availability</span>
+              <input
+                type="radio"
+                id="Entire"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="Entire" class="radio-label">Entire</label>
+              <input
+                type="radio"
+                id="Store_entry"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="Store_entry" class="radio-label">Store entry</label>
+              <input
+                type="radio"
+                id="Not_in_stores"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="Not_in_stores" class="radio-label">Not in stores</label>
+            </v-col>
+            <v-col>
+              <span class="Title">Company name</span>
+              <input
+                type="text"
+                class="input"
+                placeholder="Please enter your search term"
+              />
+            </v-col>
+          </v-row>
           <v-row>
             <v-col align="center" justify="center">
               <v-btn variant="outlined" color="#346DDB" class="button">
@@ -121,68 +151,4 @@ const Service = ref([
  const show = ref(false);
  </script>
 <style scoped>
-.card1 {
-  font-size: 16px;
-  font-weight: 700;
-  color: #242424;
-  margin-left: 10px;
-}
-.T-search {
-  font-size: 14px;
-  font-weight: 700;
-  color: #7d92a1;
-  margin-right: 5%;
-}
-.input {
-  width: 200px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input1 {
-  width: 148px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input2 {
-  width: 106px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input3 {
-  width: 350px;
-  height: 35px;
-  padding: 8px 10px;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-::placeholder {
-  color: #8899a8;
-}
-.hint {
-  font-size: 12px;
-  font-weight: 500;
-  color: #8899a8;
-}
-.checkbox {
-  margin-left: 20px;
-}
-.radio {
-  margin-left: 20px;
-}
-.button {
-  margin: 5px;
-}
 </style>

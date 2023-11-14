@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <span class="head"> Product Management</span>
+      <span class="head"> Facility information </span>
 
       <v-spacer></v-spacer>
 
@@ -18,23 +18,45 @@
         <v-container fluid>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">Display status </span>
+              <span class="T-search">* category </span>
             </v-col>
             <v-col>
-              <input type="radio" name="Business status" />
-              <label> Exhibition</label>
-              <input type="radio" name="Business status" class="checkbox" />
-              <label> Hiding</label>
+              <label for="vehicle1"
+                ><input type="checkbox" id="vehicle1" /> Free parking
+              </label>
+              <label for="vehicle2" class="checkbox"
+                ><input type="checkbox" id="vehicle2" /> Restroom</label
+              >
+              <label for="vehicle3" class="checkbox"
+                ><input type="checkbox" id="vehicle3" /> Wireless
+                Internet</label
+              >
+              <label for="vehicle3" class="checkbox"
+                ><input type="checkbox" id="vehicle3" /> Accessibility
+                facilities for the disabled</label
+              >
+              <label for="vehicle3" class="checkbox"
+                ><input type="checkbox" id="vehicle3" /> Dogs allowed</label
+              ><label for="vehicle3" class="checkbox"
+                ><input type="checkbox" id="vehicle3" /> cafe</label
+              >
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">Exposure period</span>
+              <span class="T-search">Additional facility information</span>
             </v-col>
             <v-col>
-              <input type="date" class="date" />
-              <span>~</span>
-              <input type="date" class="date" />
+              <input
+                type="text"
+                class="input"
+                placeholder="Please enter additional facility information."
+              />
+              <br />
+              <span class="hint"
+                >※ Please enter more than one facility information separated by
+                a comma (,).</span
+              >
             </v-col>
           </v-row>
         </v-container>
@@ -42,41 +64,13 @@
     </v-expand-transition>
   </v-card>
 </template>
-     <script setup lang="js">
-     import { ref } from 'vue';
-     
-     const show = ref(false);
+       <script setup lang="js">
+       import { ref } from 'vue';
+       
+       const show = ref(false);
 
-     </script>
-    <style scoped>
-
-.row {
-  display: flex;
-  align-items: center;
-  margin-top: 5px;
-}
-
-.col {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 5px;
-  width: 50px;
-}
-.col_Break {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 5px;
-  width: auto;
-}
-
-.input-col input {
-  width: 100px;
-  padding: 5px 10px;
-  border: 1px solid #e6e6e6;
-  border-radius: 4px;
-}
+       </script>
+      <style scoped>
 .head {
   font-size: 16px;
   font-weight: 700;

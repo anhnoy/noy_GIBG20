@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <span class="card1">Search conditions</span>
+      <span class="Head">Search conditions</span>
       <v-spacer></v-spacer>
       <v-btn
         :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
@@ -16,49 +16,65 @@
         <v-container fluid>
           <v-row align="center" justify="center">
             <v-col>
-              <span class="T-search">Join date</span>
+              <span class="Title">Join date</span>
 
-              <input type="date" class="date" />
-              <span>~</span>
-              <input type="date" class="date" />
+              <input type="date" class="date-input" v-model="startDate" />
+              <span> ~ </span>
+              <input type="date" class="date-input" v-model="endDate" />
             </v-col>
-          <v-col cols="6">
-            <span class="T-search">Search word</span>
-            <select v-model="selectedWord" class="dropdown">
-              <option value="ID" >ID</option>
-              <option value="Member">Member Name</option>
-              <option value="Phone">Phone Number</option>
-            </select>
-
-            <input
-              v-if="selectedWord === 'ID'"
-              type="text"
-              class="input"
-              placeholder="Please enter your ID."
-            />
-            <input
-              v-if="selectedWord === 'Member'"
-              type="text"
-              class="input"
-              placeholder="Please enter your member name"
-            />
-            <input
-              v-if="selectedWord === 'Phone'"
-              type="text"
-              class="input"
-              placeholder="Please enter your Phone"
-            />
+            <v-col cols="6">
+              <span class="Title">Search word</span>
+              <select v-model="selectedWord" class="dropdown">
+                <option value="ID">ID</option>
+                <option value="Member">Member Name</option>
+                <option value="Phone">Phone Number</option>
+              </select>
+              <input
+                v-if="selectedWord === 'ID'"
+                type="text"
+                class="input"
+                placeholder="Please enter your ID."
+              />
+              <input
+                v-if="selectedWord === 'Member'"
+                type="text"
+                class="input"
+                placeholder="Please enter your member name"
+              />
+              <input
+                v-if="selectedWord === 'Phone'"
+                type="text"
+                class="input"
+                placeholder="Please enter your Phone"
+              />
             </v-col>
-        </v-row>
+          </v-row>
           <v-row>
             <v-col cols="5">
-              <span class="T-search"> Situation</span>
-              <input type="radio" name="closed down" />
-              <label> entire</label>
-              <input type="radio" name="closed down" class="radio" />
-              <label> Registered member</label>
-              <input type="radio" name="closed down" class="radio" />
-              <label> Withdrawal member</label>
+              <span class="Title"> Situation</span>
+              <input
+                type="radio"
+                id="Situation_entire"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="Situation_entire" class="radio-label">Entire</label>
+
+              <input
+                type="radio"
+                id="Registered_member"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="Registered_member" class="radio-label">Registered member</label>
+
+              <input
+                type="radio"
+                id="Withdrawal_member"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="Withdrawal_member" class="radio-label">Withdrawal member</label>
             </v-col>
           </v-row>
           <v-row>
@@ -83,86 +99,4 @@
  const selectedWord = ref('ID');
  </script>
 <style scoped>
-.date {
-  width: 120px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  font-size: 13px;
-  font-weight: 400;
-  outline: none;
-}
-.card1 {
-  font-size: 16px;
-  font-weight: 700;
-  color: #242424;
-  margin-left: 10px;
-}
-.T-search {
-  font-size: 14px;
-  font-weight: 700;
-  color: #7d92a1;
-  margin-right: 5%;
-}
-.dropdown {
-  width: 200px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input {
-  width: 250px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input1 {
-  width: 148px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input2 {
-  width: 106px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input3 {
-  width: 350px;
-  height: 35px;
-  padding: 8px 10px;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-::placeholder {
-  color: #8899a8;
-}
-.hint {
-  font-size: 12px;
-  font-weight: 500;
-  color: #8899a8;
-}
-.checkbox {
-  margin-left: 20px;
-}
-.radio {
-  margin-left: 20px;
-}
-.button {
-  margin: 5px;
-}
 </style>

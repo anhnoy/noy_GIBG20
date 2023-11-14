@@ -97,12 +97,15 @@
             </v-list-item>
           </template>
           <v-list-item
-            v-for="([subTitle], i) in orderSubGroups"
-            :key="i"
-            :title="subTitle"
-            :value="subTitle"
-            style="color: white"
+            v-for="Order in orderSubGroups"
+            :key="Order.text"
+            router
+            :to="Order.route"
+            active-class="border"
           >
+            <v-list-item-content>
+              <v-list-item-title>{{ Order.text }}</v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
         </v-list-group>
       </v-list>
@@ -134,10 +137,11 @@ const memberSubGroups = [
 const productSubGroups = [
 {text:'Category/Service Management list', route: '/Category_Service'},
 {text:'Product list', route: '/product_list'},
-{text:'Tire information management', route: '/'},
+{text:'Tire information', route: '/tire_information'},
 ];
 const orderSubGroups = [
-  ['Reservation list'],
+{text:'Reservation list', route: '/reservation'},
+
 ];
 
 

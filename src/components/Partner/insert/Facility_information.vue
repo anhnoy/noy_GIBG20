@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <span class="head"> Facility information </span>
+      <span class="Head">Facility information </span>
 
       <v-spacer></v-spacer>
 
@@ -18,33 +18,58 @@
         <v-container fluid>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* category </span>
+              <span class="Title">* category </span>
             </v-col>
             <v-col>
-              <label for="vehicle1"
-                ><input type="checkbox" id="vehicle1" /> Free parking
+              <label for="Free_parking" class="checkbox-label">
+                <input
+                  type="checkbox"
+                  id="Free_parking"
+                  class="hidden-checkbox"
+                />
+                <span class="custom-checkbox"></span>
+                Free parking
               </label>
-              <label for="vehicle2" class="checkbox"
-                ><input type="checkbox" id="vehicle2" /> Restroom</label
-              >
-              <label for="vehicle3" class="checkbox"
-                ><input type="checkbox" id="vehicle3" /> Wireless
-                Internet</label
-              >
-              <label for="vehicle3" class="checkbox"
-                ><input type="checkbox" id="vehicle3" /> Accessibility
-                facilities for the disabled</label
-              >
-              <label for="vehicle3" class="checkbox"
-                ><input type="checkbox" id="vehicle3" /> Dogs allowed</label
-              ><label for="vehicle3" class="checkbox"
-                ><input type="checkbox" id="vehicle3" /> cafe</label
-              >
+
+              <label for="Restroom" class="checkbox-label">
+                <input type="checkbox" id="Restroom" class="hidden-checkbox" />
+                <span class="custom-checkbox"></span>
+                Restroom
+              </label>
+
+              <label for="Wireless_Internet" class="checkbox-label">
+                <input
+                  type="checkbox"
+                  id="Wireless_Internet"
+                  class="hidden-checkbox"
+                />
+                <span class="custom-checkbox"></span>
+                Wireless Internet
+              </label>
+              <label for="Accessibility" class="checkbox-label">
+                <input
+                  type="checkbox"
+                  id="Accessibility"
+                  class="hidden-checkbox"
+                />
+                <span class="custom-checkbox"></span>
+                Accessibility facilities for the disabled
+              </label>
+              <label for="Dogs" class="checkbox-label">
+                <input type="checkbox" id="Dogs" class="hidden-checkbox" />
+                <span class="custom-checkbox"></span>
+                Dogs allowed
+              </label>
+              <label for="cafe" class="checkbox-label">
+                <input type="checkbox" id="cafe" class="hidden-checkbox" />
+                <span class="custom-checkbox"></span>
+                cafe
+              </label>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">Additional facility information</span>
+              <span class="Title">Additional facility information</span>
             </v-col>
             <v-col>
               <input
@@ -71,78 +96,4 @@
 
        </script>
       <style scoped>
-.head {
-  font-size: 16px;
-  font-weight: 700;
-  color: #242424;
-}
-.T-search {
-  font-size: 14px;
-  font-weight: 700;
-  color: #7d92a1;
-}
-.input {
-  width: 250px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input1 {
-  width: 148px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input2 {
-  width: 106px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input3 {
-  width: 350px;
-  height: 35px;
-  padding: 8px 10px;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-::placeholder {
-  color: #8899a8;
-}
-.hint {
-  font-size: 12px;
-  font-weight: 500;
-  color: #8899a8;
-}
-.checkbox {
-  margin-left: 20px;
-}
-.radio {
-  margin-left: 20px;
-}
-.button {
-  margin: 5px;
-}
-.custom-file-label {
-  padding: 8px 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  text-align: center;
-  color: #7d92a1;
-  cursor: pointer;
-}
 </style>
