@@ -1,146 +1,135 @@
 <template>
-    <v-card class="mx-auto" max-width="90%">
-      <v-card-actions>
-        <p class="Head">
-          Total<span class="Total">{{ items.length }}</span> number of views
-        </p>
-        <v-spacer></v-spacer>
-        <div class="items-per-page">
-          <select v-model="itemsPerPage" id="itemsPerPage" class="items_per"  @update:model-value="itemsPerPage = parseInt($event, 10)">
-            <option value="10">10 items</option>
-            <option value="30">30 items</option>
-            <option value="50">50 items</option>
-            <option value="100">100 items</option>
-          </select>
-        </div>
-      </v-card-actions>
-      <v-container fluid>
-        <div>
-          <table class="custom-table">
-            <tr>
-              <th>
-                <input
-                  type="checkbox"
-                  v-model="selectAll"
-                  @change="selectAllItems"
-                />
-              </th>
-              <th>Number</th>
-              <th>Division</th>
-              <th>ID</th>
-              <th>Member name</th>
-              <th>Phone number</th>
-              <th>Last access date</th>
-              <th>Situation</th>
-              <th>Join date</th>
-              <th>Withdrawal date</th>
-              <th>Management</th>
-            </tr>
-            <tr v-for="item in visibleItems" :key="item.id">
-              <td>
-                <input
-                  type="checkbox"
-                  v-model="item.selected"
-                  @change="itemSelected"
-                />
-              </td>
-              <td>{{ item.업체코드 }}</td>
-              <td>{{ item.카테고리 }}</td>
-              <td class="td3">{{ item.업체명 }}</td>
-              <td>{{ item.주소 }}</td>
-              <td>{{ item.리뷰평점 }}</td>
-              <td class="td6">{{ item.영업여부 }}</td>
-              <td>{{ item.노출여부 }}</td>
-              <td>{{ item.입점상태 }}</td>
-              <td>{{ item.등록일시 }}</td>
-              <td>
-                <v-btn size="x-small" flat @click="editItem(item)" class="management"
+  <v-card class="mx-auto" max-width="90%">
+    <v-card-actions>
+      <p class="Head">
+        총<span class="Total">{{ totalItems }}</span> 건 조회
+      </p>
+      <v-spacer></v-spacer>
+      <div class="items-per-page">
+        <select v-model="itemsPerPage" id="itemsPerPage" class="items_per">
+          <option value="10">10 items</option>
+          <option value="30">30 items</option>
+          <option value="50">50 items</option>
+          <option value="100">100 items</option>
+        </select>
+      </div>
+    </v-card-actions>
+    <v-container fluid>
+      <div>
+        <table class="custom-table">
+          <tr>
+            <th>번호</th>
+            <th>구분</th>
+            <th>아이디</th>
+            <th>회원명</th>
+            <th>휴대폰 번호</th>
+            <th>최종 접속일</th>
+            <th>상태</th>
+            <th>가입일</th>
+            <th>탈퇴일</th>
+            <th>관리</th>
+          </tr>
+          <tr v-for="item in items" :key="item.id">
+            <td>{{ item.mid }}</td>
+            <td>{{ item.device_id }}</td>
+            <td>
+              <router-link :to="`/modify(member)/${item.mid}`" class="no-underline">
+                <p class="ID">{{ item.email }}</p>
+              </router-link>
+            </td>
+            <td>
+              <router-link :to="`/modify(member)/${item.mid}`" class="no-underline">
+                <p class="Member_name">{{ item.name }}</p>
+              </router-link>
+            </td>
+            <td>{{ item.phone }}</td>
+            <td>
+              <p>{{ item.Last_access_date }}</p>
+            </td>
+            <td>
+              <p>
+                {{ item.Situation }}
+              </p>
+            </td>
+            <td>
+              <p>
+                {{ item.Join_date }}
+              </p>
+            </td>
+            <td>{{ item.Withdrawal_date }}</td>
+            <td>
+              <router-link :to="`/modify(member)/${item.mid}`">
+                <v-btn size="x-small" flat class="management"
                   >수정</v-btn
-                >
-                <v-btn size="x-small" flat @click="confirmDelete(item)" class="management"
-                  >삭제</v-btn
-                >
-              </td>
-            </tr>
-          </table>
-        </div>
-        <v-pagination v-model="page" :length="pageCount"></v-pagination>
-      </v-container>
-    </v-card>
-  </template>
-     <script setup lang="js">
-     import { ref , computed} from 'vue';
-     const page =ref(1);
-  const itemsPerPage  =ref(10);
-  const items = ref([
-  { 업체코드: 1, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 2, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 3, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 4, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 5, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 6, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 7, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 8, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 9, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 10, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 11, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 12, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 13, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 14, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 15, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 16, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 17, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 18, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 19, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 20, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 21, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 22, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 23, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 24, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 25, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 26, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 27, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 28, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 29, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 30, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 31, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 32, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 33, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 34, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  { 업체코드: 35, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-  ]);
-  
-  const selectAll = ref(false);
-  
-  
-  const itemSelected = () => {
-    selectAll.value = items.value.every((item) => item.selected);
-  };
-  
-  const visibleItems = computed(() => {
-    const startIndex = (page.value - 1) * itemsPerPage.value;
-    const endIndex = startIndex + itemsPerPage.value;
-    return items.value.slice(startIndex, endIndex);
-  });
-  const pageCount = computed(() => Math.ceil(items.value.length / itemsPerPage.value));
-  
-  const selectAllItems = () => {
-    items.value.forEach((item) => (item.selected = selectAll.value));
-  };
-  const editItem = (item) => {
-    // Handle edit action for the selected item
-    console.log('Edit:', item);
-  };
-  const confirmDelete = (item) => {
-    if (window.confirm('Are you sure you want to delete this item?')) {
-      deleteItem(item);
-    }
-  };
-  
-  const deleteItem = (item) => {
-    items.value = items.value.filter((i) => i !== item);
-  };
-     </script>
-    <style scoped>
- 
-  </style>
+                ></router-link
+              >
+              <v-btn
+                size="x-small"
+                flat
+                @click="confirmDelete(item)"
+                class="management"
+                >삭제</v-btn
+              >
+            </td>
+          </tr>
+        </table>
+      </div>
+      <v-pagination
+        v-model="page"
+        :length="pageCount"
+        :total-visible="7"
+      ></v-pagination>
+    </v-container>
+  </v-card>
+</template>
+
+<script setup lang="js">
+   import { ref, watch, computed} from 'vue';
+   import Post_admin from '@/services/Post_admin';
+
+
+   const page =ref(1);
+   const size =ref(10);
+   const itemsPerPage  =ref(10);
+   const items = ref([]);
+   const totalItems = ref([]);
+
+const loadItems = async ()=>{
+  const PG = page.value;
+  const SZ = size.value;
+  try{
+    const resp = await Post_admin.get_member(PG,SZ);
+    console.log(resp.data.datas);
+    items.value = resp.data.datas;
+    totalItems.value = resp.data.totalItems;
+  }
+  catch(error){
+    console.error('Exception occurred while try to fetch items', error);
+  }
+}
+loadItems();
+
+watch(itemsPerPage, (newValue) => {
+  size.value = parseInt(newValue, 10);
+  loadItems();
+});
+watch(page, (newValue) => {
+  page.value = parseInt(newValue, 10);
+  loadItems();
+});
+
+
+const pageCount = computed(() => Math.ceil(totalItems.value / size.value));
+
+const confirmDelete = (item) => {
+  if (window.confirm('Are you sure you want to delete this item?')) {
+    deleteItem(item);
+  }
+};
+
+const deleteItem = (itemToDelete) => {
+  items.value = items.value.filter((item) => item !== itemToDelete);
+};
+   </script>
+  <style scoped>
+</style>

@@ -38,5 +38,5 @@ import Permission from "@/components/Member/Administrator_list/insert/Permission
 
 </script>
   <style scoped>
-
+@import "/src/assets/css/style.css";
 </style>

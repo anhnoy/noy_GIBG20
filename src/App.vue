@@ -29,5 +29,12 @@ export default {
       }
     },
   },
+  created(){
+    if(!localStorage.getItem('Token')){
+      this.$router.push({ path: "/login" })
+    }
+   
+  }
 };
+
 </script>

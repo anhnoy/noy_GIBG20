@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <span class="card1">Basic product information</span>
+      <span class="Head">Basic product information</span>
 
       <v-spacer></v-spacer>
 
@@ -18,7 +18,7 @@
         <v-container fluid>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* category</span>
+              <span class="Title">* category</span>
             </v-col>
             <v-col>
               <select id="CAT" name="CAT" class="input">
@@ -35,39 +35,41 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* Service </span>
+              <span class="Title">* Service </span>
             </v-col>
             <v-col>
               <input
                 type="radio"
+                id="engineOilChange"
                 name="Service"
-                value="engineOilChange"
+                class="hidden-radio"
                 @change="updateSelection('engineOilChange')"
               />
-              <label> Engine oil change</label>
+              <label for="engineOilChange" class="radio-label">Engine oil change</label>
 
               <input
                 type="radio"
+                id="tire"
                 name="Service"
-                value="tireChange"
-                class="checkbox"
+                class="hidden-radio"
                 @change="updateSelection('tireChange')"
               />
-              <label> tire change</label>
+              <label for="tire" class="radio-label">Entire</label>
 
               <input
                 type="radio"
+                id="carWash"
                 name="Service"
-                value="carWash"
-                class="checkbox"
+                class="hidden-radio"
                 @change="updateSelection('carWash')"
               />
-              <label> car wash</label>
+              <label for="carWash" class="radio-label">Car wash</label>
+    
             </v-col>
           </v-row>
           <v-row v-if="selection === 'tireChange'">
             <v-col cols="2">
-              <span class="T-search">* Brand name</span>
+              <span class="Title">* Brand name</span>
             </v-col>
             <v-col>
               <select id="CAT" name="CAT" class="input">
@@ -84,19 +86,19 @@
           </v-row>
           <v-row v-if="selection !== 'tireChange'">
             <v-col cols="2">
-              <span class="T-search">* Product name</span>
+              <span class="Title">* Product name</span>
             </v-col>
             <v-col>
               <input
                 type="text"
-                class="input1"
+                class="input"
                 placeholder="Please enter the product name."
               />
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">Product Description</span>
+              <span class="Title">Product Description</span>
             </v-col>
             <v-col>
               <input
@@ -108,7 +110,7 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">Company photo</span>
+              <span class="Title">Company photo</span>
             </v-col>
             <v-col>
               <input
@@ -167,116 +169,4 @@
   };
    </script>
   <style scoped>
-.img-wrapper {
-  position: relative; /* The parent container should be relative */
-  display: inline-block;
-  margin: 5px;
-}
-
-img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-button.remove-button {
-  width: 16px;
-  height: 16px;
-  background-color: #394956;
-  color: #fff;
-  cursor: pointer;
-  font-size: 12px;
-  padding: 0; /* Resetting any default padding */
-  border: none; /* Remove default border */
-  position: absolute; /* Absolute positioning */
-  top: -5px; /* Positioning it slightly above the top of the image */
-  right: -5px; /* Positioning it slightly to the right of the image */
-  border-radius: 50%; /* Making the button round */
-  line-height: 16px; /* Vertically centering the "X" text */
-  text-align: center; /* Horizontally centering the "X" text */
-}
-.textarea {
-  width: 100%;
-  height: 100px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  padding: 8px 10px;
-  font-size: 13px;
-}
-.card1 {
-  font-size: 16px;
-  font-weight: 700;
-  color: #242424;
-}
-.T-search {
-  font-size: 14px;
-  font-weight: 700;
-  color: #7d92a1;
-}
-.input {
-  width: 250px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input1 {
-  width: 100%;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input2 {
-  width: 106px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input3 {
-  width: 350px;
-  height: 35px;
-  padding: 8px 10px;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-::placeholder {
-  color: #8899a8;
-}
-.hint {
-  font-size: 12px;
-  font-weight: 500;
-  color: #8899a8;
-}
-.checkbox {
-  margin-left: 20px;
-}
-.radio {
-  margin-left: 20px;
-}
-.button {
-  margin: 5px;
-}
-.custom-file-label {
-  padding: 8px 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  text-align: center;
-  color: #7d92a1;
-  cursor: pointer;
-}
 </style>

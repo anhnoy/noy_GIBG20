@@ -24,8 +24,8 @@
                   single-line
                   variant="outlined"
                   color="#346DDB"
-                  @input="checkInput"
                   @click:clear="clearUser"
+                  :disabled="loggedIn"
                 ></v-text-field>
 
                 <v-text-field
@@ -36,8 +36,8 @@
                   variant="outlined"
                   color="#346DDB"
                   :type="visible ? 'text' : 'password'"
-                  @input="checkInput"
                   @click:clear="clearPass"
+                  :disabled="loggedIn"
                 ></v-text-field>
 
                 <div v-if="showOTPInput">
@@ -48,10 +48,13 @@
                     single-line
                     variant="outlined"
                     color="#346DDB"
+                    :disabled="otpExpired"
                   >
                     <template v-slot:append-inner>
                       <p class="time">
-                        {{ Math.floor(countdown / 60) }}:{{ countdown % 60 }}
+                        {{ Math.floor(otpTimer / 60) }}:{{
+                          (otpTimer % 60).toString().padStart(2, "0")
+                        }}
                       </p>
                     </template>
                   </v-text-field>
@@ -60,24 +63,26 @@
                     <v-row class="pb-5">
                       <a class="l-under"> 인증번호를 받지 못하셨나요?</a>
                       <v-spacer></v-spacer>
-                      <a
+                      <p
                         class="r-under"
                         style="cursor: pointer"
-                        @click="resetCountdown(10)"
+                        @click="resetTimer"
                       >
-                        인증번호 재발송</a
-                      ></v-row
+                        인증번호 재발송
+                      </p></v-row
                     >
                   </div>
                 </div>
 
-                <div class="text-center" v-if="!required">
+                <div class="text-center" v-if="required">
                   <p class="validate">로그인 정보를 확인해주세요.</p>
                 </div>
-                <div class="text-center" v-if="!requiredOTP">
-                  <p class="validate">인증번호를 확인해주세요.</p>
+                <div class="text-center" v-if="requiredOTP">
+                  <p class="validate">
+                    인증번호를 확인해주세요.
+                  </p>
                 </div>
-                <div class="text-center" v-if="!requiredTime">
+                <div class="text-center" v-if="otpExpired">
                   <p class="validate">입력시간이 초과되었습니다.</p>
                 </div>
 
@@ -99,7 +104,9 @@
                 </div>
                 <v-card-item class="d-flex justify-center pt-8">
                   <v-img
-                    :src="require('../assets/images/Auto_Logo_Gray_2400x2400.png')"
+                    :src="
+                      require('../assets/images/Auto_Logo_Gray_2400x2400.png')
+                    "
                     height="30"
                   />
                   <p class="caption">Administrator © auto&</p>
@@ -114,48 +121,84 @@
 </template>
   
   <script setup lang="js">
-  import { ref, watch, computed } from 'vue';
+  import { ref, computed } from 'vue';
   import { useRouter } from 'vue-router';
+  import Post_admin from '@/services/Post_admin';
 
-  const username = ref('');
-  const password = ref('');
-  const isInputFinished = ref(false);
+
+  const username = ref('123456789');
+  const password = ref('12345677');
+  const loggedIn = ref(false);
   const showOTPInput = ref(false);
-  const required = ref(true);
-  const requiredOTP = ref(true);
-  const requiredTime = ref(true);
-  const inputText = ref('');
-  const countdown = ref(10);
+  const required = ref(false);
+  const requiredOTP = ref(false);
   const otp = ref('');
+  const otpTimer = ref(180);
+  const otpExpired = ref(false);
+  const timerInterval = ref('');
   const visible = ref('');
   const router = useRouter();
-  let timer;
   
-  const submitLogin = () => {
+
+
+
+
+const submitLogin = async () => {
   const usr = username.value;
   const passwd = password.value;
+  const code = otp.value;
 
-
-  if (passwd == '1' && usr == 'admin') {
-    required.value = true;
-    isInputFinished.value = true;
-    startCountdown();
-    if (!showOTPInput.value) {
-      showOTPInput.value = true;
-    } else {
-      if (otp.value === '123456') {
-        requiredOTP.value = true;  
-        router.push({ name: 'Partner' })
-      
-      } else {
+  if (showOTPInput.value) {
+    if (usr && code && passwd) {
+      try {
+        const res = await Post_admin.otp(usr, code, passwd);
+        console.log(res.data.accessToken);
+        localStorage.setItem(
+                "Token",
+                res.data.accessToken
+              );
+              localStorage.setItem(
+                "ID",
+                res.data.name
+              );
         requiredOTP.value = false;
-     
+        router.push({ name: 'Partner' });
+      } catch (error) {
+        console.error(error);
+        requiredOTP.value = true;
       }
+    } else {
+      requiredOTP.value = true;
     }
   } else {
-    required.value = false;
+    if (usr && passwd) {
+      try {
+        const res = await Post_admin.login(usr, passwd);
+        console.log(res.data.message);
+        if(res.data.message === "Invalid Password!." ||res.data.message === "ID not found." ){    
+          username.value = '';
+          password.value = '';
+          required.value = true;
+        }
+        
+        if(res.data.message === "Sccuessfully Send OTP"){
+           showOTPInput.value = true;
+        startOTPCountdown();
+        loggedIn.value = true;
+        required.value = false;
+        }
+       
+      } catch (error) {
+        console.error(error);
+        required.value = true;
+      }
+    } else {
+      required.value = true;
+    }
   }
 };
+
+
   
   const buttonText = computed(() => {
   if (!showOTPInput.value) {
@@ -165,25 +208,13 @@
   }
 });
   const clearUser = () => {
-    isInputFinished.value = false;
     username.value = "";
   };
   
   const clearPass = () => {
-    isInputFinished.value = false;
     password.value = "";
   };
   
-  const checkInput = () => {
-    const usr = username.value;
-    const passwd = password.value;
-  
-    if (usr !== 'admin' && passwd !== '1') {
-      isInputFinished.value = true;
-    } else {
-      isInputFinished.value = false;
-    }
-  };
   const isFormValid = computed(() => {
   if (!showOTPInput.value) {
     return !!username.value  && !!password.value;
@@ -191,80 +222,83 @@
     return !!username.value && !!password.value && !!otp.value;
   }
 });
-  const startCountdown = () => {
-    const timer = setInterval(() => {
-      countdown.value--;
-  
-      if (countdown.value === 0) {
-        clearInterval(timer);
-        requiredTime.value = false;
-        
+
+  const startOTPCountdown = () =>{
+    let countdown = otpTimer.value;
+    timerInterval.value = setInterval(() => {
+      countdown--;
+      otpTimer.value = countdown;
+      if (countdown <= 0) {
+        clearInterval(timerInterval.value);
+        otpExpired.value =true;
+        otp.value = '';
       }
-    }, 1000);
+    },1000);
   };
-  const resetCountdown = (initialValue) => {
-    clearInterval(timer);
-    countdown.value = initialValue; // Reset the countdown to the specified initial value
+
+  const resetTimer = () =>{
+    Post_admin.login(username.value, password.value);
+    requiredOTP.value = false;
+    otpExpired.value = false;
+    otpTimer.value = 180;
+    clearInterval(timerInterval.value);
+    startOTPCountdown();
   };
-  watch(inputText, () => {
-    countdown.value = 20;
-  });
 
   </script>
   
   <style scoped>
-  .v-card-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #394956;
-  }
-  .v-card-text {
-    font-size: 16px;
-    font-weight: 400;
-    color: #394956;
-  }
-  .caption {
-    font-size: 12px;
-    font-weight: 400;
-    color: #8899a8;
-  }
-  .validate {
-    font-size: 12px;
-    font-weight: 400;
-    color: #d93025;
-  }
-  .l-under {
-    font-size: 12px;
-    font-weight: 500;
-    color: #aab8c2;
-    margin-left: 4%;
-  }
-  .r-under {
-    font-size: 12px;
-    font-weight: 500;
-    color: #394956;
-    margin-right: 4%;
-  }
-  .time {
-    font-size: 15px;
-    font-weight: 700;
-    color: #346ddb;
-  }
-  .before-input-color {
-    background-color: red;
-  }
-  .success-btn {
-    background-color: #346ddb;
-    font-size: 15px;
-    font-weight: 500;
-    color: #ffffff;
-  }
-  
-  .error-btn {
-    background-color: #e3e8ed;
-    font-size: 15px;
-    font-weight: 500;
-    color: #7d92a1;
-  }
+.v-card-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #394956;
+}
+.v-card-text {
+  font-size: 16px;
+  font-weight: 400;
+  color: #394956;
+}
+.caption {
+  font-size: 12px;
+  font-weight: 400;
+  color: #8899a8;
+}
+.validate {
+  font-size: 12px;
+  font-weight: 400;
+  color: #d93025;
+}
+.l-under {
+  font-size: 12px;
+  font-weight: 500;
+  color: #aab8c2;
+  margin-left: 4%;
+}
+.r-under {
+  font-size: 12px;
+  font-weight: 500;
+  color: #394956;
+  margin-right: 4%;
+}
+.time {
+  font-size: 15px;
+  font-weight: 700;
+  color: #346ddb;
+}
+.before-input-color {
+  background-color: red;
+}
+.success-btn {
+  background-color: #346ddb;
+  font-size: 15px;
+  font-weight: 500;
+  color: #ffffff;
+}
 
+.error-btn {
+  background-color: #e3e8ed;
+  font-size: 15px;
+  font-weight: 500;
+  color: #7d92a1;
+}
 </style>

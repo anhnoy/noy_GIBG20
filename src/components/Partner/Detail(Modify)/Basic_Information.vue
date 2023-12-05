@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <span class="card1">Basic Information</span>
+      <span class="Head">Basic Information</span>
 
       <v-spacer></v-spacer>
 
@@ -18,80 +18,152 @@
         <v-container fluid>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* category </span>
+              <span class="Title">* Category </span>
             </v-col>
             <v-col>
-              <label for="vehicle1"
-                ><input type="checkbox" id="vehicle1" /> Maintenance/Car
-                Wash</label
-              >
-              <label for="vehicle2" class="checkbox"
-                ><input type="checkbox" id="vehicle2" /> Business visit</label
-              >
-              <label for="vehicle3" class="checkbox"
-                ><input type="checkbox" id="vehicle3" /> Self/Rental</label
-              >
+              <label for="vehicle1" class="checkbox-label">
+                <input type="checkbox" id="vehicle1" class="hidden-checkbox" />
+                <span class="custom-checkbox"></span>
+                Maintenance/Car Wash
+              </label>
+
+              <label for="vehicle2" class="checkbox-label">
+                <input type="checkbox" id="vehicle2" class="hidden-checkbox" />
+                <span class="custom-checkbox"></span>
+                Business visit
+              </label>
+
+              <label for="vehicle3" class="checkbox-label">
+                <input type="checkbox" id="vehicle3" class="hidden-checkbox" />
+                <span class="custom-checkbox"></span>
+                Self/Rental
+              </label>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* company name</span>
+              <span class="Title">* Company code</span>
             </v-col>
             <v-col>
               <input
+                v-for="item in items"
+                :key="item.Company_code"
                 type="text"
                 class="input"
-                placeholder="Please enter the company name."
+                v-model="item.Company_code"
+                readonly
+                style="background-color: #e3e8ed; color: #7d92a1"
               />
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* Representative number</span>
+              <span class="Title">* Company name</span>
             </v-col>
             <v-col>
               <input
+                v-for="item in items"
+                :key="item.Company_name"
                 type="text"
                 class="input"
-                placeholder="Please enter your phone number."
+                v-model="item.Company_name"
+              />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="2">
+              <span class="Title">* Representative number</span>
+            </v-col>
+            <v-col>
+              <input
+                v-for="item in items"
+                :key="item.Representative_number"
+                type="text"
+                class="input"
+                v-model="item.Representative_number"
               /><br />
               <span class="hint">※ Please enter including the hyphen (-).</span>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* address</span>
+              <span class="Title">* Virtual number</span>
             </v-col>
             <v-col>
-              <input type="text" class="input1" placeholder="address search" />
+              <input
+                v-for="item in items"
+                :key="item.Virtual_number"
+                type="text"
+                class="input"
+                v-model="item.Virtual_number"
+                readonly
+                style="background-color: #e3e8ed; color: #7d92a1"
+              /><br />
+              <span class="hint"
+                >※ This is a virtual number automatically assigned when
+                registering business information, regardless of whether the
+                store is open or not.</span
+              >
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="2">
+              <span class="Title">* address</span>
+            </v-col>
+            <v-col>
+              <input
+                v-for="item in items"
+                :key="item.Address"
+                type="text"
+                class="input"
+                v-model="item.Address"
+              />
               <label class="custom-file-label">search address</label>
               <br />
               <input
+                v-for="item in items"
+                :key="item.Address_search"
                 type="text"
                 class="input"
-                placeholder="Please enter your address."
+                v-model="item.Address_search"
               />
               <input
+                v-for="item in items"
+                :key="item.Address_detail"
                 type="text"
                 class="input"
-                placeholder="Please enter the detailed address."
+                v-model="item.Address_detail"
               />
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* Latitude/Longitude</span>
+              <span class="Title">* Latitude/Longitude</span>
             </v-col>
             <v-col>
-              <input type="text" class="input" placeholder="" />
-              <input type="text" class="input" placeholder="text" />
+              <input
+                v-for="item in items"
+                :key="item.Longitude"
+                type="text"
+                class="input"
+                v-model="item.Longitude"
+                style="background-color: #e3e8ed; color: #7d92a1"
+              />
+              <input
+                v-for="item in items"
+                :key="item.Latitude"
+                type="text"
+                class="input"
+                v-model="item.Latitude"
+                style="background-color: #e3e8ed; color: #7d92a1"
+              />
               <br />
               <span class="hint">※ Please enter including the hyphen (-).</span>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">Company photo</span>
+              <span class="Title">Company photo</span>
             </v-col>
             <v-col>
               <input
@@ -121,38 +193,72 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* Store availability </span>
+              <span class="Title">* Store availability </span>
             </v-col>
             <v-col>
-              <input type="radio" name="Store availability" />
-              <label> Not in stores</label>
-              <input type="radio" name="Store availability" class="checkbox" />
-              <label> Store entry</label>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="2">
-              <span class="T-search">* Exposure</span>
-            </v-col>
-            <v-col>
-              <input type="radio" name="Exposure" />
-              <label> Hiding</label>
+              <input
+                type="radio"
+                id="entire"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="entire" class="radio-label">Not in stores</label>
 
-              <input type="radio" name="Exposure" class="checkbox" />
-              <label> Exposure</label>
+              <input
+                type="radio"
+                id="storeEntry"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="storeEntry" class="radio-label"> Store entry</label>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* Business status </span>
+              <span class="Title">* Exposure</span>
             </v-col>
             <v-col>
-              <input type="radio" name="Business status" />
-              <label> Open</label>
-              <input type="radio" name="Business status" class="checkbox" />
-              <label> Business suspension</label>
-              <input type="radio" name="Business status" class="checkbox" />
-              <label> Closed down</label>
+              <input
+                type="radio"
+                id="Hiding"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="Hiding" class="radio-label">Hiding</label>
+
+              <input
+                type="radio"
+                id="Exposure"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="Exposure" class="radio-label">Exposure</label>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="2">
+              <span class="Title">* Business status </span>
+            </v-col>
+            <v-col>
+              <input type="radio" id="Open" name="store" class="hidden-radio" />
+              <label for="Open" class="radio-label">Open</label>
+
+              <input
+                type="radio"
+                id="Business_suspension"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="Business_suspension" class="radio-label"
+                >Business suspension</label
+              >
+              <input
+                type="radio"
+                id="Closed_down"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="Closed_down" class="radio-label">Closed down</label>
             </v-col>
           </v-row>
         </v-container>
@@ -164,6 +270,23 @@
   import { ref } from 'vue';
      
    const show = ref(false);
+   const items = ref([
+  { Company_code: 1, 
+    Category: '셀프/대여', 
+    Company_name: '크리스탈 디테일링 센터 금천점',
+     Representative_number: '02-1234-1234',
+      Virtual_number : '050-1234-1234', 
+      Address: '115',
+      Longitude: '00.000000000',
+      Latitude: '00.000000000',
+       Address_search: '서울특별시',
+        Address_detail: '서초중앙로8길',
+        Review_rating: 5.0, 
+        Business_status: '영업중',
+         Exposure: '노출',
+          Store_status: '입점', 
+          Date: 'YYYY-MM-DD HH:MM:SS' },
+   ]);
   
   const imagePreviews = ref([]);
   
@@ -177,100 +300,4 @@
   };
   </script>
   <style scoped>
-.img-wrapper {
-  position: relative; /* The parent container should be relative */
-  display: inline-block;
-  margin: 5px;
-}
-
-img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-button.remove-button {
-  width: 16px;
-  height: 16px;
-  background-color: #394956;
-  color: #fff;
-  cursor: pointer;
-  font-size: 12px;
-  padding: 0; /* Resetting any default padding */
-  border: none; /* Remove default border */
-  position: absolute; /* Absolute positioning */
-  top: -5px; /* Positioning it slightly above the top of the image */
-  right: -5px; /* Positioning it slightly to the right of the image */
-  border-radius: 50%; /* Making the button round */
-  line-height: 16px; /* Vertically centering the "X" text */
-  text-align: center; /* Horizontally centering the "X" text */
-}
-.card1 {
-  font-size: 16px;
-  font-weight: 700;
-  color: #242424;
-}
-.T-search {
-  font-size: 14px;
-  font-weight: 700;
-  color: #7d92a1;
-  margin: 5px 20px 5px 0px;
-}
-.input {
-  width: 250px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input1 {
-  width: 148px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin: 0px 10px 10px 0px;
-  font-size: 13px;
-  font-weight: 400;
-}
-
-.input3 {
-  width: 350px;
-  height: 35px;
-  padding: 8px 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-::placeholder {
-  color: #8899a8;
-}
-.hint {
-  font-size: 12px;
-  font-weight: 500;
-  color: #8899a8;
-}
-.checkbox {
-  margin-left: 20px;
-}
-.radio {
-  margin-left: 20px;
-}
-.button {
-  margin: 5px;
-}
-.custom-file-label {
-  padding: 8px 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  text-align: center;
-  color: #7d92a1;
-  cursor: pointer;
-}
 </style>

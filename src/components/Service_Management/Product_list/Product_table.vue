@@ -51,7 +51,7 @@
             <th>Registration date</th>
             <th>Management</th>
           </tr>
-          <tr v-for="item in visibleItems" :key="item.id">
+          <tr v-for="item in items" :key="item.id">
             <td>
               <input
                 type="checkbox"
@@ -61,17 +61,19 @@
             </td>
             <td>{{ item.Number }}</td>
             <td>
-              <p class="td2">{{ item.Display }}</p>
+              <p>{{ item.Display_classification }}</p>
             </td>
-            <td>{{ item.Category }}</td>
-            <td>{{ item.Service }}</td>
-            <td>{{ item.standard }}</td>
-            <td >{{ item.image }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.Price }}</td>
-            <td>{{ item.Store }}</td>
-            <td>{{ item.Company }}</td>
-            <td>{{ item.date }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.service }}</td>
+            <td>{{ item.Price_standard }}</td>
+            <td>
+      <img :src="item.Product_image" alt="Product Image" style="width: 25px; height: auto;"/>
+    </td>
+            <td>{{ item.Product_name }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.Store_availability }}</td>
+            <td>{{ item.company_name }}</td>
+            <td>{{ item.Registration_date }}</td>
             <td>
               <v-btn size="x-small" flat @click="editItem(item)" class="management"
                 >수정</v-btn
@@ -89,22 +91,25 @@
 </template>
      <script setup lang="js">
      import { ref , computed} from 'vue';
+   import Get_data from "@/services/Get_data";
+
      const page =ref(1);
   const itemsPerPage  =ref(10);
-  const items = ref([
-  {
-    Number: 1,
-    Display: '진열',
-    Category: '셀프/대여',
-    Service: '셀프 세차장',
-    standard: '이용시간',
-    image: '이용시간',
-    name: '상품명',
-    Price: '10,000 원',
-    Store: '입점',
-    Company: '업체명',
-    date: 'YYYY-MM-DD'
-  },  ]);
+const items = ref([]);
+
+  const loadItems = async ()=>{
+  try{
+    const resp = await Get_data.get_partner();
+    console.log(resp.data.Product);
+    items.value = resp.data.Product;
+  }
+  catch(error){
+    console.error('Exception occurred while try to fetch items', error);
+  }
+}
+
+loadItems();
+
   
   const selectAll = ref(false);
   
@@ -113,11 +118,6 @@
     selectAll.value = items.value.every((item) => item.selected);
   };
   
-  const visibleItems = computed(() => {
-    const startIndex = (page.value - 1) * itemsPerPage.value;
-    const endIndex = startIndex + itemsPerPage.value;
-    return items.value.slice(startIndex, endIndex);
-  });
   const pageCount = computed(() => Math.ceil(items.value.length / itemsPerPage.value));
   
   const selectAllItems = () => {

@@ -15,6 +15,15 @@
   display: none; /* Hide the actual checkbox */
 }
 
+.login{
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.01em;
+  text-align: right;
+  color: #7D92A1;
+}
+
 .checkbox-label {
   cursor: pointer;
   position: relative;
@@ -119,8 +128,9 @@ button.remove-button {
   color: #8899a8;
 }
 .Head {
-  font-size: 16px;
-  font-weight: 700;
+  font-family: Noto Sans KR;
+  font-size: 18px;
+  font-weight: 900;
   color: #242424;
   margin-left: 10px;
 }
@@ -131,10 +141,30 @@ button.remove-button {
   margin-right: 5%;
 }
 .Total {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   margin-left: 10px;
   color: #346ddb;
+}
+.Number {
+  font-size: 13px;
+  font-weight: 400;
+  margin-left: 10px;
+  color: #346ddb;
+}
+.detail {
+  font-size: 13px;
+  font-weight: 400;
+  margin-left: 10px;
+  color: #346ddb;
+ cursor: pointer;
+}
+.Registration {
+  font-size: 13px;
+  font-weight: 400;
+  margin-left: 10px;
+  color: #346ddb;
+ cursor: pointer;
 }
 .input {
   width: 200px;
@@ -144,7 +174,43 @@ button.remove-button {
   font-size: 13px;
   font-weight: 400;
   margin-right: 5px;
-  margin-top: 5px;
+}
+.input_detail{
+  width: 100%;
+  height: 500px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  font-weight: 400;
+  margin-right: 5px;
+}
+.input_title{
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  font-weight: 400;
+  margin-right: 5px;
+}
+.custom-select {
+  width: 100%; /* Make the select element width 100% of its container */
+  padding: 8px; /* Add padding to the select */
+  border: 1px solid #ccc; /* Add a border */
+  border-radius: 4px; /* Add rounded corners */
+  background-color: #fff; /* Set background color */
+  font-size: 14px; /* Set font size */
+  color: #333; /* Set text color */
+  text-align: center;
+}
+
+.Detail {
+  width: 100%;
+  height: 65px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  font-weight: 400;
+  margin-right: 5px;
 
 }
 .dropdown {
@@ -173,6 +239,16 @@ button.remove-button {
 }
 .button {
   margin: 5px;
+}
+.button-category {
+  margin: 5px;
+  background-color: #FFFFFF;
+  border: 1px solid #7D92A1;
+  border-radius: 4px;
+font-size: 12px;
+font-weight: 500;
+color: #7D92A1;
+
 }
 .date-input {
   width: 150px;
@@ -206,7 +282,7 @@ font-weight: 500;
 text-align: center;
 
 }
-.td3 {
+.Company_name {
   font-family: Noto Sans KR;
   font-size: 13px;
   font-weight: 400;
@@ -214,6 +290,46 @@ text-align: center;
   letter-spacing: 0em;
   text-align: left;
   color: #346ddb;
+}
+.ID {
+  font-family: Noto Sans KR;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #346ddb;
+  cursor: pointer;
+}
+.no-underline {
+  text-decoration: none;
+}
+.Member_name {
+  font-family: Noto Sans KR;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #346ddb;
+}
+.Business_status {
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  color: #1AA5A2;
+  border-radius: 25px;
+  border: 2px solid #1AA5A2;
+}
+.Division {
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  color: #fff;
+  border-radius: 25px;
+  background-color: #346DDB;
 }
 .custom-table {
   width: 100%;
@@ -264,4 +380,94 @@ text-align: center;
   border: 1px solid #e6e6e6;
   border-radius: 4px;
 }
+.textarea {
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+.exposure {
+   width: 42px;
+ font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  color: #1AA5A2;
+  border-radius: 25px;
+  border: 2px solid #1AA5A2;
+}
 
+.hiding {
+  width: 42px;
+  font-family: Noto Sans KR;
+   font-size: 10px;
+   font-weight: 500;
+   color: red;
+   border-radius: 25px;
+   border: 2px solid red;
+}
+.Store_entry {
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  color: #ffffff;
+  width: 42px;
+  border-radius: 25px;
+  background-color: #394956;
+  border: 2px solid #394956;
+}
+
+.Not_in_store {
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  color: #7D92A1;
+  width: 42px;
+  border-radius: 25px;
+  border: 2px solid #E3E8ED;
+  background-color: #E3E8ED;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  background-color: #f3f4f7;
+  border-radius: 10px;
+  height: 53px;
+  border: 1px solid #e3e8ed;
+}
+.list-image {
+  width: 35px;
+  height: 35px;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+.item {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 15px;
+}
+.box {
+  margin: 5px;
+  background-color: #ffffff;
+  border: 1px solid #7d92a1;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  width: 45px;
+  height: 36px;
+  text-align: center;
+  padding: 6px;
+}
+.BTN-Save{
+  border: 1px solid #346DDB;
+  color: #346DDB;
+  
+}

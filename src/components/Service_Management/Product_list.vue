@@ -22,4 +22,5 @@
   
   </script>
   <style scoped>
+@import '/src/assets/css/style.css';
   </style>

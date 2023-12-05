@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <span class="head"> Business hours settings</span>
+      <span class="Head"> Business hours settings</span>
 
       <v-spacer></v-spacer>
 
@@ -18,20 +18,41 @@
         <v-container fluid>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* Division</span>
+              <span class="Title">* Division</span>
             </v-col>
             <v-col>
-              <input type="checkbox" name="Division" />
-              <label> 24 hours</label>
-              <input type="checkbox" name="Division" class="radio" />
-              <label> holiday</label>
-              <input type="checkbox" name="Division" class="radio" />
-              <label> No information</label>
+              <label for="24hours" class="checkbox-label">
+                <input
+                  type="checkbox"
+                  id="24hours"
+                  class="hidden-checkbox"
+                />
+                <span class="custom-checkbox"></span>
+               24 hours
+              </label>
+              <label for="Holiday" class="checkbox-label">
+                <input
+                  type="checkbox"
+                  id="Holiday"
+                  class="hidden-checkbox"
+                />
+                <span class="custom-checkbox"></span>
+               Holiday
+              </label>
+              <label for="No_information" class="checkbox-label">
+                <input
+                  type="checkbox"
+                  id="No_information"
+                  class="hidden-checkbox"
+                />
+                <span class="custom-checkbox"></span>
+                No information
+              </label>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* Operating time</span>
+              <span class="Title">* Operating time</span>
             </v-col>
             <v-col>
               <div class="form-container">
@@ -92,7 +113,7 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">etc</span>
+              <span class="Title">etc</span>
             </v-col>
             <v-col>
               <input
@@ -173,105 +194,4 @@
      </script>
     <style scoped>
 
-.row {
-  display: flex;
-  align-items: center;
-  margin-top: 5px;
-}
-
-.col {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 5px;
-  width: 50px;
-}
-.col_Break {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 5px;
-  width: auto;
-}
-
-.input-col input {
-  width: 100px;
-  padding: 5px 10px;
-  border: 1px solid #e6e6e6;
-  border-radius: 4px;
-}
-.head {
-  font-size: 16px;
-  font-weight: 700;
-  color: #242424;
-}
-.T-search {
-  font-size: 14px;
-  font-weight: 700;
-  color: #7d92a1;
-}
-.input {
-  width: 250px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input1 {
-  width: 148px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input2 {
-  width: 106px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input3 {
-  width: 350px;
-  height: 35px;
-  padding: 8px 10px;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-::placeholder {
-  color: #8899a8;
-}
-.hint {
-  font-size: 12px;
-  font-weight: 500;
-  color: #8899a8;
-}
-.checkbox {
-  margin-left: 20px;
-}
-.radio {
-  margin-left: 20px;
-}
-.button {
-  margin: 5px;
-}
-.custom-file-label {
-  padding: 8px 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  text-align: center;
-  color: #7d92a1;
-  cursor: pointer;
-}
 </style>

@@ -3,8 +3,8 @@
     <v-app style="background-color: #e3e8ed">
       <div>
         <div class="pb-5">
-          <p class="H-Title">Reservation Management</p>
-          <p class="Title">Reservation Management > Reservation List</p>
+          <p class="Page_name">Reservation Management</p>
+          <p class="Page_name_title">Reservation Management > Reservation List</p>
         </div>
         <div class="pb-5">
           <Search_reservation />
@@ -22,18 +22,6 @@
   
   </script>
   <style scoped>
-  .H-Title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #242424;
-    margin-left: 5%;
-    margin-top: 2%;
-  }
-  .Title {
-    font-size: 12px;
-    font-weight: 500;
-    color: #8899a8;
-    margin-left: 5%;
-  }
+@import '/src/assets/css/style.css';
   
   </style>

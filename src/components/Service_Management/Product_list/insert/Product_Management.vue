@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <span class="head"> Product Management</span>
+      <span class="Head"> Product Management</span>
 
       <v-spacer></v-spacer>
 
@@ -18,23 +18,33 @@
         <v-container fluid>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">Display status </span>
+              <span class="Title">Display status </span>
             </v-col>
             <v-col>
-              <input type="radio" name="Business status" />
-              <label> Exhibition</label>
-              <input type="radio" name="Business status" class="checkbox" />
-              <label> Hiding</label>
+              <input
+                type="radio"
+                id="Exhibition"
+                name="Display"
+                class="hidden-radio"
+              />
+              <label for="Exhibition" class="radio-label">Exhibition</label>
+              <input
+                type="radio"
+                id="Hiding"
+                name="Display"
+                class="hidden-radio"
+              />
+              <label for="Hiding" class="radio-label">Hiding</label>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">Exposure period</span>
+              <span class="Title">Exposure period</span>
             </v-col>
             <v-col>
-              <input type="date" class="date" />
-              <span>~</span>
-              <input type="date" class="date" />
+              <input type="date" class="date-input" />
+              <span> ~ </span>
+              <input type="date" class="date-input" />
             </v-col>
           </v-row>
         </v-container>
@@ -49,106 +59,4 @@
 
      </script>
     <style scoped>
-
-.row {
-  display: flex;
-  align-items: center;
-  margin-top: 5px;
-}
-
-.col {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 5px;
-  width: 50px;
-}
-.col_Break {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 5px;
-  width: auto;
-}
-
-.input-col input {
-  width: 100px;
-  padding: 5px 10px;
-  border: 1px solid #e6e6e6;
-  border-radius: 4px;
-}
-.head {
-  font-size: 16px;
-  font-weight: 700;
-  color: #242424;
-}
-.T-search {
-  font-size: 14px;
-  font-weight: 700;
-  color: #7d92a1;
-}
-.input {
-  width: 250px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input1 {
-  width: 148px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input2 {
-  width: 106px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input3 {
-  width: 350px;
-  height: 35px;
-  padding: 8px 10px;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-::placeholder {
-  color: #8899a8;
-}
-.hint {
-  font-size: 12px;
-  font-weight: 500;
-  color: #8899a8;
-}
-.checkbox {
-  margin-left: 20px;
-}
-.radio {
-  margin-left: 20px;
-}
-.button {
-  margin: 5px;
-}
-.custom-file-label {
-  padding: 8px 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  text-align: center;
-  color: #7d92a1;
-  cursor: pointer;
-}
 </style>

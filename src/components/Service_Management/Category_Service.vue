@@ -26,7 +26,12 @@
         </v-window-item>
 
         <v-window-item value="2">
-          <Service_Registration />
+          <div class="pb-5">
+            <Service_Registration />
+          </div>
+          <div class="pb-5">
+            <Service_List />
+          </div>
         </v-window-item>
       </v-window>
       </div>
@@ -40,6 +45,7 @@ const tab = ref(null);
 import Category_Registration from "@/components/Service_Management/Category&Service Management/Category_Registration.vue";
 import Service_Registration from "@/components/Service_Management/Category&Service Management/Service_Registration.vue";
 import Category_list from "@/components/Service_Management/Category&Service Management/Category_list.vue";
+import Service_List from "@/components/Service_Management/Category&Service Management/Service_List.vue";
 
 </script>
 <style scoped>

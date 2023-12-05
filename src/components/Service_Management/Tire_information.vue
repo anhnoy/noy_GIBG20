@@ -3,14 +3,14 @@
     <v-app style="background-color: #e3e8ed">
       <div>
         <div class="pb-5">
-          <p class="H-Title">Tire information management</p>
-          <p class="Title">Service Management > Tire Information Management</p>
+          <p class="Page_name">Tire information management</p>
+          <p class="Page_name_title">Service Management > Tire Information Management</p>
         </div>
         <div class="pb-5">
           <v-tabs
         v-model="tab"
         color="#346DDB"
-        class="Title"
+        class="Page_name_title"
 
       >
         <v-tab value="1">Brand</v-tab>
@@ -73,18 +73,5 @@
   
   </script>
   <style scoped>
-  .H-Title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #242424;
-    margin-left: 5%;
-    margin-top: 2%;
-  }
-  .Title {
-    font-size: 12px;
-    font-weight: 500;
-    color: #8899a8;
-    margin-left: 5%;
-  }
   
   </style>

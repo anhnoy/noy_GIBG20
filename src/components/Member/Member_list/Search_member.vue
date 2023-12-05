@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <span class="Head">Search conditions</span>
+      <span class="Head">조회조건</span>
       <v-spacer></v-spacer>
       <v-btn
         :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
@@ -14,16 +14,15 @@
         <v-divider></v-divider>
 
         <v-container fluid>
-          <v-row align="center" justify="center">
-            <v-col>
-              <span class="Title">Join date</span>
-
+          <v-row>
+            <v-col >
+              <span class="Title">가입일</span>
               <input type="date" class="date-input" v-model="startDate" />
               <span> ~ </span>
               <input type="date" class="date-input" v-model="endDate" />
             </v-col>
             <v-col cols="6">
-              <span class="Title">Search word</span>
+              <span class="Title">검색어</span>
               <select v-model="selectedWord" class="dropdown">
                 <option value="ID">ID</option>
                 <option value="Member">Member Name</option>
@@ -33,32 +32,32 @@
                 v-if="selectedWord === 'ID'"
                 type="text"
                 class="input"
-                placeholder="Please enter your ID."
+                placeholder="검색어를 입력하세요"
               />
               <input
                 v-if="selectedWord === 'Member'"
                 type="text"
                 class="input"
-                placeholder="Please enter your member name"
+                placeholder="검색어를 입력하세요"
               />
               <input
                 v-if="selectedWord === 'Phone'"
                 type="text"
                 class="input"
-                placeholder="Please enter your Phone"
+                placeholder="검색어를 입력하세요"
               />
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="5">
-              <span class="Title"> Situation</span>
+            <v-col>
+              <span class="Title"> 상태</span>
               <input
                 type="radio"
                 id="Situation_entire"
                 name="store"
                 class="hidden-radio"
               />
-              <label for="Situation_entire" class="radio-label">Entire</label>
+              <label for="Situation_entire" class="radio-label">전체</label>
 
               <input
                 type="radio"
@@ -66,7 +65,7 @@
                 name="store"
                 class="hidden-radio"
               />
-              <label for="Registered_member" class="radio-label">Registered member</label>
+              <label for="Registered_member" class="radio-label">가입회원</label>
 
               <input
                 type="radio"
@@ -74,16 +73,16 @@
                 name="store"
                 class="hidden-radio"
               />
-              <label for="Withdrawal_member" class="radio-label">Withdrawal member</label>
+              <label for="Withdrawal_member" class="radio-label">탈퇴회원</label>
             </v-col>
           </v-row>
           <v-row>
             <v-col align="center" justify="center">
               <v-btn variant="outlined" color="#346DDB" class="button">
-                reset
+                초기화
               </v-btn>
               <v-btn elevation="0" color="#346DDB" class="button">
-                check
+                조회
               </v-btn>
             </v-col>
           </v-row>

@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <span class="card1">Store information</span>
+      <span class="Head">Store information</span>
 
       <v-spacer></v-spacer>
 
@@ -18,26 +18,42 @@
         <v-container fluid>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* Business classification</span>
+              <span class="Title">* Business classification</span>
             </v-col>
             <v-col>
-              <input type="radio" name="sole proprietor" />
-              <label> Corporate business</label>
-              <input type="radio" name="sole proprietor" class="radio" />
-              <label> Sole proprietor</label>
+              <input
+                type="radio"
+                id="Corporate_business"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="Corporate_business" class="radio-label"
+                >Corporate business</label
+              >
+
+              <input
+                type="radio"
+                id="Sole_proprietor"
+                name="store"
+                class="hidden-radio"
+              />
+              <label for="Sole_proprietor" class="radio-label"
+                >Sole proprietor</label
+              >
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* Business Number</span>
+              <span class="Title">* Business Number</span>
             </v-col>
             <v-col>
               <input
+              v-for="item in items"
+                :key="item.Business_number"
                 type="text"
                 class="input"
-                placeholder="Please enter your business registration number."
+                v-model="item.Business_number"
               />
-              <label class="custom-file-label">Double check</label>
               <br /><span class="hint"
                 >※ Please enter including the hyphen (-).</span
               >
@@ -45,25 +61,29 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* Representative name</span>
+              <span class="Title">* Representative name</span>
             </v-col>
             <v-col>
               <input
+              v-for="item in items"
+                :key="item.Representative_name"
                 type="text"
                 class="input"
-                placeholder="Please enter the representative name."
+                v-model="item.Representative_name"
               />
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* Business status</span>
+              <span class="Title">* Business status</span>
             </v-col>
             <v-col>
               <input
+              v-for="item in items"
+                :key="item.Business_status"
                 type="text"
                 class="input"
-                placeholder="Please enter your business type."
+                v-model="item.Business_status"
               /><br /><span class="hint"
                 >※ If there is more than one type of business, please enter them
                 separated by a comma (,).</span
@@ -72,13 +92,15 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* Sectors</span>
+              <span class="Title">* Sectors</span>
             </v-col>
             <v-col>
               <input
+              v-for="item in items"
+                :key="item.Sectors"
                 type="text"
                 class="input"
-                placeholder="Please enter your industry."
+                v-model="item.Sectors"
               /><br /><span class="hint"
                 >※ If there is more than one industry, please enter them
                 separated by a comma (,).</span
@@ -87,21 +109,22 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* id</span>
+              <span class="Title">* id</span>
             </v-col>
             <v-col>
               <input
+              v-for="item in items"
+                :key="item.id"
                 type="text"
                 class="input"
-                placeholder="Please enter your ID."
+                v-model="item.id"
+                style="background-color: #e3e8ed; color: #7d92a1"
               />
-              <label class="custom-file-label">Double check</label>
-            <br />
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* password</span>
+              <span class="Title">* password</span>
             </v-col>
             <v-col cols="5">
               <input
@@ -113,33 +136,38 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* email</span>
+              <span class="Title">* email</span>
             </v-col>
             <v-col>
               <input
+              v-for="item in items"
+                :key="item.email"
                 type="text"
                 class="input"
-                placeholder="Please enter your e-mail"
+                v-model="item.email"
               />
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">* Contact information for person in charge</span>
+              <span class="Title"
+                >* Contact information for person in charge</span
+              >
             </v-col>
             <v-col>
               <input
+              v-for="item in items"
+                :key="item.Contact"
                 type="text"
                 class="input"
-                placeholder="Please enter the contact information of the person in charge."
-              /><br /><span class="hint"
+                v-model="item.Contact" /><br /><span class="hint"
                 >※ A secondary authentication number will be sent.</span
               >
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="T-search">Company photo</span>
+              <span class="Title">Company photo</span>
             </v-col>
             <v-col>
               <input
@@ -153,7 +181,9 @@
                 @change="previewImage"
                 style="display: none"
               />
-              <label for="fileInput2" class="custom-file-label">Find file</label>
+              <label for="fileInput2" class="custom-file-label"
+                >Find file</label
+              >
               <br />
               <v-row class="pt-5 ml-2">
                 <div v-for="(img, index) in imagePreviews" :key="index">
@@ -177,6 +207,30 @@
    
    const show = ref(false);
    const imagePreviews = ref([]);
+   const items = ref([
+  { Company_code: 1, 
+    Category: '셀프/대여', 
+    Company_name: '크리스탈 디테일링 센터 금천점',
+     Representative_number: '02-1234-1234',
+      Virtual_number : '050-1234-1234', 
+      Business_number : '123-45-67890', 
+      Contact:'010-1234-1234',
+      Address: '115',
+      Longitude: '00.000000000',
+      Latitude: '00.000000000',
+       Address_search: '서울특별시',
+        Address_detail: '서초중앙로8길',
+        Representative_name:'김길동',
+        Sectors:'세차',
+        email:'abcd1324@abcd.com',
+        id:'detailing01',
+        Review_rating: 5.0, 
+        Business_status: '영업중',
+         Exposure: '노출',
+          Store_status: '입점', 
+          Date: 'YYYY-MM-DD HH:MM:SS' },
+   ]);
+  
   
   const previewImage = (event) => {
     const selectedImage = event.target.files[0];
@@ -188,108 +242,4 @@
   };
    </script>
   <style scoped>
-  .img-wrapper {
-  position: relative; /* The parent container should be relative */
-  display: inline-block;
-  margin: 5px;
-}
-
-img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-button.remove-button {
-  width: 16px;
-  height: 16px;
-  background-color: #394956;
-  color: #fff;
-  cursor: pointer;
-  font-size: 12px;
-  padding: 0; /* Resetting any default padding */
-  border: none; /* Remove default border */
-  position: absolute; /* Absolute positioning */
-  top: -5px; /* Positioning it slightly above the top of the image */
-  right: -5px; /* Positioning it slightly to the right of the image */
-  border-radius: 50%; /* Making the button round */
-  line-height: 16px; /* Vertically centering the "X" text */
-  text-align: center; /* Horizontally centering the "X" text */
-}
-.card1 {
-  font-size: 16px;
-  font-weight: 700;
-  color: #242424;
-}
-.T-search {
-  font-size: 14px;
-  font-weight: 700;
-  color: #7d92a1;
-}
-.input {
-  width: 250px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input1 {
-  width: 148px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input2 {
-  width: 106px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-.input3 {
-  width: 350px;
-  height: 35px;
-  padding: 8px 10px;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
-::placeholder {
-  color: #8899a8;
-}
-.hint {
-  font-size: 12px;
-  font-weight: 500;
-  color: #8899a8;
-}
-.checkbox {
-  margin-left: 20px;
-}
-.radio {
-  margin-left: 20px;
-}
-.button {
-  margin: 5px;
-}
-.custom-file-label {
-  padding: 8px 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  text-align: center;
-  color: #7d92a1;
-  cursor: pointer;
-}
 </style>

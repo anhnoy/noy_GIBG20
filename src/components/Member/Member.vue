@@ -3,8 +3,8 @@
     <v-app style="background-color: #e3e8ed">
       <div>
         <div class="pb-5">
-          <p class="Page_name">Member list</p>
-          <p class="Page_name_title">Member Management > Member List</p>
+          <p class="Page_name">회원목록</p>
+          <p class="Page_name_title">회원관리 > 회원목록</p>
         </div>
         <div class="pb-5">
           <Search_requirement />

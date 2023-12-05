@@ -65,6 +65,26 @@ const routes = [
     name: 'Category_Service',
     component: () => import('../components/Service_Management/Category_Service.vue')
   },
+  {
+    path: '/notice',
+    name: 'Notice',
+    component: () => import('../components/Contents/Board/Notice/Notice.vue')
+  },
+  {
+    path: '/modify(Inquiry)/:id',
+    name: 'Modify(Inquiry)',
+    component: () => import('../components/Contents/Board/Helpdesk/Detail(modify)/Inquiry_detail.vue')
+  },
+  {
+    path: '/inquiry',
+    name: 'Inquiry',
+    component: () => import('../components/Contents/Board/Helpdesk/Inquiry.vue')
+  },
+  {
+    path: '/insert_notice',
+    name: 'insert_Notice',
+    component: () => import('../components/Contents/Board/Notice/insert/insert_notice.vue')
+  },
     {
     path: '/product_list',
     name: 'Product_list',
@@ -81,15 +101,31 @@ const routes = [
     component: () => import('../components/Partner/insert/insert.vue')
   },
   {
-    path: '/modify(partner)',
+    path: '/modify(partner)/:id',
     name: 'Modify(partner)',
     component: () => import('../components/Partner/Detail(Modify)/modify.vue')
+  },
+  {
+    path: '/modify(Reservation)/:id',
+    name: 'Modify(Reservation )',
+    component: () => import('../components/Reservation/Detail(Modify)/Reservation_detail.vue')
+  },
+  {
+    path: '/modify(member)/:id',
+    name: 'Modify(member)',
+    component: () => import('../components/Member/Member_list/Detail(modify)/modify.vue')
+  },
+  {
+    path: '/modify(admin)/:id',
+    name: 'Modify(admin)',
+    component: () => import('../components/Member/Administrator_list/Detail(modify)/Detail_administrator.vue')
   },
   {
     path: '/insert_Admin',
     name: 'Insert_Admin',
     component: () => import('../components/Member/Administrator_list/insert/insert_administrator.vue')
   },
+  
   {
     path: '/insert_product',
     name: 'Insert_product',

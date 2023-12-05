@@ -1,198 +1,133 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <v-card class="mx-auto" max-width="90%">
+  <div>
     <v-card-actions>
-      <p class="card1">
-        Total<span class="card2">{{ items.length }}</span> views
+      <p>
+        Total<span class="Total">{{ dataList.length }}</span> number of views
       </p>
       <v-spacer></v-spacer>
-      <v-btn @click="this.$router.push({ path: '/insert_Admin' })" class="text-none text-subtitle-1" color="#346DDB">
-        save order
-    </v-btn>
+      <v-btn class="BTN-Save"> Save order </v-btn>
     </v-card-actions>
-    <v-container fluid>
-      <div>
-        <table class="custom-table">
-          <tr>
-            <th>
-              <input
-                type="checkbox"
-                v-model="selectAll"
-                @change="selectAllItems"
-              />
-            </th>
-            <th>Number</th>
-            <th>Authority</th>
-            <th>ID</th>
-            <th>Member name</th>
-            <th>Phone number</th>
-            <th>Last access date</th>
-            <th>Situation</th>
-            <th>Join date</th>
-            <th>Connection IP</th>
-            <th>Management</th>
-          </tr>
-          <tr v-for="item in visibleItems" :key="item.id">
-            <td>
-              <input
-                type="checkbox"
-                v-model="item.selected"
-                @change="itemSelected"
-              />
-            </td>
-            <td>{{ item.업체코드 }}</td>
-            <td>{{ item.카테고리 }}</td>
-            <td class="td3">{{ item.업체명 }}</td>
-            <td>{{ item.주소 }}</td>
-            <td>{{ item.리뷰평점 }}</td>
-            <td class="td6">{{ item.영업여부 }}</td>
-            <td>{{ item.노출여부 }}</td>
-            <td>{{ item.입점상태 }}</td>
-            <td>{{ item.등록일시 }}</td>
-            <td>
-              <v-btn flat @click="editItem(item)" class="management"
-                >수정</v-btn
-              >
-              <v-btn flat @click="confirmDelete(item)" class="management"
-                >삭제</v-btn
-              >
-            </td>
-          </tr>
-        </table>
-      </div>
-      <v-pagination v-model="page" :length="pageCount"></v-pagination>
-    </v-container>
-  </v-card>
+    <ul>
+      <li v-for="item in dataList" :key="item.id">
+        <img :src="item.imageUrl" alt="" class="list-image" />
+        <div class="item-info">
+          <p class="item">{{ item.name }}</p>
+        </div>
+        <v-spacer></v-spacer>
+        <p class="item">{{ item.category }}</p>
+        <v-divider class="ma-3" inset vertical></v-divider>
+        <p class="item">사용</p>
+        <v-divider class="ma-3" inset vertical></v-divider>
+        <p class="item">지도 사용</p>
+        <v-divider class="ma-3" inset vertical></v-divider>
+        <p class="item">순서</p>
+        <div class="box">{{ item.order }}</div>
+        <v-btn class="button-category" flat
+          >수정
+          <v-dialog v-model="dialog" activator="parent" width="800px">
+            <v-card>
+              <v-toolbar>
+                <v-toolbar-title>More information</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-toolbar-items>
+                  <v-btn icon dark @click="dialog = false">
+                    <v-icon>mdi-close</v-icon>
+                  </v-btn>
+                </v-toolbar-items>
+              </v-toolbar>
+              <v-card-text>
+                <v-row>
+                  <v-col cols="2"  class="mt-2">
+                    <span class="Title">Category Type</span>
+                  </v-col>
+                  <v-col>
+                    <v-radio-group inline>
+  <v-radio label="Common" value="Common" color="#346DDBCC"></v-radio>
+  <v-radio label="Event" value="Event" color="#346DDBCC"></v-radio>
+</v-radio-group>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="2">
+                    <span class="Title">Category Code</span>
+                  </v-col>
+                  <v-col >
+                    <span >cg202310200000001e</span>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="2">
+                    <span class="Title">Not to use</span>
+                  </v-col>
+                  <v-col >
+                  
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="2">
+                    <span class="Title">Not to use</span>
+                  </v-col>
+                  <v-col >
+                    <v-checkbox label="Use"></v-checkbox>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+              <v-card-actions>
+                <v-row align="center" justify="center">
+                  <v-btn
+                    class="text-none text-subtitle-1"
+                    color="#346DDB"
+                    variant="flat"
+                    @click="dialog = false"
+                  >
+                    Save
+                  </v-btn>
+                </v-row>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-btn>
+      
+        <v-btn class="button-category" flat>삭제</v-btn>
+      </li>
+    </ul>
+  </div>
 </template>
-   <script setup lang="js">
-   import { ref , computed} from 'vue';
-   const page =ref(1);
-const itemsPerPage  =ref(10);
-const items = ref([
-{ 업체코드: 1, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-{ 업체코드: 2, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-{ 업체코드: 3, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-{ 업체코드: 4, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-{ 업체코드: 5, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-{ 업체코드: 6, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-{ 업체코드: 7, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-{ 업체코드: 8, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-{ 업체코드: 9, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-{ 업체코드: 10, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-{ 업체코드: 11, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-{ 업체코드: 12, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-{ 업체코드: 13, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-{ 업체코드: 14, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-{ 업체코드: 15, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-{ 업체코드: 16, 카테고리: '셀프/대여', 업체명: '크리스탈 디테일링 센터 금천점', 주소: '서울특별시 서초중앙로8길 115', 리뷰평점: 5.0, 영업여부: '영업중', 노출여부: '노출', 입점상태: '입점', 등록일시: 'YYYY-MM-DD HH:MM:SS' },
-]);
 
-const selectAll = ref(false);
+<script setup lang="js">
+import { ref, onMounted } from 'vue';
 
+const dataList = ref([]);
+const dialog =ref(false);
 
-const itemSelected = () => {
-  selectAll.value = items.value.every((item) => item.selected);
+const loadData = () => {
+  // Load your data here
+  dataList.value = [
+    {
+      id: 1,
+      name: '정비/세차',
+      imageUrl: 'https://static.thenounproject.com/png/17840-200.png',
+      category: '일반',
+      order: '1',
+    },
+    {
+      id: 2,
+      name: '정비/세차',
+      imageUrl: 'https://static.thenounproject.com/png/17840-200.png',
+      category: '이벤트',
+      order: '2',
+    },
+    // more items...
+  ];
 };
 
-const visibleItems = computed(() => {
-  const startIndex = (page.value - 1) * itemsPerPage.value;
-  const endIndex = startIndex + itemsPerPage.value;
-  return items.value.slice(startIndex, endIndex);
+onMounted(() => {
+  loadData();
 });
 
-const editItem = (item) => {
-  // Handle edit action for the selected item
-  console.log('Edit:', item);
-};
-const confirmDelete = (item) => {
-  if (window.confirm('Are you sure you want to delete this item?')) {
-    deleteItem(item);
-  }
-};
+</script>
 
-const deleteItem = (item) => {
-  items.value = items.value.filter((i) => i !== item);
-};
-   </script>
-  <style scoped>
-.items_per {
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  text-align: center;
-  color: #8899a8;
-  width: 85px;
-  height: 35px;
-  border: 1px solid #e3e8ed;
-  margin: 5px;
-}
-.management {
-  height: 18px;
-  text-align: center;
-  color: #7d92a1;
-  border: 1px solid #7d92a1;
-  margin-left: 5px;
-  font-family: Noto Sans KR;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  text-align: center;
-}
-.td3 {
-  font-family: Noto Sans KR;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 17px;
-  letter-spacing: 0em;
-  text-align: left;
-  color: #346ddb;
-}
 
-.card1 {
-  font-size: 16px;
-  font-weight: 700;
-  margin-left: 10px;
-  color: #242424;
-}
-.card2 {
-  font-size: 16px;
-  font-weight: 700;
-  margin-left: 10px;
-  color: #346ddb;
-}
-.custom-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: Noto Sans KR;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 17px;
-  letter-spacing: 0em;
-  text-align: center;
-}
-
-.custom-table th {
-  background-color: #f5f8fa;
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: center;
-}
-.custom-table td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: center;
-}
-
-.btn {
-  color: white;
-  background-color: #346ddb;
-  font-family: Noto Sans KR;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  text-align: center;
-  height: 32px;
-}
+<style scoped>
 </style>
