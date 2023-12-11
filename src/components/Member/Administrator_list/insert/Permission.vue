@@ -2,12 +2,12 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <span class="Head"> Permission settings </span>
+      <span class="Head"> 권한설정 </span>
 
       <v-spacer></v-spacer>
 
       <v-btn
-        :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+        :icon="show ? 'mdi-chevron-down' : 'mdi-chevron-up'"
         @click="show = !show"
       ></v-btn>
     </v-card-actions>
@@ -19,33 +19,33 @@
         <v-container fluid>
           <v-row>
             <v-col cols="2">
-              <span class="Title">Menu permission</span>
+              <span class="Title">메뉴권한</span>
             </v-col>
             <v-col>
               <label for="Company" class="checkbox-label">
                 <input type="checkbox" id="Company" class="hidden-checkbox" />
                 <span class="custom-checkbox"></span>
-                Company management
+                업체관리
               </label>
               <label for="Membership" class="checkbox-label">
                 <input type="checkbox" id="Membership" class="hidden-checkbox" />
                 <span class="custom-checkbox"></span>
-                Membership management
+                회원관리
               </label>
               <label for="Service" class="checkbox-label">
                 <input type="checkbox" id="Service" class="hidden-checkbox" />
                 <span class="custom-checkbox"></span>
-                Service Management
+                서비스관리
               </label>
               <label for="Reservation" class="checkbox-label">
                 <input type="checkbox" id="Reservation" class="hidden-checkbox" />
                 <span class="custom-checkbox"></span>
-                Reservation management
+                예약관리
               </label>
               <label for="Content" class="checkbox-label">
                 <input type="checkbox" id="Content" class="hidden-checkbox" />
                 <span class="custom-checkbox"></span>
-                Content Management
+                콘텐츠관리
               </label>
             </v-col>
           </v-row>

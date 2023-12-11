@@ -17,8 +17,12 @@
     </v-app>
   </template>
   <script setup lang="js">
+  
   import Search_requirement from "@/components/Member/Member_list/Search_member.vue";
   import Member_table from "@/components/Member/Member_list/Member_table.vue";
+
+
+
   
   </script>
   <style scoped>

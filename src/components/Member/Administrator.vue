@@ -3,8 +3,8 @@
   <v-app style="background-color: #e3e8ed">
     <div>
       <div class="pb-5">
-        <p class="Page_name">Administrator list</p>
-        <p class="Page_name_title">Membership Management > Administrator List</p>
+        <p class="Page_name">관리자 목록</p>
+        <p class="Page_name_title">회원관리 > 관리자 > 관리자 목록</p>
       </div>
       <div class="pb-5">
         <Search_requirement />

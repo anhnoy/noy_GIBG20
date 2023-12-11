@@ -1,4 +1,8 @@
 .Page_name {
+  font-family: Noto Sans KR;
+  line-height: 29px;
+  letter-spacing: -0.01em;
+  text-align: left;
   font-size: 20px;
   font-weight: 700;
   color: #242424;
@@ -6,6 +10,10 @@
   margin-top: 2%;
 }
 .Page_name_title {
+  font-family: Noto Sans KR;
+  line-height: 29px;
+  letter-spacing: -0.01em;
+  text-align: left;
   font-size: 12px;
   font-weight: 500;
   color: #8899a8;
@@ -129,10 +137,12 @@ button.remove-button {
 }
 .Head {
   font-family: Noto Sans KR;
-  font-size: 18px;
-  font-weight: 900;
-  color: #242424;
-  margin-left: 10px;
+  font-size: 16px;
+font-weight: 700;
+line-height: 24px;
+letter-spacing: -0.01em;
+text-align: left;
+
 }
 .Title {
   font-size: 14px;

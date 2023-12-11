@@ -1,12 +1,12 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <span class="Head">Basic Information</span>
+      <span class="Head">기본정보</span>
 
       <v-spacer></v-spacer>
 
       <v-btn
-        :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+        :icon="show ? 'mdi-chevron-down' : 'mdi-chevron-up'"
         @click="show = !show"
       ></v-btn>
     </v-card-actions>
@@ -18,15 +18,13 @@
         <v-container fluid>
           <v-row>
             <v-col cols="2">
-              <span class="Title">* id </span>
+              <span class="Title">* 아이디 </span>
             </v-col>
             <v-col>
               <input
-                v-for="item in items"
-                :key="item.id"
                 type="text"
                 class="input"
-                v-model="item.id"
+                v-model="admin.id"
                 readonly
                 style="background-color: #e3e8ed; color: #7d92a1"
               />
@@ -34,58 +32,50 @@
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="Title">* password</span>
+              <span class="Title">* 비밀번호</span>
             </v-col>
             <v-col>
-              <label class="custom-file-label">Reset password</label>
+              <label class="custom-file-label">비밀번호 초기화</label>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="Title">* Member name</span>
+              <span class="Title">* 회원명</span>
             </v-col>
             <v-col>
               <input
-                v-for="item in items"
-                :key="item.Member_name"
                 type="text"
                 class="input"
-                v-model="item.Member_name"
+                v-model="admin.name"
               />
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="Title">* Phone number</span>
+              <span class="Title">* 휴대폰 번호</span>
             </v-col>
             <v-col>
               <input
-                v-for="item in items"
-                :key="item.Phone"
                 type="text"
                 class="input"
-                v-model="item.Phone"
+                v-model="admin.phone"
               />
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="Title">* Permission type</span>
+              <span class="Title">* 권한타입</span>
             </v-col>
            <v-col>
-            <select id="CAT" name="CAT" class="input">
-                <option value="" disabled selected>
-                  Manager
-                </option>
-                <option v-for="Manager in Managers" :key="Manager.value" :value="Manager.value">
-                  {{ Manager.label }}
-                </option>
+            <select v-model="selectedWord" class="dropdown">
+                <option value="manager">관리자 </option>
+                <option value="Operator">운영자 </option>
               </select>
            </v-col>
           </v-row>
           <v-row>
             <v-col cols="2">
-              <span class="Title">Last access date</span>
+              <span class="Title">최근 접속일</span>
             </v-col>
             <v-col>
               <span >YYYY-MM-DD HH:MM:SS</span>
@@ -96,30 +86,35 @@
     </v-expand-transition>
   </v-card>
 </template>
-  <script setup lang="js">
-  import { ref } from 'vue';
-     
-   const show = ref(false);
-   const Managers = ref([
-  { value: 'volvo', label: 'Volvo' },
-  { value: 'saab', label: 'Saab' },
-  { value: 'fiat', label: 'Fiat' },
-  { value: 'audi', label: 'Audi' },
-]);
-const items = ref([
-  { Number: 1, 
-    authority: '운영자', 
-    id: 'ab******',
-    Member_name: '홍*동',
-    Phone : '010-1234-****', 
-    Last_access_date: 'YYYY-MM-DD',
-    situation: '승인',
-    Join_date: 'YYYY-MM-DD',
-    Connection_IP: '000.00.0.000', },
-   ]);
-  
+<script setup>
+import axios from 'axios';
+import { useRoute, } from 'vue-router';
+import { ref, onMounted } from 'vue';
+const selectedWord = ref('manager');
+const show = ref(false);
+const admin = ref({
+  id: '',
+  name: '',
+  phone: '',
+})
+const route = useRoute();
+const fetch_single_user = async () => {
+  try {
+    const response = await axios.get(`http://192.168.100.81:5000/api/admin/${route.params.id}`);
+    console.log(response.data);
+    admin.value.id = response.data.id;
+    admin.value.name = response.data.name;
+    admin.value.phone = response.data.phone;
+  } catch (err) {
+    console.error(err);
+  }
+};
 
-  </script>
+onMounted(() => {
+  fetch_single_user();
+});
+</script>
+
   <style scoped>
 
 </style>

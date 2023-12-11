@@ -4,12 +4,10 @@
     <div>
       <div class="pb-5">
         <p class="Page_name">회원 상세정보</p>
-        <p class="Page_name_title">
-          회원관리 > 회원목록 > 회원 상세
-        </p>
+        <p class="Page_name_title">회원관리 > 회원목록 > 회원 상세</p>
       </div>
       <div class="pb-5">
-        <Basic_Information />
+        <Basic_Information ref="Basic_Information" />
       </div>
       <div class="pb-5">
         <Vehicle_information />
@@ -22,34 +20,54 @@
       </div>
       <v-row>
         <v-col align="center" justify="center">
-          <v-btn variant="outlined" color="#346DDB" class="button" @click="this.$router.push({ path: '/partner' })" >
-            목록
+          <form @submit.prevent="edit_member">
+            <v-btn
+            variant="outlined"
+            color="#346DDB"
+            class="button"
+            @click="this.$router.push({ path: '/member' })"
+          >
+          목록
           </v-btn>
-          <v-btn elevation="0" color="#346DDB" class="button"  @click="confirmEdit">
+            <v-btn
+              type="submit"
+              color="#346DDB" class="button"
+            >
             수정
-          </v-btn>
+            </v-btn>
+          </form>
         </v-col>
       </v-row>
     </div>
   </v-app>
 </template>
-<script setup lang="js">
+<script>
 import Basic_Information from "@/components/Member/Member_list/Detail(modify)/Basic_Information.vue";
 import Vehicle_information from "@/components/Member/Member_list/Detail(modify)/Vehicle_information.vue";
 import Other_information from "@/components/Member/Member_list/Detail(modify)/Other_information.vue";
 import memo from "@/components/Member/Member_list/Detail(modify)/memo.vue";
-
-const editMember = async () => {
-  await Basic_Information.edit_member();
-};
-
-const confirmEdit = () => {
-  if (window.confirm('Are you sure you want to edit this item?')) {
-
-    editMember();
-  }
+export default {
+  data() {
+    return {};
+  },
+  components: {
+    Basic_Information,
+    Vehicle_information,
+    Other_information,
+    memo,
+  },
+  methods: {
+    edit_member() {
+      if (this.$refs.Basic_Information) {
+        this.$refs.Basic_Information.edit_member();
+      } else {
+        console.error("Unable to find the test2 component.");
+      }
+    },
+  },
 };
 </script>
+
   <style scoped>
-  @import '/src/assets/css/style.css';
+@import "/src/assets/css/style.css";
 </style>

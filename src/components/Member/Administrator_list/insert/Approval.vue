@@ -2,12 +2,12 @@
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
-      <span class="Head"> Approval </span>
+      <span class="Head"> 승인여부 </span>
 
       <v-spacer></v-spacer>
 
       <v-btn
-        :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+        :icon="show ? 'mdi-chevron-down' : 'mdi-chevron-up'"
         @click="show = !show"
       ></v-btn>
     </v-card-actions>
@@ -19,7 +19,7 @@
         <v-container fluid>
           <v-row>
             <v-col cols="2">
-              <span class="Title">* Division</span>
+              <span class="Title">구분</span>
             </v-col>
             <v-col>
               <input
@@ -28,7 +28,7 @@
                 name="store"
                 class="hidden-radio"
               />
-              <label for="Approval" class="radio-label">Approval</label>
+              <label for="Approval" class="radio-label">승인</label>
 
               <input
                 type="radio"
@@ -36,7 +36,7 @@
                 name="store"
                 class="hidden-radio"
               />
-              <label for="Not_approved" class="radio-label">Not approved</label>
+              <label for="Not_approved" class="radio-label">미승인</label>
             </v-col>
           </v-row>
         </v-container>

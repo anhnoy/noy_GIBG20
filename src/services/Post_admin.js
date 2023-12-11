@@ -21,5 +21,24 @@ export default {
     get_member(page, size){
         const url = "/api/member?page="+page+"&size="+size
         return API().get(url);
+    },
+    get_admin(page, size){
+        const url = "/api/admin?page="+page+"&size="+size
+        return API().get(url);
+    },
+    find_member(page, size, params,){
+        const url = "/api/find_condition_member"
+        return API().post(url, {
+            page: page,
+            size: size,
+            params: {
+              status: params.status || null,
+              id: params.id || null,
+              name: params.name || null,
+              phone: params.phone || null,
+              startDate: params.startDate || null,
+              endDate: params.endDate || null
+            }
+          });
     }
 }

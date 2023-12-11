@@ -127,7 +127,7 @@
 
 
   const username = ref('123456789');
-  const password = ref('12345677');
+  const password = ref('Aa!12345');
   const loggedIn = ref(false);
   const showOTPInput = ref(false);
   const required = ref(false);
@@ -159,10 +159,14 @@ const submitLogin = async () => {
               );
               localStorage.setItem(
                 "ID",
+                res.data.id
+              );
+              localStorage.setItem(
+                "name",
                 res.data.name
               );
         requiredOTP.value = false;
-        router.push({ name: 'Partner' });
+        router.push({ name: 'Member' });
       } catch (error) {
         console.error(error);
         requiredOTP.value = true;

@@ -36,6 +36,11 @@ const routes = [
     component: () => import('../components/test2.vue')
   },
   {
+    path: '/test3',
+    name: 'Test3',
+    component: () => import('../components/test3.vue')
+  },
+  {
     path: '/Navbar',
     name: 'Navbar',
     component: () => import('../components/Navbar.vue')

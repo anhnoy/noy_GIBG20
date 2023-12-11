@@ -6,12 +6,17 @@
       </p>
       <v-spacer></v-spacer>
       <div class="items-per-page">
-        <select v-model="itemsPerPage" id="itemsPerPage" class="items_per">
+        <!-- <select v-model="itemsPerPage" id="itemsPerPage" class="items_per">
           <option value="10">10 items</option>
           <option value="30">30 items</option>
           <option value="50">50 items</option>
           <option value="100">100 items</option>
-        </select>
+        </select> -->
+        <v-select v-model="itemsPerPage" id="itemsPerPage"
+  :items="['10 건씩 조회', '30 건씩 조회', '50 건씩 조회', '100 건씩 조회']"
+  variant="outlined"
+
+></v-select>
       </div>
     </v-card-actions>
     <v-container fluid>
@@ -90,7 +95,7 @@
 
    const page =ref(1);
    const size =ref(10);
-   const itemsPerPage  =ref(10);
+   const itemsPerPage  =ref('10건씩 조회');
    const items = ref([]);
    const totalItems = ref([]);
 
@@ -130,6 +135,8 @@ const confirmDelete = (item) => {
 const deleteItem = (itemToDelete) => {
   items.value = items.value.filter((item) => item !== itemToDelete);
 };
+
+
    </script>
   <style scoped>
 </style>
