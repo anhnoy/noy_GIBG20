@@ -150,13 +150,14 @@
     </v-app-bar>
   </nav>
 </template>
+
 <script setup lang="js">
 import { ref } from 'vue';
 
 const ID = ref( localStorage.getItem("ID"));
 const name = ref( localStorage.getItem("name"));
 const logout = () => {
-  localStorage.removeItem("Token");
+localStorage.removeItem("Token");
 };
 
 const Boards = [
@@ -175,30 +176,29 @@ const Events = [
 </script>
 <style scoped>
 .list-item-title {
-  font-size: 12px;
+font-size: 12px;
 }
 .title {
-  font-size: 14px;
-  font-weight: 500;
-  color: #8899a8;
+font-size: 14px;
+font-weight: 500;
+color: #8899a8;
 }
 .logo {
-  font-size: 20px;
-  font-weight: 700;
-  color: #ffffff;
+font-size: 20px;
+font-weight: 700;
+color: #ffffff;
 }
 .caption {
-  font-size: 12px;
-  font-weight: 400;
-  color: #8899a8;
+font-size: 12px;
+font-weight: 400;
+color: #8899a8;
 }
 .custom-text {
-  font-size: 12px;
-  font-weight: 500;
-  color: #ffffff;
+font-size: 12px;
+font-weight: 500;
+color: #ffffff;
 }
 .border {
-  color: #346ddb;
+color: #346ddb;
 }
 </style>
-

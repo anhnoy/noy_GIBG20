@@ -52,4 +52,8 @@ export default {
 @import "/src/assets/css/style.css";
 </style>
 
+<script setup>
+import { ref } from 'vue';
 
+const selectedOption = ref('');
+</script>
