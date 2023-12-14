@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>

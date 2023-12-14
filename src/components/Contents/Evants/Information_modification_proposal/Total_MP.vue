@@ -145,5 +145,7 @@
     const pageCount = computed(() => Math.ceil(items.value.length / itemsPerPage.value));
     
   </script>
-  <style scoped></style>
+  <style scoped>
+@import '/src/assets/css/style_noy.css';
+</style>
   

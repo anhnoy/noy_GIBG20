@@ -114,6 +114,12 @@
               :title="title"
               :value="title"
             ></v-list-item>
+            <v-list-item
+              @click="$router.push('/Information_MP')"
+              title="정보 수정 제안"
+            ></v-list-item>
+
+
           </v-list-group>
           <v-list-item title="배너 관리"></v-list-item>
           <v-list-item title="팝업 관리"></v-list-item>
@@ -163,14 +169,14 @@ localStorage.removeItem("Token");
 const Boards = [
 {text:'공지사항', route: '/notice'},
 {text:'리뷰관리', route: '/'},
-{text:'자주 묻는 질문', route: '/'},
+{text:'자주 묻는 질문', route: '/FAQ'},
 {text:'1:1 문의 관리', route: '/Inquiry'},
       ];
 
 const Events = [
   ["이벤트 목록"],
   ["정비명세서 인증 관리"],
-  ["정보 수정 제안"],
+  // ["정보 수정 제안"],
 ];
 
 </script>

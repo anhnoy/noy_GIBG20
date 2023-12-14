@@ -35,7 +35,7 @@ const tab = ref(null);
 
 </script>
 <style scoped>
-@import '/src/assets/css/style.css';
+@import '/src/assets/css/style_noy.css';
 
 .Page_name_title1 {
     font-size: 12px;
