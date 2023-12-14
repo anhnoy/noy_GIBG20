@@ -67,10 +67,12 @@
               <span class="Title">* 권한타입</span>
             </v-col>
            <v-col>
-            <select v-model="selectedWord" class="dropdown">
-                <option value="manager">관리자 </option>
-                <option value="Operator">운영자 </option>
+            <div class="dropdown_Type">
+            <select v-model="admin.type">
+                <option value="Y" :selected="admin.type === 'Y'">관리자 </option>
+                <option value="N" :selected="admin.type === 'N'">운영자 </option>
               </select>
+            </div>
            </v-col>
           </v-row>
           <v-row>
@@ -86,33 +88,42 @@
     </v-expand-transition>
   </v-card>
 </template>
-<script setup>
+<script>
 import axios from 'axios';
-import { useRoute, } from 'vue-router';
-import { ref, onMounted } from 'vue';
-const selectedWord = ref('manager');
-const show = ref(false);
-const admin = ref({
-  id: '',
-  name: '',
-  phone: '',
-})
-const route = useRoute();
-const fetch_single_user = async () => {
-  try {
-    const response = await axios.get(`http://192.168.100.81:5000/api/admin/${route.params.id}`);
-    console.log(response.data);
-    admin.value.id = response.data.id;
-    admin.value.name = response.data.name;
-    admin.value.phone = response.data.phone;
-  } catch (err) {
-    console.error(err);
-  }
-};
+import { useRoute, useRouter } from 'vue-router';
 
-onMounted(() => {
-  fetch_single_user();
-});
+export default {
+  data() {
+    return {
+      show: false,
+      route: useRoute(),
+      router: useRouter(),
+      admin: {
+        id: '',
+        name: '',
+        phone: '',
+        type: '',
+      },
+    };
+  },
+  methods: {
+    async fetch_single_admin() {
+      try {
+        const response = await axios.get(`http://192.168.100.81:5000/api/admin/detail/${this.route.params.id}`);
+        console.log(response.data);
+        this.admin.id = response.data.id;
+        this.admin.name = response.data.name;
+        this.admin.phone = response.data.phone;
+        this.admin.type = response.data.type;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  },
+  mounted() {
+    this.fetch_single_admin();
+  },
+};
 </script>
 
   <style scoped>

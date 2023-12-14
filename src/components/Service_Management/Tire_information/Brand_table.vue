@@ -7,10 +7,10 @@
       <v-spacer></v-spacer>
       <div class="items-per-page">
         <select
-          v-model="itemsPerPage"
-          id="itemsPerPage"
+          v-model="size"
+          id="size"
           class="items_per"
-          @update:model-value="itemsPerPage = parseInt($event, 10)"
+          @update:model-value="size = parseInt($event, 10)"
         >
           <option value="10">10 items</option>
           <option value="30">30 items</option>
@@ -65,7 +65,7 @@
      <script setup lang="js">
      import { ref , computed} from 'vue';
      const page =ref(1);
-  const itemsPerPage  =ref(10);
+  const size  =ref(5);
   const items = ref([
   { Number: 1, Division: 'Brand', Brand: 'Geumho'}, 
   { Number: 2, Division: 'Brand', Brand: 'Geumho'}, 
@@ -113,11 +113,11 @@
   };
   
   const visibleItems = computed(() => {
-    const startIndex = (page.value - 1) * itemsPerPage.value;
-    const endIndex = startIndex + itemsPerPage.value;
+    const startIndex = (page.value - 1) * size.value;
+    const endIndex = startIndex + size.value;
     return items.value.slice(startIndex, endIndex);
   });
-  const pageCount = computed(() => Math.ceil(items.value.length / itemsPerPage.value));
+  const pageCount = computed(() => Math.ceil(items.value.length / size.value));
   
   const selectAllItems = () => {
     items.value.forEach((item) => (item.selected = selectAll.value));

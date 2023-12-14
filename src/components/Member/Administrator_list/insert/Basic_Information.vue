@@ -33,11 +33,7 @@
               <span class="Title">* 비밀번호</span>
             </v-col>
             <v-col>
-              <input
-                type="text"
-                class="input"
-                placeholder="Your password will be automatically sent upon registration."
-              />
+              <span >비밀번호는 등록 시 자동으로 발송됩니다.</span>
             </v-col>
           </v-row>
           <v-row>
@@ -69,14 +65,12 @@
               <span class="Title">* 권한타입</span>
             </v-col>
            <v-col>
-            <select id="CAT" name="CAT" class="input">
-                <option value="" disabled selected>
-                  관리자
-                </option>
-                <option v-for="Manager in Managers" :key="Manager.value" :value="Manager.value">
-                  {{ Manager.label }}
-                </option>
+            <div class="dropdown_Type">
+            <select v-model="Type">
+                <option value="Y">관리자 </option>
+                <option value="N">운영자 </option>
               </select>
+            </div>
            </v-col>
           </v-row>
         </v-container>
@@ -88,11 +82,7 @@
   import { ref } from 'vue';
      
    const show = ref(false);
-   const Managers = ref([
-  { value: 'volvo', label: 'Volvo' },
-  { value: 'saab', label: 'Saab' },
-  { value: 'fiat', label: 'Fiat' },
-  { value: 'audi', label: 'Audi' },
+   const Type = ref([
 ]);
   
 

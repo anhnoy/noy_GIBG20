@@ -148,7 +148,15 @@ text-align: left;
   font-size: 14px;
   font-weight: 700;
   color: #7d92a1;
-  margin-right: 5%;
+}
+.Title_dialog {
+font-family: Noto Sans KR;
+font-size: 16px;
+font-weight:700;
+line-height: 23px;
+letter-spacing: -0.01em;
+text-align: center;
+
 }
 .Total {
   font-size: 20px;
@@ -223,15 +231,6 @@ text-align: left;
   margin-right: 5px;
 
 }
-.dropdown {
-  width: 200px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
 ::placeholder {
   color: #8899a8;
 }
@@ -249,6 +248,26 @@ text-align: left;
 }
 .button {
   margin: 5px;
+}
+.button_dialog {
+  width: 122px;
+height: 60px;
+padding: 12px, 20px, 12px, 20px;
+border-radius: 4px;
+border: 1px;
+gap: 10px;
+background-color:#346DDB;
+color: #ffff;
+}
+.button_dialog_cancel {
+  width: 122px;
+height: 60px;
+padding: 12px, 20px, 12px, 20px;
+border-radius: 4px;
+border: 1px;
+gap: 10px;
+background-color: #E3E8ED;
+color: #7D92A1;
 }
 .button-category {
   margin: 5px;
@@ -407,6 +426,27 @@ text-align: center;
   border-radius: 25px;
   border: 2px solid #1AA5A2;
 }
+.YES {
+  width: 50px;
+font-family: Noto Sans KR;
+ font-size: 8px;
+ font-weight: 500;
+ color: #1AA5A2;
+ border-radius: 25px;
+ border: 2px solid #1AA5A2;
+ margin: auto;
+}
+.NO {
+  width: 50px;
+font-family: Noto Sans KR;
+ font-size: 8px;
+ font-weight: 500;
+ color: #a51a1a;
+ border-radius: 25px;
+ border: 2px solid #a51a1a;
+ margin: auto;
+}
+
 
 .hiding {
   width: 42px;
@@ -480,4 +520,88 @@ li {
   border: 1px solid #346DDB;
   color: #346DDB;
   
+}
+.item_per_page {
+  position: relative;
+  margin-top: 5px;
+  width: 140px;
+  height: 40px;
+  left: 20px;
+}
+.item_per_page:after {
+  content: ">";
+  font: 20px "Consolas", monospace;
+  color: #8899a8;
+  transform: rotate(90deg);
+  right: 36px;
+  top: 5px;
+  position: absolute;
+  font-weight: 600;
+  cursor: pointer;
+}
+.item_per_page select {
+  width: 110px;
+  height: 36px;
+  padding-right: 20px;
+  padding-left: 15px;
+  font-size: 12px;
+  color: #8899a8;
+  border: 2px solid #e3e8ed;
+  font-weight: 600;
+  cursor: pointer;
+}
+.dropdown {
+  padding: 2px 15px 2px 15px;
+  position: relative;
+  margin-right: 5px;
+  margin-top: 10px;
+  width: 140px;
+}
+.dropdown:after {
+  content: ">";
+  font: 20px "Consolas", monospace;
+  color: #8899a8;
+  transform: rotate(90deg);
+  right: 5px;
+  top: 8px;
+  position: absolute;
+  font-weight: 600;
+  cursor: pointer;
+}
+.dropdown select {
+  width: 135px;
+  height: 35px;
+  padding-right: 40px;
+  padding-left: 15px;
+  font-size: 12px;
+  color: #8899a8;
+  border: 1px solid #ccc;
+  font-weight: 600;
+  cursor: pointer;
+}
+.dropdown_Type {
+  position: relative;
+  width: 140px;
+}
+.dropdown_Type:after {
+  content: ">";
+  font: 20px "Consolas", monospace;
+  color: #8899a8;
+  transform: rotate(90deg);
+  right: 15px;
+  top: 6px;
+  position: absolute;
+  font-weight: 600;
+  cursor: pointer;
+}
+.dropdown_Type select {
+  width: 135px;
+  height: 35px;
+  padding-right: 40px;
+  padding-left: 15px;
+  font-size: 12px;
+  color: #8899a8;
+  border: 1px solid #ccc;
+  font-weight: 600;
+  cursor: pointer;
 }

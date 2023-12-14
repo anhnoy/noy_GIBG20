@@ -15,58 +15,64 @@
 
         <v-container fluid>
           <v-row>
-            <v-col>
-              <span class="Title">가입일</span>
-              <input type="date" class="date-input" v-model="startDate"/>
-              <span> ~ </span>
+            <v-col cols="4">
+              <span class="Title mr-5">가입일</span>
+              <input type="date" class="date-input" v-model="startDate" />
+              <span class="ml-5 mr-5"> ~ </span>
               <input type="date" class="date-input" v-model="endDate" />
             </v-col>
-            <v-col cols="6">
-              <span class="Title">검색어</span>
-              <select v-model="selectedWord" class="dropdown" @change="clearInput">
-              <option value="ID">아이디</option>
-              <option value="Member">회원명</option>
-              <option value="Phone">휴대폰번호 </option>
-            </select>
+            <v-col cols="8">
+              <v-row>
+                <span class="Title mt-5">검색어</span>
+                <div class="dropdown">
+                  <select v-model="selectedWord" @change="clearInput">
+                    <option value="ID">아이디</option>
+                    <option value="Member">회원명</option>
+                    <option value="Phone">휴대폰번호</option>
+                  </select>
+                </div>
 
-            <input
-              v-if="selectedWord === 'ID'"
-              v-model="searchKeywordID"
-              type="text"
-              class="input"
-              placeholder="검색어를 입력하세요 ID"
-            />
-            <input
-              v-if="selectedWord === 'Member'"
-              v-model="searchKeyword_name"
-              type="text"
-              class="input"
-              placeholder="검색어를 입력하세요 Name"
-            />
-            <input
-              v-if="selectedWord === 'Phone'"
-              v-model="searchKeyword_phone"
-              type="text"
-              class="input"
-              placeholder="검색어를 입력하세요 Phone"
-            />
+                <div class="ml-10 mt-3">
+                  <input
+                  v-if="selectedWord === 'ID'"
+                  v-model="searchKeywordID"
+                  type="text"
+                  class="input"
+                  placeholder="검색어를 입력하세요 ID"
+                />
+                <input
+                  v-if="selectedWord === 'Member'"
+                  v-model="searchKeywordName"
+                  type="text"
+                  class="input"
+                  placeholder="검색어를 입력하세요 Name"
+                />
+                <input
+                  v-if="selectedWord === 'Phone'"
+                  v-model="searchKeywordPhone"
+                  type="text"
+                  class="input"
+                  placeholder="검색어를 입력하세요 Phone"
+                />
+                </div>
+              </v-row>
             </v-col>
           </v-row>
           <v-row>
             <v-col>
-              <span class="Title"> 상태</span>
+              <span class="Title mr-8"> 상태</span>
               <input
-              v-model="selectedStatus"
+                v-model="selectedStatus"
                 type="radio"
                 id="Situation_entire"
-                value="null"
+                value=""
                 name="situation"
                 class="hidden-radio"
               />
               <label for="Situation_entire" class="radio-label">전체</label>
 
               <input
-              v-model="selectedStatus"
+                v-model="selectedStatus"
                 type="radio"
                 id="Registered_member"
                 value="1"
@@ -78,7 +84,7 @@
               >
 
               <input
-              v-model="selectedStatus"
+                v-model="selectedStatus"
                 type="radio"
                 id="Withdrawal_member"
                 value="2"
@@ -95,7 +101,14 @@
               <v-btn variant="outlined" color="#346DDB" class="button">
                 초기화
               </v-btn>
-              <v-btn elevation="0" color="#346DDB" class="button" @click="findMember"> 조회 </v-btn>
+              <v-btn
+                elevation="0"
+                color="#346DDB"
+                class="button"
+                @click="searchMembers"
+              >
+                조회
+              </v-btn>
             </v-col>
           </v-row>
         </v-container>
@@ -103,67 +116,55 @@
     </v-expand-transition>
   </v-card>
 </template>
-<script setup>
-import axios from 'axios';
-import {ref} from 'vue';
+<script setup lang="js">
 
+import {ref,defineEmits} from 'vue';
 
  const show = ref(false);
 // Your existing data properties
-const selectedStatus = ref(null);
+const selectedStatus = ref('');
 const selectedWord = ref('ID');
-const searchKeywordID = ref(null);
-const searchKeyword_name = ref(null);
-const searchKeyword_phone = ref(null);
-const startDate = ref(null);
-const endDate = ref(null);
+const searchKeywordID = ref('');
+const searchKeywordName = ref('');
+const searchKeywordPhone = ref('');
+const startDate = ref('');
+const endDate = ref('');
 
 const clearInput = () => {
   searchKeywordID.value = '';
-  searchKeyword_name.value = '';
-  searchKeyword_phone.value = '';
+  searchKeywordName.value = '';
+  searchKeywordPhone.value = '';
 };
 
-// const members = ref([]);
+const emit = defineEmits([
+  'filterMembers'
+]);
 
-
-// const searchMembers = async () => {
-//   try{
-//     const  resp = await 
-
-//   }
-//   catch(error){
-//     console.error('Exception occured while try to get information', error);
-//   }
-// }
-
-// searchMembers();
-
-const findMember = () => {
-  const requestData = {
-    page: 0,
-    size: 10,
-    params: {
-      status: selectedStatus.value,
-      id: searchKeywordID.value,
-      name: searchKeyword_name.value,
-      phone: searchKeyword_phone.value,
-      startDate: startDate.value,
-      endDate: endDate.value,
-    },
+const searchMembers = () => {
+  const start = startDate.value;
+  const end = endDate.value;
+  const id = searchKeywordID.value;
+  const name = searchKeywordName.value;
+  const phone = searchKeywordPhone.value;
+  const status = selectedStatus.value;
+  const page = 0;
+  const size = 10;
+  const params = {
+    start:start,
+    end:end,
+    id:id,
+    name:name,
+    phone:phone,
+    status:status,
+    page:page,
+    size:size
   };
+  emit('filterMembers', params);
 
-
-  
-
-  axios.post('http://192.168.100.81:5000/api/find_condition_member', requestData)
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
 };
+
+
+
 </script>
 <style scoped>
 </style>

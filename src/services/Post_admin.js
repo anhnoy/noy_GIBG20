@@ -40,5 +40,5 @@ export default {
               endDate: params.endDate || null
             }
           });
-    }
+    },
 }

@@ -130,14 +130,13 @@ export default {
         name: '',
         phone: '',
         gender: '',
-        Division: '',
       },
     };
   },
   methods: {
     async fetch_single_user() {
       try {
-        const response = await axios.get(`http://192.168.100.81:5000/api/member/${this.route.params.id}`);
+        const response = await axios.get(`http://192.168.100.81:5000/api/member/detail/${this.route.params.id}`);
         console.log(response.data);
         this.member.email = response.data.email;
         this.member.name = response.data.name;
@@ -150,11 +149,10 @@ export default {
     },
     async edit_member() {
       try {
-        const response = await axios.patch(`http://192.168.100.81:5000/api/member/`, {
+        const response = await axios.patch(`http://192.168.100.81:5000/api/member/update`, {
           mid: this.route.params.id,
           name: this.member.name,
           phone: this.member.phone,
-          device_id: this.member.Division,
           gender: this.member.gender
         });
         setTimeout(async() => {
