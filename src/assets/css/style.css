@@ -2,15 +2,28 @@
   font-size: 20px;
   font-weight: 700;
   color: #242424;
-  margin-left: 5%;
+
   margin-top: 2%;
 }
 .Page_name_title {
   font-size: 12px;
   font-weight: 500;
   color: #8899a8;
-  margin-left: 5%;
 }
+
+.T-search{
+  font-family: Noto Sans KR;
+font-size: 14px;
+font-weight: 700;
+line-height: 33px;
+letter-spacing: -0.01em;
+text-align: left;
+color: rgb(44, 165, 221);
+text-align: center;
+padding-top: 25px;
+
+}
+
 .hidden-checkbox {
   display: none; /* Hide the actual checkbox */
 }
@@ -53,6 +66,7 @@
 }
 .hidden-radio {
   display: none; /* Hide the actual radio input */
+  
 }
 
 .radio-label {
@@ -138,7 +152,18 @@ button.remove-button {
   font-size: 14px;
   font-weight: 700;
   color: #7d92a1;
-  margin-right: 5%;
+  margin-right: 50px;
+}
+.Title_bill{
+  font-size: 14px;
+  font-weight: 700;
+  color: #7d92a1;
+  margin: 15px 10px 0px 10px;
+  margin-right: 45px;
+
+}
+.no-border {
+  border: none;
 }
 .Total {
   font-size: 20px;
@@ -168,12 +193,13 @@ button.remove-button {
 }
 .input {
   width: 200px;
-  height: 35px;
+  height: 40px;
   padding: 8px 10px;
   border: 1px solid #ccc;
   font-size: 13px;
   font-weight: 400;
   margin-right: 5px;
+  margin-top: 5px;
 }
 .input_detail{
   width: 100%;
@@ -264,10 +290,98 @@ color: #7D92A1;
   letter-spacing: -0.01em;
   text-align: center;
   color: #8899a8;
-  width: 85px;
-  height: 35px;
   border: 1px solid #e3e8ed;
-  margin: 5px;
+  margin: 5px 9px;
+  outline: none;
+}
+.items-per-page{
+  position: relative;
+  margin-top: 10px;
+}
+.items-per-page:after {
+  content: ">";
+  font: 17px "Consolas", monospace;
+  color: #8899a8;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 20px;
+  top: 10px;
+  position: absolute;
+  pointer-events: none;
+}
+
+.items-per-page select {
+  outline: none;
+  display: block;
+  width: 100%;
+  text-align: center;
+  float: right;
+  padding-right: 20px;
+  font-size: 12px;
+  color: #8899a8;
+  border: 1px solid #e3e8ed;
+}
+.selectdiv {
+  position: relative;
+  margin-right: 25px;
+  /* margin-top: 10px; */
+  width: 150px;
+  height: 40px;
+  border-radius: 1px;
+}
+.input-select-by-selectdiv {
+  margin: 8px 0px 0px 0px;
+  /* background-color: #346DDB; */
+  margin-top: auto;
+
+
+}
+
+
+
+
+
+
+
+.options {
+  position: relative;
+  margin-right: 25px;
+  margin-top: 10px !important;
+}
+.selectdiv:after {
+  content: ">";
+  font: 17px "Consolas", monospace;
+  color: #8899a8;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 20px;
+  top: 15px;
+  padding: 0 0 2px;
+  position: absolute;
+  pointer-events: none;
+}
+
+.selectdiv select {
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 40px;
+  float: right;
+  margin: 5px 0px;
+  padding-right: 34px;
+  padding-left: 20px;
+  font-size: 12px;
+  color: #8899a8;
+  border: 1px solid #e3e8ed;
+  -ms-word-break: normal;
+  word-break: normal;
 }
 .management {
   width: 60px;
@@ -397,6 +511,83 @@ text-align: center;
   border-radius: 25px;
   border: 2px solid #1AA5A2;
 }
+.Waiting {
+  font-family: Noto Sans KR;
+   font-size: 10px;
+   font-weight: 500;
+   color: #346DDB;
+   background-color: #FFFFFF;
+   border-radius: 6px;
+   padding: 1px;
+   border: 1px solid #346DDB;
+   width: 70px;
+   margin: auto;
+  }
+  .Answer {
+    font-family: Noto Sans KR;
+     font-size: 10px;
+     font-weight: 500;
+     color: #FFFFFF;
+     background-color: #346DDB;
+     border-radius: 6px;
+     padding: 1px;
+     border: 1px solid #346DDB;
+     width: 70px;
+     margin: auto;
+    }
+.Approval{
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  color: #FFFFFF;
+  background-color: #1AA5A2 ;
+  border-radius: 8px;
+  padding: 1px;
+  border: 1px solid #1AA5A2;
+  width: 70px;
+  margin: auto;
+
+}
+
+
+.Under {
+  font-family: Noto Sans KR;
+   font-size: 10px;
+   font-weight: 500;
+   color: #1AA5A2;
+   background-color: #FFFFFF 0.2% ;
+   border-radius: 8px;
+   padding: 1px;
+   border: 1px solid #1AA5A2;
+   width: 70px;
+  margin: auto;
+  }
+.Approval_request {
+font-family: Noto Sans KR;
+ font-size: 10px;
+ font-weight: 500;
+ color: #1AA5A2;
+ background-color: #FFFFFF ;
+ border-radius: 8px;
+ padding: 1px;
+ border: 1px solid #1AA5A2;
+ width: 70px;
+  margin: auto;
+}
+.Approved {
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  color: #FFFFFF;
+  background-color: #7D92A1 ;
+  border-radius: 8px;
+  padding: 1px;
+  width: 70px;
+  margin: auto;
+
+}
+
+
 
 .hiding {
   width: 42px;
@@ -443,6 +634,7 @@ li {
   height: 53px;
   border: 1px solid #e3e8ed;
 }
+
 .list-image {
   width: 35px;
   height: 35px;
@@ -454,6 +646,11 @@ li {
   font-weight: 700;
   margin: 15px;
 }
+.item_c {
+  width: 1120px; /* ปรับความกว้างตามที่คุณต้องการ */
+  height: 40px; /* ปรับความสูงตามที่คุณต้องการ */
+}
+
 .box {
   margin: 5px;
   background-color: #ffffff;
@@ -469,5 +666,110 @@ li {
 .BTN-Save{
   border: 1px solid #346DDB;
   color: #346DDB;
+  
+}
+.bt1 {
+  width: 33px ;
+  height: 24px;
+  font-family: 'Noto Sans KR';
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  border: 1px solid #346DDB!important;
+  color: #346DDB !important; 
+
+}
+.v-field {
+  width: 200px; /* กำหนดความกว้างที่คุณต้องการ */
+  height: 40px; /* กำหนดความสูงที่คุณต้องการ */
+}
+
+.btn2 {
+  width: 54px;
+  height: 32px;
+  padding: 4px 16px;
+  border-radius: 4px;
+  gap: 10px;
+  background-color: #346DDB!important;  
+  color: #ffffff !important; 
+}
+.search-field-container{
+  max-width: 300px;
+  margin-top: -5px;
+}
+.custom-v-select {
+  height: 60px; /* ปรับความสูงตามที่คุณต้องการ */
+}
+select {
+  width: 200px; /* ปรับความกว้างตามที่คุณต้องการ */
+  height: 30px; /* ปรับความสูงตามที่คุณต้องการ */
+}
+
+option {
+  height: 20px; /* ปรับความสูงตามที่คุณต้องการ */
+}
+/* bill detaill */
+
+.image-container {
+  display: flex;
+  gap: 10px; 
+}
+.checkbox_MP {
+
+width: 20px;
+height: 20px;
+background-color: #FFFFFF;
+background-color: white; 
+}
+
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="checkbox"]:checked + label,
+[type="checkbox"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+[type="checkbox"]:checked + label:before,
+[type="checkbox"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+[type="checkbox"]:checked + label:after {
+    content: '';
+    width: 5px;
+    height: 10px;
+    border: solid #346DDB;
+    border-width: 0px 3px 3px 0;
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.checkbox_MP1 {
+  margin-right: 20px; /* เพิ่มระยะห่างระหว่าง checkbox กับ label */
+}
+.test_PM{
+  margin-left: -20px;
+  width: 200px;
   
 }

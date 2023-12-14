@@ -101,6 +101,12 @@ const routes = [
     component: () => import('../components/Partner/insert/insert.vue')
   },
   {
+    path: '/insert1',
+    name: 'Insert1',
+    component: () => import('../components/Contents/Board/FAQ/insert1')
+  },
+ 
+  {
     path: '/modify(partner)/:id',
     name: 'Modify(partner)',
     component: () => import('../components/Partner/Detail(Modify)/modify.vue')
@@ -131,6 +137,45 @@ const routes = [
     name: 'Insert_product',
     component: () => import('../components/Service_Management/Product_list/insert/insert_product.vue')
   },
+//////////////noy
+
+{
+  path: '/information_MP',
+  name: 'Information_MP',
+  component: () => import('../components/Contents/Evants/Information_modification_proposal/Information_MP.vue')
+},
+{
+  path: '/faq',
+  name: 'Faq',
+  component: () => import('../components/Contents/Board/FAQ/FAQ.vue')
+},
+{
+  path: '/faq_data2',
+name: 'Faq_data2',
+component: () => import('../components/Contents/Board/FAQ/FAQ_data2.vue')
+},
+{
+path: '/bill',
+name: 'Bill',
+component: () => import('../components/Contents/Evants/Bill.vue')
+},
+{
+  path: '/detaill',
+  name: 'Detaill',
+  component: () => import('../components/Contents/Evants/Bill/Detaill/Detaill.vue')
+},
+{
+  path: '/test',
+  name: 'Test',
+  component: () => import('../components/test.vue')
+},
+{
+  path: '/detail(modify)_PM',
+  name: 'Detail(modify)_PM',
+  component: () => import('../components/Contents/Evants/Information_modification_proposal/Detail(modify)_PM.vue')
+},
+
+
 ]
 
 const router = createRouter({

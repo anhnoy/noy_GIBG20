@@ -44,7 +44,7 @@
 import { ref } from "vue";
 const tab = ref(null);
 import Search_conditions from "@/components/Contents/Board/Helpdesk/Search_conditions.vue";
-import Inquiry_table from "@/components/Contents/Board/Helpdesk/Inquiry_table.vue";
+// import Inquiry_table from "@/components/Contents/Board/Helpdesk/Inquiry_table.vue";
 import Inquiry_type from "@/components/Contents/Board/Helpdesk/Inquiry_type.vue";
 import List_of_inquiry_types from "@/components/Contents/Board/Helpdesk/List_of_inquiry_types.vue";
 </script>
