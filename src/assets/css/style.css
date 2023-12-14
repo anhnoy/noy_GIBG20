@@ -1,4 +1,8 @@
 .Page_name {
+  font-family: Noto Sans KR;
+  line-height: 29px;
+  letter-spacing: -0.01em;
+  text-align: left;
   font-size: 20px;
   font-weight: 700;
   color: #242424;
@@ -6,6 +10,10 @@
   margin-top: 2%;
 }
 .Page_name_title {
+  font-family: Noto Sans KR;
+  line-height: 29px;
+  letter-spacing: -0.01em;
+  text-align: left;
   font-size: 12px;
   font-weight: 500;
   color: #8899a8;
@@ -143,27 +151,26 @@ button.remove-button {
 }
 .Head {
   font-family: Noto Sans KR;
-  font-size: 18px;
-  font-weight: 900;
-  color: #242424;
-  margin-left: 10px;
+  font-size: 16px;
+font-weight: 700;
+line-height: 24px;
+letter-spacing: -0.01em;
+text-align: left;
+
 }
 .Title {
   font-size: 14px;
   font-weight: 700;
   color: #7d92a1;
-  margin-right: 50px;
 }
-.Title_bill{
-  font-size: 14px;
-  font-weight: 700;
-  color: #7d92a1;
-  margin: 15px 10px 0px 10px;
-  margin-right: 45px;
+.Title_dialog {
+font-family: Noto Sans KR;
+font-size: 16px;
+font-weight:700;
+line-height: 23px;
+letter-spacing: -0.01em;
+text-align: center;
 
-}
-.no-border {
-  border: none;
 }
 .Total {
   font-size: 20px;
@@ -239,15 +246,6 @@ button.remove-button {
   margin-right: 5px;
 
 }
-.dropdown {
-  width: 200px;
-  height: 35px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 400;
-}
 ::placeholder {
   color: #8899a8;
 }
@@ -265,6 +263,26 @@ button.remove-button {
 }
 .button {
   margin: 5px;
+}
+.button_dialog {
+  width: 122px;
+height: 60px;
+padding: 12px, 20px, 12px, 20px;
+border-radius: 4px;
+border: 1px;
+gap: 10px;
+background-color:#346DDB;
+color: #ffff;
+}
+.button_dialog_cancel {
+  width: 122px;
+height: 60px;
+padding: 12px, 20px, 12px, 20px;
+border-radius: 4px;
+border: 1px;
+gap: 10px;
+background-color: #E3E8ED;
+color: #7D92A1;
 }
 .button-category {
   margin: 5px;
@@ -511,82 +529,26 @@ text-align: center;
   border-radius: 25px;
   border: 2px solid #1AA5A2;
 }
-.Waiting {
-  font-family: Noto Sans KR;
-   font-size: 10px;
-   font-weight: 500;
-   color: #346DDB;
-   background-color: #FFFFFF;
-   border-radius: 6px;
-   padding: 1px;
-   border: 1px solid #346DDB;
-   width: 70px;
-   margin: auto;
-  }
-  .Answer {
-    font-family: Noto Sans KR;
-     font-size: 10px;
-     font-weight: 500;
-     color: #FFFFFF;
-     background-color: #346DDB;
-     border-radius: 6px;
-     padding: 1px;
-     border: 1px solid #346DDB;
-     width: 70px;
-     margin: auto;
-    }
-.Approval{
-  font-family: Noto Sans KR;
-  font-size: 10px;
-  font-weight: 500;
-  color: #FFFFFF;
-  background-color: #1AA5A2 ;
-  border-radius: 8px;
-  padding: 1px;
-  border: 1px solid #1AA5A2;
-  width: 70px;
-  margin: auto;
-
-}
-
-
-.Under {
-  font-family: Noto Sans KR;
-   font-size: 10px;
-   font-weight: 500;
-   color: #1AA5A2;
-   background-color: #FFFFFF 0.2% ;
-   border-radius: 8px;
-   padding: 1px;
-   border: 1px solid #1AA5A2;
-   width: 70px;
-  margin: auto;
-  }
-.Approval_request {
+.YES {
+  width: 50px;
 font-family: Noto Sans KR;
- font-size: 10px;
+ font-size: 8px;
  font-weight: 500;
  color: #1AA5A2;
- background-color: #FFFFFF ;
- border-radius: 8px;
- padding: 1px;
- border: 1px solid #1AA5A2;
- width: 70px;
-  margin: auto;
+ border-radius: 25px;
+ border: 2px solid #1AA5A2;
+ margin: auto;
 }
-.Approved {
-  font-family: Noto Sans KR;
-  font-size: 10px;
-  font-weight: 500;
-  color: #FFFFFF;
-  background-color: #7D92A1 ;
-  border-radius: 8px;
-  padding: 1px;
-  width: 70px;
-  margin: auto;
-
+.NO {
+  width: 50px;
+font-family: Noto Sans KR;
+ font-size: 8px;
+ font-weight: 500;
+ color: #a51a1a;
+ border-radius: 25px;
+ border: 2px solid #a51a1a;
+ margin: auto;
 }
-
 
 
 .hiding {
@@ -668,108 +630,87 @@ li {
   color: #346DDB;
   
 }
-.bt1 {
-  width: 33px ;
-  height: 24px;
-  font-family: 'Noto Sans KR';
+.item_per_page {
+  position: relative;
+  margin-top: 5px;
+  width: 140px;
+  height: 40px;
+  left: 20px;
+}
+.item_per_page:after {
+  content: ">";
+  font: 20px "Consolas", monospace;
+  color: #8899a8;
+  transform: rotate(90deg);
+  right: 36px;
+  top: 5px;
+  position: absolute;
+  font-weight: 600;
+  cursor: pointer;
+}
+.item_per_page select {
+  width: 110px;
+  height: 36px;
+  padding-right: 20px;
+  padding-left: 15px;
   font-size: 12px;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  text-align: center;
-  border: 1px solid #346DDB!important;
-  color: #346DDB !important; 
-
+  color: #8899a8;
+  border: 2px solid #e3e8ed;
+  font-weight: 600;
+  cursor: pointer;
 }
-.v-field {
-  width: 200px; /* กำหนดความกว้างที่คุณต้องการ */
-  height: 40px; /* กำหนดความสูงที่คุณต้องการ */
+.dropdown {
+  padding: 2px 15px 2px 15px;
+  position: relative;
+  margin-right: 5px;
+  margin-top: 10px;
+  width: 140px;
 }
-
-.btn2 {
-  width: 54px;
-  height: 32px;
-  padding: 4px 16px;
-  border-radius: 4px;
-  gap: 10px;
-  background-color: #346DDB!important;  
-  color: #ffffff !important; 
+.dropdown:after {
+  content: ">";
+  font: 20px "Consolas", monospace;
+  color: #8899a8;
+  transform: rotate(90deg);
+  right: 5px;
+  top: 8px;
+  position: absolute;
+  font-weight: 600;
+  cursor: pointer;
 }
-.search-field-container{
-  max-width: 300px;
-  margin-top: -5px;
+.dropdown select {
+  width: 135px;
+  height: 35px;
+  padding-right: 40px;
+  padding-left: 15px;
+  font-size: 12px;
+  color: #8899a8;
+  border: 1px solid #ccc;
+  font-weight: 600;
+  cursor: pointer;
 }
-.custom-v-select {
-  height: 60px; /* ปรับความสูงตามที่คุณต้องการ */
+.dropdown_Type {
+  position: relative;
+  width: 140px;
 }
-select {
-  width: 200px; /* ปรับความกว้างตามที่คุณต้องการ */
-  height: 30px; /* ปรับความสูงตามที่คุณต้องการ */
+.dropdown_Type:after {
+  content: ">";
+  font: 20px "Consolas", monospace;
+  color: #8899a8;
+  transform: rotate(90deg);
+  right: 15px;
+  top: 6px;
+  position: absolute;
+  font-weight: 600;
+  cursor: pointer;
 }
-
-option {
-  height: 20px; /* ปรับความสูงตามที่คุณต้องการ */
-}
-/* bill detaill */
-
-.image-container {
-  display: flex;
-  gap: 10px; 
-}
-.checkbox_MP {
-
-width: 20px;
-height: 20px;
-background-color: #FFFFFF;
-background-color: white; 
-}
-
-[type="checkbox"]:checked,
-[type="checkbox"]:not(:checked) {
-    position: absolute;
-    left: -9999px;
-}
-[type="checkbox"]:checked + label,
-[type="checkbox"]:not(:checked) + label
-{
-    position: relative;
-    padding-left: 30px;
-    cursor: pointer;
-    line-height: 20px;
-    display: inline-block;
-    color: #666;
-}
-[type="checkbox"]:checked + label:before,
-[type="checkbox"]:not(:checked) + label:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 18px;
-    height: 18px;
-    border: 1px solid #ddd;
-    background: #fff;
-}
-[type="checkbox"]:checked + label:after {
-    content: '';
-    width: 5px;
-    height: 10px;
-    border: solid #346DDB;
-    border-width: 0px 3px 3px 0;
-    position: absolute;
-    top: 2px;
-    left: 6px;
-    -webkit-transition: all 0.2s ease;
-    transition: all 0.2s ease;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-.checkbox_MP1 {
-  margin-right: 20px; /* เพิ่มระยะห่างระหว่าง checkbox กับ label */
-}
-.test_PM{
-  margin-left: -20px;
-  width: 200px;
-  
+.dropdown_Type select {
+  width: 135px;
+  height: 35px;
+  padding-right: 40px;
+  padding-left: 15px;
+  font-size: 12px;
+  color: #8899a8;
+  border: 1px solid #ccc;
+  font-weight: 600;
+  cursor: pointer;
 }

@@ -24,7 +24,7 @@
             ></v-list-item>
           </template>
           <v-list-item
-            title="Partner"
+            title="업체 목록"
             @click="this.$router.push({ path: '/partner' })"
           ></v-list-item>
         </v-list-group>
@@ -37,11 +37,11 @@
             ></v-list-item>
           </template>
           <v-list-item
-            title="Member list"
+            title="회원목록"
             @click="this.$router.push({ path: '/member' })"
           ></v-list-item>
           <v-list-item
-            title="Administrator list"
+            title="관리자"
             @click="this.$router.push({ path: '/administrator' })"
           ></v-list-item>
         </v-list-group>
@@ -53,11 +53,19 @@
               title="서비스 관리"
             ></v-list-item>
           </template>
-          <v-list-item @click="this.$router.push({ path: '/Category_Service' })" title="Category/service"></v-list-item>
-          <v-list-item @click="this.$router.push({ path: '/product_list' })" title="Product list"></v-list-item>
-          <v-list-item @click="this.$router.push({ path: '/tire_information' })" title="Tire Information"></v-list-item>
-        </v-list-group>
-        <v-list-group value="Reservation" style="color: white">
+          <v-list-item
+            @click="this.$router.push({ path: '/Category_Service' })"
+            title="카테고리/서비스 관리"
+          ></v-list-item>
+          <v-list-item
+            @click="this.$router.push({ path: '/product_list' })"
+            title="상품목록"
+          ></v-list-item>
+          <v-list-item
+            @click="this.$router.push({ path: '/tire_information' })"
+            title="타이어 정보 관리"
+          ></v-list-item> </v-list-group
+        ><v-list-group value="Reservation" style="color: white">
           <template v-slot:activator="{ props }">
             <v-list-item
               v-bind="props"
@@ -65,8 +73,11 @@
               title="예약관리"
             ></v-list-item>
           </template>
-          <v-list-item  @click="this.$router.push({ path: '/reservation' })" title="Reservation list"></v-list-item> </v-list-group>
-        <v-list-group value="Content" style="color: white">
+          <v-list-item
+            @click="this.$router.push({ path: '/reservation' })"
+            title="예약 목록"
+          ></v-list-item> </v-list-group
+        ><v-list-group value="Content" style="color: white">
           <template v-slot:activator="{ props }">
             <v-list-item
               v-bind="props"
@@ -97,34 +108,41 @@
               <v-list-item v-bind="props" title="이벤트 관리"></v-list-item>
             </template>
 
-            <!-- เพิ่มรายการ "정비명세서 인증 관리" ใน Event และกำหนด route เป็น '/Bill' -->
             <v-list-item
-              @click="$router.push('/Bill')"
-              title="정비명세서 인증 관리"
-            ></v-list-item>
-
-            <!-- เพิ่มรายการ "정보 수정 제안" ใน Event และกำหนด route เป็น '/info-proposal' -->
-            <v-list-item
-              @click="$router.push('/Information_MP')"
-              title="정보 수정 제안"
+              v-for="([title], i) in Events"
+              :key="i"
+              :title="title"
+              :value="title"
             ></v-list-item>
           </v-list-group>
-
           <v-list-item title="배너 관리"></v-list-item>
           <v-list-item title="팝업 관리"></v-list-item>
           <v-list-item title="앱 푸시 관리"></v-list-item>
           <v-list-item title="약관 관리"></v-list-item>
         </v-list-group>
       </v-list>
+      <template v-slot:append>
+        <div class="pa-2">
+          <v-card-item class="d-flex justify-center pt-8">
+           <div class="pa-2">
+            <v-img
+              :src="require('../assets/images/Auto_Logo_Gray_2400x2400.png')"
+              height="30"
+            />
+           </div>
+            <p class="caption">Administrator © auto&</p>
+          </v-card-item>
+        </div>
+      </template>
     </v-navigation-drawer>
     <v-app-bar color="#FFFFFF" elevation="1">
       <v-spacer></v-spacer>
-      <p class="login"> {{ ID }}</p>
+      <P class="login"> {{ name}} ({{ ID }})</P>
       <v-divider class="ma-3" inset vertical></v-divider>
       <v-btn
         prepend-icon="mdi mdi-logout"
         variant="plain"
-        @click="this.$router.push({ path: '/login' }),logout()"
+        @click="this.$router.push({ path: '/login' }), logout()"
         class="login"
       >
         로그아웃
@@ -137,15 +155,22 @@
 import { ref } from 'vue';
 
 const ID = ref( localStorage.getItem("ID"));
+const name = ref( localStorage.getItem("name"));
 const logout = () => {
 localStorage.removeItem("Token");
 };
 
 const Boards = [
 {text:'공지사항', route: '/notice'},
-{text:'공지사항', route: '/'},
-{text:'자주 묻는 질문', route: '/FAQ'},
+{text:'리뷰관리', route: '/'},
+{text:'자주 묻는 질문', route: '/'},
 {text:'1:1 문의 관리', route: '/Inquiry'},
+      ];
+
+const Events = [
+  ["이벤트 목록"],
+  ["정비명세서 인증 관리"],
+  ["정보 수정 제안"],
 ];
 
 </script>

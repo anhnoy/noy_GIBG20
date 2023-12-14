@@ -6,7 +6,7 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+        :icon="show ?  'mdi-chevron-down' : 'mdi-chevron-up'"
         @click="show = !show"
       ></v-btn>
     </v-card-actions>
@@ -24,8 +24,9 @@
               <input
                 v-model="member.Division"
                 type="radio"
-                id="Division"
+                id="common"
                 name="common"
+                value="일반"
                 class="hidden-radio"
                 :checked="member.Division === '일반'"
               />
@@ -34,7 +35,8 @@
               <input
                 v-model="member.Division"
                 type="radio"
-                id="Division"
+                id="Social"
+                value="소셜 로그인"
                 name="Social"
                 class="hidden-radio"
                 :checked="member.Division === '소셜 로그인'"
@@ -88,8 +90,9 @@
               <input
                 v-model="member.gender"
                 type="radio"
-                id="Gender"
-                name="Gender"
+                id="Man"
+                name="Man"
+                value="1"
                 class="hidden-radio"
                 :checked="member.gender === '1'"
               />
@@ -99,76 +102,73 @@
                 v-model="member.gender"
                 type="radio"
                 id="Woman"
-                name="Gender"
+                name="Woman"
+                value="0"
                 class="hidden-radio"
                 :checked="member.gender === '0'"
               />
               <label for="Woman" class="radio-label">여자</label>
             </v-col>
-            <v-btn elevation="0" color="#346DDB" class="button"  @click="edit_member">
-            수정
-          </v-btn>
           </v-row>
         </v-container>
       </div>
     </v-expand-transition>
   </v-card>
 </template>
-  <script setup lang="js">
-  import { ref, onMounted } from 'vue'
-  import axios from "axios"
-  import { useRoute } from 'vue-router'
-import router from '@/router';
+<script>
+import axios from 'axios';
+import { useRoute, useRouter } from 'vue-router';
 
-
-  const route = useRoute()
-  console.log(route.params.id)
-
-  const member =ref({
-    email :'',
-    name :'',
-    phone :'',
-    gender :'',
-    Division :'',
-  })
-
-const fetch_single_user = async () => {
-  try {
-    const response = await axios.get(`http://192.168.100.81:5000/api/member/${route.params.id}`);
-    console.log(response.data)
-    member.value.email = response.data.email
-    member.value.name = response.data.name
-    member.value.phone = response.data.phone
-    member.value.gender = response.data.gender
-    member.value.Division = response.data.device_id
-  } catch (err) {
-    console.error(err);
-  }
+export default {
+  data() {
+    return {
+      show: false,
+      route: useRoute(),
+      router: useRouter(),
+      member: {
+        email: '',
+        name: '',
+        phone: '',
+        gender: '',
+      },
+    };
+  },
+  methods: {
+    async fetch_single_user() {
+      try {
+        const response = await axios.get(`http://192.168.100.81:5000/api/member/detail/${this.route.params.id}`);
+        console.log(response.data);
+        this.member.email = response.data.email;
+        this.member.name = response.data.name;
+        this.member.phone = response.data.phone;
+        this.member.gender = response.data.gender;
+        this.member.Division = response.data.device_id;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async edit_member() {
+      try {
+        const response = await axios.patch(`http://192.168.100.81:5000/api/member/update`, {
+          mid: this.route.params.id,
+          name: this.member.name,
+          phone: this.member.phone,
+          gender: this.member.gender
+        });
+        setTimeout(async() => {
+          await this.router.push('/member');
+        console.log(response);
+        }, 100);
+      } catch (error) {
+        console.error('Error updating member:', error);
+      }
+    },
+  },
+  mounted() {
+    this.fetch_single_user();
+  },
 };
+</script>
 
-onMounted(() => {
-  fetch_single_user();
-});
-
-
-const edit_member = async () => {
-  try {
-    const response = await axios.patch(`http://192.168.100.81:5000/api/member/`, {
-      "mid" : route.params.id,
-      "name": member.value.name,
-      "phone": member.value.phone
-    });
-     await router.push('/member')
-console.log(response);
-} catch (error) {
-console.error(error);
-}
-};
-
-
-   const show = ref(false);
-
-  
-  </script>
   <style scoped>
 </style>

@@ -7,18 +7,28 @@
           <p class="Page_name_title">회원관리 > 회원목록</p>
         </div>
         <div class="pb-5">
-          <Search_requirement />
+          <Search_requirement @filter-members="searchFunction"/>
         </div>
         <div class="pb-5">
-          <Member_table />
+          <Member_table ref="memberTable"/>
         </div>
   
       </div>
     </v-app>
   </template>
   <script setup lang="js">
+  import { ref } from "vue";
   import Search_requirement from "@/components/Member/Member_list/Search_member.vue";
   import Member_table from "@/components/Member/Member_list/Member_table.vue";
+
+  const memberTable = ref();
+
+  const searchFunction = (params)=>{
+    console.log('==========>');
+    console.log(params);
+    memberTable.value.filterMembers(params);
+  }
+
   
   </script>
   <style scoped>

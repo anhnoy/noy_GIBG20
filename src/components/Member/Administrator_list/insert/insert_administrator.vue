@@ -3,9 +3,9 @@
   <v-app style="background-color: #e3e8ed">
     <div>
       <div class="pb-5">
-        <p class="Page_name">Administrator Registration</p>
+        <p class="Page_name">관리자 등록</p>
         <p class="Page_name_title">
-          Membership Management > Administrator List > Administrator Registration
+          회원관리 > 관리자 > 관리자 목록
         </p>
       </div>
       <div class="pb-5">
@@ -19,11 +19,11 @@
       </div>
       <v-row>
         <v-col align="center" justify="center">
-          <v-btn variant="outlined" color="#346DDB" class="button" @click="this.$router.push({ path: '/member' })" >
-            cancellation
+          <v-btn variant="outlined" color="#346DDB" class="button" @click="this.$router.push({ path: '/administrator' })" >
+            목록
           </v-btn>
           <v-btn elevation="0" color="#346DDB" class="button">
-            registration
+            등록
           </v-btn>
         </v-col>
       </v-row>

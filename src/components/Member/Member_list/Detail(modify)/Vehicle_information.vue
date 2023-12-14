@@ -6,7 +6,7 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+        :icon="show ? 'mdi-chevron-down' : 'mdi-chevron-up'"
         @click="show = !show"
       ></v-btn>
     </v-card-actions>
@@ -35,9 +35,12 @@
                   <th>연료</th>
                   <th>배기량(cc)</th>
                   <th>색상</th>
-                  <th>생산_날짜</th>
-                  <th>자동차 종류</th>
-                  <th>첫 등록일</th>
+                  <th>차대번호</th>
+                  <th>제작일</th>
+                  <th>차종분류</th>
+                  <th>최초등록일</th>
+                  <th>최종점검일</th>
+                  <th>주행거리(km)</th>
                 </tr>
                 <tr v-for="item in items" :key="item.id">
                   <td>{{ item. mcid}}</td>
@@ -80,7 +83,6 @@
 
   const items = ref([]);
   const route = useRoute()
-  console.log(route.params.id)
 
 
   const loadItems = async () => {

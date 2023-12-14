@@ -3,8 +3,8 @@
   <v-app style="background-color: #e3e8ed">
     <div>
       <div class="pb-5">
-        <p class="Page_name">Business Registration</p>
-        <p class="Page_name_title">Company Management > Company List</p>
+        <p class="Page_name">업체목록</p>
+        <p class="Page_name_title">업체관리 > 업체목록</p>
       </div>
       <div class="pb-5">
         <Search_requirement />

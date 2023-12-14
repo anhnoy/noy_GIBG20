@@ -6,7 +6,7 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+        :icon="show ? 'mdi-chevron-down' : 'mdi-chevron-up'"
         @click="show = !show"
       ></v-btn>
     </v-card-actions>
@@ -32,7 +32,7 @@
               <input
                 type="radio"
                 id="Agree"
-                name="Division"
+                name="marketing"
                 class="hidden-radio"
               />
               <label for="Agree" class="radio-label">동의  (YYYY-MM-DD)</label>
@@ -40,7 +40,7 @@
               <input
                 type="radio"
                 id="Reject"
-                name="Division"
+                name="marketing"
                 class="hidden-radio"
               />
               <label for="Reject" class="radio-label">거부  (YYYY-MM-DD)</label>
@@ -53,19 +53,19 @@
             <v-col>
               <input
                 type="radio"
-                id="Agree"
-                name="Division"
+                id="Agree_night"
+                name="Night_notification"
                 class="hidden-radio"
               />
-              <label for="Agree" class="radio-label">동의  (YYYY-MM-DD)</label>
+              <label for="Agree_night" class="radio-label">동의  (YYYY-MM-DD)</label>
 
               <input
                 type="radio"
-                id="Reject"
-                name="Division"
+                id="Reject_night"
+                name="Night_notification"
                 class="hidden-radio"
               />
-              <label for="Reject" class="radio-label">거부  (YYYY-MM-DD)</label>
+              <label for="Reject_night" class="radio-label">거부  (YYYY-MM-DD)</label>
             </v-col>
           </v-row>
           <v-row>
@@ -108,43 +108,42 @@
               <span class="Title">탈퇴사유</span>
             </v-col>
             <v-col>
-              <label for="vehicle1" class="checkbox-label">
-                <input type="checkbox" id="vehicle1" class="hidden-checkbox" />
-                <span class="custom-checkbox"></span>
-                고객에게 제공하는 혜택이 많지 않아서
-              </label><br>
-
-              <label for="vehicle2" class="checkbox-label">
-                <input type="checkbox" id="vehicle2" class="hidden-checkbox" />
+              <label for="provided" class="checkbox-label">
+                <input type="checkbox" id="provided" class="hidden-checkbox" />
                 <span class="custom-checkbox"></span>
                 제공되는 서비스가 별로 없어서
-              </label><br>
-
-              <label for="vehicle3" class="checkbox-label">
-                <input type="checkbox" id="vehicle3" class="hidden-checkbox" />
+              </label><br><br>
+              <label for="service" class="checkbox-label">
+                <input type="checkbox" id="service" class="hidden-checkbox" />
                 <span class="custom-checkbox"></span>
                 서비스 정보가 정확하지 않아서
-              </label><br>
-              <label for="vehicle3" class="checkbox-label">
-                <input type="checkbox" id="vehicle3" class="hidden-checkbox" />
+              </label><br><br>
+              <label for="inconvenient" class="checkbox-label">
+                <input type="checkbox" id="inconvenient" class="hidden-checkbox" />
                 <span class="custom-checkbox"></span>
                 앱을 사용하기 불편해서
-              </label><br>
-              <label for="vehicle3" class="checkbox-label">
-                <input type="checkbox" id="vehicle3" class="hidden-checkbox" />
+              </label><br><br>
+              <label for="vehicle" class="checkbox-label">
+                <input type="checkbox" id="vehicle" class="hidden-checkbox" />
                 <span class="custom-checkbox"></span>
                 차량이 없어 서비스 이용에 제약이 많아서
-              </label><br>
-              <label for="vehicle3" class="checkbox-label">
-                <input type="checkbox" id="vehicle3" class="hidden-checkbox" />
+              </label><br><br>
+              <label for="more" class="checkbox-label">
+                <input type="checkbox" id="more" class="hidden-checkbox" />
                 <span class="custom-checkbox"></span>
                 더 나은 서비스를 찾아내서
-              </label><br>
-               <label for="vehicle3" class="checkbox-label">
-                <input type="checkbox" id="vehicle3" class="hidden-checkbox" />
+              </label><br><br>
+               <label for="Advertising" class="checkbox-label">
+                <input type="checkbox" id="Advertising" class="hidden-checkbox" />
                 <span class="custom-checkbox"></span>
                 광고성 앱 푸시 등의 알람이 빈번해서
+              </label><br><br>
+              <label for="customers" class="checkbox-label">
+                <input type="checkbox" id="customers" class="hidden-checkbox" />
+                <span class="custom-checkbox"></span>
+                고객에게 제공하는 혜택이 많지 않아서
               </label>
+
             </v-col>
           </v-row>
         </v-container>
@@ -159,7 +158,6 @@ import { useRoute } from 'vue-router'
 
 
 const route = useRoute()
-console.log(route.params.id)
 
 const member =ref({
   email :'',

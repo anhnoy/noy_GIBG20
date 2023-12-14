@@ -2,17 +2,18 @@
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
       <p class="Head">
-        총<span class="Total">{{ totalItems }}</span> 건 조회
+        총<span class="Total">{{ totalCount }}</span> 건 조회
       </p>
       <v-spacer></v-spacer>
-      <div class="items-per-page">
-        <select v-model="itemsPerPage" id="itemsPerPage" class="items_per">
-          <option value="10">10 items</option>
-          <option value="30">30 items</option>
-          <option value="50">50 items</option>
-          <option value="100">100 items</option>
-        </select>
-      </div>
+      <div class="item_per_page">
+                <select v-model="size" id="size" @update:model-value="size = parseInt($event, 10)">
+                  <option value="5">5 건씩 조회</option>
+                  <option value="10">10 건씩 조회</option>
+                  <option value="30">30 건씩 조회</option>
+                  <option value="50">50 건씩 조회</option>
+                  <option value="100">100 건씩 조회</option>
+                </select>
+            </div>
     </v-card-actions>
     <v-container fluid>
       <div>
@@ -29,16 +30,22 @@
             <th>탈퇴일</th>
             <th>관리</th>
           </tr>
-          <tr v-for="item in items" :key="item.id">
+          <tr v-for="item in visibleItems" :key="item.mid">
             <td>{{ item.mid }}</td>
             <td>{{ item.device_id }}</td>
             <td>
-              <router-link :to="`/modify(member)/${item.mid}`" class="no-underline">
+              <router-link
+                :to="`/modify(member)/${item.mid}`"
+                class="no-underline"
+              >
                 <p class="ID">{{ item.email }}</p>
               </router-link>
             </td>
             <td>
-              <router-link :to="`/modify(member)/${item.mid}`" class="no-underline">
+              <router-link
+                :to="`/modify(member)/${item.mid}`"
+                class="no-underline"
+              >
                 <p class="Member_name">{{ item.name }}</p>
               </router-link>
             </td>
@@ -63,73 +70,129 @@
                   >수정</v-btn
                 ></router-link
               >
-              <v-btn
-                size="x-small"
-                flat
-                @click="confirmDelete(item)"
-                class="management"
-                >삭제</v-btn
-              >
+                <v-btn size="x-small" flat class="management" @click="dialog = true">
+                  삭제
+                  <v-dialog v-model="dialog" width="auto">
+                    <v-card width="360" height="170">
+                      <div class="pt-8">
+                        <v-card-title class="Title_dialog"
+                          >삭제하시겠습니까?</v-card-title
+                        >
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn class="button_dialog_cancel" @click="close">
+                            아니오
+                          </v-btn>
+                          <v-btn
+                            class="button_dialog"
+                            @click="confirmDelete(item.mid)"
+                          >
+                            네
+                          </v-btn>
+                          <v-spacer></v-spacer>
+                        </v-card-actions>
+                      </div>
+                    </v-card>
+                  </v-dialog>
+                </v-btn>
             </td>
           </tr>
+          <template v-if="members.length === 0">
+            <tr>
+              <td colspan="10">조회된 내용이 없습니다.</td>
+            </tr>
+          </template>
         </table>
       </div>
-      <v-pagination
-        v-model="page"
-        :length="pageCount"
-        :total-visible="7"
-      ></v-pagination>
+      <v-pagination v-model="page" :length="totalCount" ></v-pagination>
     </v-container>
   </v-card>
 </template>
 
 <script setup lang="js">
-   import { ref, watch, computed} from 'vue';
-   import Post_admin from '@/services/Post_admin';
 
+  import MemberService from '@/services/member.service'
+  import axios from 'axios';
+  import { ref, computed, defineExpose} from 'vue';
+  import { useRouter } from 'vue-router';
 
    const page =ref(1);
-   const size =ref(10);
-   const itemsPerPage  =ref(10);
-   const items = ref([]);
-   const totalItems = ref([]);
+   const size =ref(5);
+   const router = useRouter();
+   const totalCount = ref(0);
+   const members= ref([]);
+   const mid= ref([]);
+   const dialog = ref(false);
 
-const loadItems = async ()=>{
-  const PG = page.value;
-  const SZ = size.value;
+   const visibleItems = computed(() => {
+    const startIndex = (page.value - 1) * size.value;
+    const endIndex = startIndex + size.value;
+    return members.value.slice(startIndex, endIndex);
+  });
+
+
+
+  const filterMembers = (params)=>{searchMembers(params);}
+
+
+  const loadMembers = async ()=>{
+  const start = '';
+  const end = '';
+  const status = '';
+  const id = '';
+  const name = '';
+  const phone = '';
+  const page = 0;
+  const limit = size.value;
+
   try{
-    const resp = await Post_admin.get_member(PG,SZ);
-    console.log(resp.data.datas);
-    items.value = resp.data.datas;
-    totalItems.value = resp.data.totalItems;
+    const resp = await MemberService.getMembers(start,end, id,  name, phone, status, page, limit);
+    members.value = resp.data.data;
+    totalCount.value = (resp.data.totalCount+limit-1)/limit;
+   
+    mid.value = resp.data.data.map(item => item.mid);
+    console.log(resp.data.data.map(item => item.mid))
   }
   catch(error){
-    console.error('Exception occurred while try to fetch items', error);
+    console.error('Exception while try to search members',error);}
   }
-}
-loadItems();
+  
+  loadMembers();
 
-watch(itemsPerPage, (newValue) => {
-  size.value = parseInt(newValue, 10);
-  loadItems();
-});
-watch(page, (newValue) => {
-  page.value = parseInt(newValue, 10);
-  loadItems();
-});
-
-
-const pageCount = computed(() => Math.ceil(totalItems.value / size.value));
-
-const confirmDelete = (item) => {
-  if (window.confirm('Are you sure you want to delete this item?')) {
-    deleteItem(item);
+  const searchMembers = async(params)=>{
+  try{
+    const resp = await MemberService.getMembers(params.start,params.end,  params.id,  params.name, params.phone, params.status, params.page, params.size);
+    members.value = resp.data.data;
+    totalCount.value = resp.data.totalCount;
   }
+  catch(error){
+    console.error('Exception  while try to search members',error);}}
+
+
+  defineExpose({filterMembers});
+
+  const confirmDelete = (mid) => {
+    router.push({ query: { id: mid } });
+    console.log(mid);
+    try {
+      const response = axios.patch(`http://192.168.100.81:5000/api/member/delete`, {
+        mid: mid,
+        delete_yn: 'Y',
+      });
+      window.location.reload();
+      console.log(response);
+    } catch (error) {
+      console.error('Error updating member:', error);
+    }
+  };
+
+  const close = () => {
+  dialog.value = false;
 };
 
-const deleteItem = (itemToDelete) => {
-  items.value = items.value.filter((item) => item !== itemToDelete);
-};
+  
+
+
    </script>
   <style scoped>
 </style>
