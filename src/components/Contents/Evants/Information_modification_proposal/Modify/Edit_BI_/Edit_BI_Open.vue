@@ -17,7 +17,7 @@
           <v-col cols="6">
             <v-row>
               <p class="Title_bill">등록일</p>
-              <span class="mt-1">
+              <span class="ml-3 mt-1">
                 <datepicker />
               </span>
 
@@ -32,8 +32,8 @@
                 >~</span
               >
               <span class="mt-1" style="margin-right: 10px">
-                <datepicker
-              /></span>
+                <datepicker />
+            </span>
             </v-row>
           </v-col>
           <v-col cols="6">
@@ -182,8 +182,7 @@
 
 <script setup lang="js">
 import { ref } from 'vue';
-import datepicker from '../../../datepicker/Vuedatepicker.vue'
-
+import datepicker from '../../../../../datepicker/Vuedatepicker.vue'
 const show = ref(false);
 const selectedWord = ref('Number');
 const status = ref('entire');
@@ -196,4 +195,6 @@ const resetForm = () => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+@import url(../../../../../../assets/css/style_noy.css);
+</style>

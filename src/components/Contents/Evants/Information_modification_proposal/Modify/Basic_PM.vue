@@ -19,28 +19,34 @@
             <v-col cols="2">
               <span class="Title">* 등록일시 </span>
             </v-col>
-            <v-col cols="10">
+            <v-col >
               <p>YYYY-MM-DD HH:MM:SS</p>
             </v-col>
           </v-row>
           <v-row class="mt-5">
-            <v-col style="margin-top: 25px;" cols="2">
-              <span class="Title">* 등록일시 </span>
+            <v-col style="" cols="2">
+              <span class="Title">* 작성자 </span>
             </v-col>
-            <v-col  cols="10">
-              <p>YYYY-MM-DD HH:MM:SS</p>
+            <v-col  >
+              <p>홍길동 (abcd12345)</p>
             </v-col>
           </v-row>
           <v-row class="mt-5">
             <v-col style="margin-top: 25px;" cols="2">
-              <span  class="Title">* 등록일시 </span>
+              <span  class="Title">*  업체명 </span>
             </v-col>
-            <v-col cols="10">
-              <v-card-text>
-                <v-text-field class="test_PM"
+            <v-col  >
+              <v-card-text >
+                <v-text-field
+                  style="margin-right: "
+                  class="test_PM"
                   density="compact"
-                  label="정비명세서 인증해요!"
+                  variant="solo"
+                  label="크리스탈 디테일링 금천점"
+                  single-line
+                  hide-details
                   disabled
+                  ref="searchField"
                 ></v-text-field>
               </v-card-text>
             </v-col>
@@ -54,4 +60,7 @@
 import { ref } from 'vue';
  const show = ref(false);
 </script>
-<style scoped></style>
+
+<style scoped>
+@import '/src/assets/css/style_noy.css';
+</style>

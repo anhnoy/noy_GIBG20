@@ -1,10 +1,9 @@
-
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <v-app style="background-color: #e3e8ed">
-        <div style="margin-left: 40px; margin-top: 10px;">
-            <p class="Page_name">정비명세서 인증 관리</p>
-            <p class="Page_name_title">콘텐츠 관리 > 이벤트 관리 > 정비명세서 인증 관리</p>
+        <div >
+            <p class="Page_name">정보 수정 제안 상세</p>
+            <p class="Page_name_title">콘텐츠 관리 > 이벤트 관리 > 정보 수정 제안 상세</p>
         </div>
 <br>
         <div class="pb-5">
@@ -12,12 +11,32 @@
             <v-window v-model="tab">
                 <v-window-item value="1">
                     <div class="pb-5">
-                        <Search_conditions />
+                        <Basic_PM />
                         
                     </div>
                     <div class="pb-5">
-                        <Total_MP />
-                    </div>                                               
+                        <Proposal_closed />
+                        <Edit_PM />
+                        <Register_PM />
+                        <Record />
+                       
+                    </div>     
+                         
+                     
+                  
+                   <div class="pb-5">
+                       
+                       <Proposal_location />
+                       <Proposal_pricing/>
+                       <Proposal_Opening/>
+                       <Proposal_Contact/>
+                       <Proposal_Faciiity/>
+                   </div>     
+                   <div class="pb-5">
+                       
+                       
+
+                   </div>                                 
                 </v-window-item> 
                  
             </v-window>
@@ -27,7 +46,18 @@
 <script setup lang="js">
 import { ref } from "vue";
 
-import Total_MP from "@/components/Contents/Evants/Information_modification_proposal/Modify/Basic_PM.vue";
+import Basic_PM from "@/components/Contents/Evants/Information_modification_proposal/Modify/Basic_PM.vue";
+import Proposal_closed from "@/components/Contents/Evants/Information_modification_proposal/Modify/Proposal_data/Proposal_closed.vue";
+// import Edit_PM from "@/components/Contents/Evants/Information_modification_proposal/Modify/Edit_PM.vue";
+// import Register_PM from "@/components/Contents/Evants/Information_modification_proposal/Modify/Register_PM.vue";
+// import Record from "@/components/Contents/Evants/Bill/Detaill/Record.vue";
+
+
+// import Proposal_location from "@/components/Contents/Evants/Information_modification_proposal/Modify/Proposal_data/Proposal_location.vue";
+// import Proposal_pricing from "@/components/Contents/Evants/Information_modification_proposal/Modify/Proposal_data/Proposal_pricing.vue";
+// import Proposal_Opening from "@/components/Contents/Evants/Information_modification_proposal/Modify/Proposal_data/Proposal_Opening.vue";
+// import Proposal_Contact from "@/components/Contents/Evants/Information_modification_proposal/Modify/Proposal_data/Proposal_Contact.vue";
+// import Proposal_Faciiity from "@/components/Contents/Evants/Information_modification_proposal/Modify/Proposal_data/Proposal_Faciiity.vue";
 
 
 

@@ -1,4 +1,4 @@
-<!-- eslint-disable vue/multi-word-component-names -->
+
 <template>
   <v-card class="mx-auto" max-width="90%">
     <v-card-actions>
@@ -48,6 +48,7 @@
                     <option value="Phone">Phone Number</option>
                     <option value="Store">Store Name</option>
                     <option value="Product">Product</option>
+                    <option value="all">all</option>
                   </select>
                 </label>
               </div>
@@ -83,6 +84,12 @@
                   class="input"
                   placeholder="Please enter your Phone"
                 />
+                <input
+                  v-if="selectedWord === 'all'"
+                  type="text"
+                  class="input"
+                  placeholder="Please enter your all"
+                />
               </div>
             </v-row>
           </v-col>
@@ -98,7 +105,7 @@
                   id="entire_MP"
                   name="entire_name"
                   class="checkbox_MP"
-                  checked
+                  v-model="entire_MP"
                 />
                 <label for="entire_MP" class="checkbox_MP1">전체</label>
                 <span class="mt-1"> </span>
@@ -107,7 +114,7 @@
                   id="closed"
                   name="closed_name"
                   class="checkbox_MP"
-                  checked
+                  v-model="closed"
                 />
                 <label for="closed" class="checkbox_MP1">폐업</label>
                 <span class="mt-1"> </span>
@@ -116,7 +123,7 @@
                   id="location"
                   name="location_name"
                   class="checkbox_MP"
-                  checked
+                  v-model="location"
                 />
                 <label for="location" class="checkbox_MP1">위치 이전</label>
                 <span class="mt-1"> </span>
@@ -125,7 +132,7 @@
                   id="pricing"
                   name="pricing_name"
                   class="checkbox_MP"
-                  checked
+                  v-model="pricing"
                 />
                 <label for="pricing" class="checkbox_MP1">가격 정보</label>
                 <span class="mt-1"> </span>
@@ -134,7 +141,7 @@
                   id="Opening"
                   name="Opening_name"
                   class="checkbox_MP"
-                  checked
+                  v-model="Opening"
                 />
                 <label for="Opening" class="checkbox_MP1">영업시간</label>
                 <span class="mt-1"> </span>
@@ -143,7 +150,7 @@
                   id="contact"
                   name="contact_name"
                   class="checkbox_MP"
-                  checked
+                  v-model="contact"
                 />
                 <label for="contact" class="checkbox_MP1">연락처</label>
                 <span class="mt-1"> </span>
@@ -152,7 +159,7 @@
                   id="Facility"
                   name="Facility_name"
                   class="checkbox_MP"
-                  checked
+                  v-model="Facility"
                 />
                 <label for="Facility" class="checkbox_MP1">시설정보</label>
                 <span class="mt-1"> </span>
@@ -161,7 +168,7 @@
                   id="payment"
                   name="payment_name"
                   class="checkbox_MP"
-                  checked
+                  v-model="payment"
                 />
                 <label for="payment" class="checkbox_MP1">결제수단</label>
               </v-row>
@@ -200,12 +207,12 @@
                 <label for="Under" class="radio-label">승인완료</label>
                 <input
                   type="radio"
-                  id="Approved"
+                  id="denied"
                   name="hidden"
                   class="hidden-radio"
                   v-model="status"
                 />
-                <label for="Approved" class="radio-label">승인거부</label>
+                <label for="denied" class="radio-label">승인거부</label>
               
               </v-row>
             </v-col>
@@ -230,17 +237,35 @@
 </template>
 
 <script setup lang="js">
+
 import { ref } from 'vue';
-import datepicker from '../../../datepicker/datepicker.vue'
+import datepicker from '../../../datepicker/Vuedatepicker.vue'
 
 const show = ref(false);
 const selectedWord = ref('Number');
+
 const status = ref('entire');
+const entire_MP = ref(false);
+const closed = ref(false);
+const location = ref(false);
+const pricing = ref(false);
+const Opening = ref(false);
+const contact = ref(false);
+const Facility = ref(false);
+const payment = ref(false);
 
 const resetForm = () => {
   selectedWord.value = 'Number';
-  status.value = 'entire';
 
+  status.value = 'entire';
+  entire_MP.value = false;
+  closed.value = false;
+  location.value = false;
+  pricing.value = false;
+  Opening.value = false;
+  contact.value = false;
+  Facility.value = false;
+  payment.value = false;
 };
 </script>
 

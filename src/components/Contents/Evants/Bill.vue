@@ -25,8 +25,6 @@
 </template>
 <script setup lang="js">
 import { ref } from "vue";
-
-// import Search_conditions_Bill from "@/components/Contents/Board/Events/Bill/Search_conditions_Bill.vue";
 import Search_conditions_Bill from "@/components/Contents/Evants/Bill/Search_condition_Bill.vue";
 import Inquiry_table_Bill from "@/components/Contents/Evants/Bill/Inquiry_table_Bill.vue";
 

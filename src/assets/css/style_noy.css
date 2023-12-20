@@ -5,13 +5,6 @@
   margin: 15px 10px 0px 10px;
   margin-right: 45px;
 }
-.Title_bill {
-  font-size: 14px;
-  font-weight: 700;
-  color: #7d92a1;
-  margin: 15px 10px 0px 10px;
-  margin-right: 45px;
-}
 .options {
   position: relative;
   margin-right: 25px;
@@ -83,28 +76,26 @@
   color: #7d92a1;
   margin-right: 50px;
 }
-.Title_bill {
-  font-size: 14px;
-  font-weight: 700;
-  color: #7d92a1;
-  margin: 15px 10px 0px 10px;
-  margin-right: 45px;
-}
+
 .checkbox_MP {
-  width: 20px;
+  width: 30px;
   height: 20px;
   background-color: #ffffff;
   background-color: white;
+
+ 
+ 
 }
 .checkbox_MP1 {
-  margin-right: 20px; /* เพิ่มระยะห่างระหว่าง checkbox กับ label */
+  margin-right: 30px;
+  padding-left: 5px;
+  width: Hug (833px);
+height: Hug (33px);
+gap: 12px;
+
 }
-.hidden-radio {
-  display: none; /* Hide the actual radio input */
-}
-.hidden-radio:checked + .radio-label:after {
-  transform: translateY(-50%) scale(1); /* Show the inner circle when selected */
-}
+
+
 .button-category {
   margin: 5px;
   background-color: #ffffff;
@@ -137,6 +128,8 @@ button.remove-button {
   font-size: 12px;
   font-weight: 500;
   color: #8899a8;
+  margin-left: 85px;
+
 }
 .Page_name {
   font-size: 20px;
@@ -147,10 +140,12 @@ button.remove-button {
 }
 .Head {
   font-family: Noto Sans KR;
-  font-size: 18px;
-  font-weight: 900;
-  color: #242424;
-  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  text-align: left;
+  
 }
 .selectdiv {
   position: relative;
@@ -248,13 +243,6 @@ button.remove-button {
   background-color: #346ddb !important;
   color: #ffffff !important;
 }
-.Title_bill {
-  font-size: 14px;
-  font-weight: 700;
-  color: #7d92a1;
-  margin: 15px 10px 0px 10px;
-  margin-right: 45px;
-}
 .selectdiv {
   position: relative;
   margin-right: 25px;
@@ -346,19 +334,22 @@ button.remove-button {
   margin-top: 5px;
 }
 .hidden-radio:checked + .radio-label:after {
-  transform: translateY(-50%) scale(1); /* Show the inner circle when selected */
+  transform: translateY(-50%) scale(1); 
 }
 .hidden-radio {
   display: none;
 }
 
 .radio-label {
-  padding-left: 30px;
+  margin-left: -5px; /* Adjust the margin as needed */
+  margin-right: 30px; /* Adjust the margin as needed */
+  padding-left: 30px; /* Adjust the padding as needed */
+  line-height: 24px; /* Adjust the line-height for vertical centering */
   position: relative;
   cursor: pointer;
-  margin-right: 10px; /* Space between each radio button */
   display: inline-block;
 }
+
 
 .radio-label:before {
   content: "";
@@ -498,20 +489,29 @@ button.remove-button {
 }
 /* /////////////// */
 .Page_name {
-    font-size: 20px;
-    font-weight: 700;
-    color: #242424;
-  
-    margin-top: 2%;
-  }
-  .Page_name_title {
-    font-size: 12px;
-    font-weight: 500;
-    color: #8899a8;
-  }
-  
-  .T-search{
-    font-family: Noto Sans KR;
+ font-family: Noto Sans KR;
+font-size: 20px;
+font-weight: 700;
+line-height: 29px;
+letter-spacing: -0.01em;
+text-align: left;
+
+text-align: left;
+
+  margin-left: 85px;
+
+
+  margin-top: 2%;
+}
+.Page_name_title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #c2991f;
+
+}
+
+.T-search {
+  font-family: Noto Sans KR;
   font-size: 14px;
   font-weight: 700;
   line-height: 33px;
@@ -520,466 +520,501 @@ button.remove-button {
   color: rgb(44, 165, 221);
   text-align: center;
   padding-top: 25px;
-  
-  }
-  
-  .hidden-checkbox {
-    display: none; /* Hide the actual checkbox */
-  }
-  
-  .login{
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    letter-spacing: -0.01em;
-    text-align: right;
-    color: #7D92A1;
-  }
-  
-  .checkbox-label {
-    cursor: pointer;
-    position: relative;
-    padding-left: 35px;
-  }
-  
-  .custom-checkbox {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    border: 1px solid #e3e8ed;
-    margin-left: 5px;
-  }
-  
-  .hidden-checkbox:checked + .custom-checkbox:after {
-    content: "";
-    position: absolute;
-    display: block;
-    width: 7px;
-    height: 14px;
-    left: 5px;
-    border: 1px solid #346ddb;
-    border-width: 0 3px 3px 0;
-    transform: rotate(45deg);
-  }
-  
-  
-  
-  
-  .img-wrapper {
-    position: relative; /* The parent container should be relative */
-    display: inline-block;
-    margin: 5px;
-  }
-  
-  img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .hint {
-    font-size: 12px;
-    font-weight: 500;
-    color: #8899a8;
-  }
-  
-  .Title {
-    font-size: 14px;
-    font-weight: 700;
-    color: #7d92a1;
-    margin-right: 50px;
-  }
-  
-  .no-border {
-    border: none;
-  }
-  
-  .Number {
-    font-size: 13px;
-    font-weight: 400;
-    margin-left: 10px;
-    color: #346ddb;
-  }
-  
-  .Registration {
-    font-size: 13px;
-    font-weight: 400;
-    margin-left: 10px;
-    color: #346ddb;
-   cursor: pointer;
-  }
-  
-  
-  .custom-select {
-    width: 100%; /* Make the select element width 100% of its container */
-    padding: 8px; /* Add padding to the select */
-    border: 1px solid #ccc; /* Add a border */
-    border-radius: 4px; /* Add rounded corners */
-    background-color: #fff; /* Set background color */
-    font-size: 14px; /* Set font size */
-    color: #333; /* Set text color */
-    text-align: center;
-  }
-  
-  .Detail {
-    width: 100%;
-    height: 65px;
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    font-size: 13px;
-    font-weight: 400;
-    margin-right: 5px;
-  
-  }
-  .dropdown {
-    width: 200px;
-    height: 35px;
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    margin-right: 10px;
-    font-size: 13px;
-    font-weight: 400;
-  }
-  ::placeholder {
-    color: #8899a8;
-  }
-  .custom-file-label {
-    padding: 8px 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin-right: 10px;
-    font-size: 13px;
-    line-height: 24px;
-    letter-spacing: -0.01em;
-    text-align: center;
-    color: #7d92a1;
-    cursor: pointer;
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  .management {
-    width: 60px;
-    text-align: center;
-    color: #7d92a1;
-    border: 1px solid #7d92a1;
-    margin-left: 5px;
-    text-align: center;
-    font-family: Noto Sans KR;
+}
+
+.hidden-checkbox {
+  display: none; /* Hide the actual checkbox */
+}
+
+.login {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.01em;
+  text-align: right;
+  color: #7d92a1;
+}
+
+.checkbox-label {
+  cursor: pointer;
+  position: relative;
+  padding-left: 35px;
+}
+
+.custom-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  border: 1px solid #e3e8ed;
+  margin-left: 5px;
+}
+
+.hidden-checkbox:checked + .custom-checkbox:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 7px;
+  height: 14px;
+  left: 5px;
+  border: 1px solid #346ddb;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.img-wrapper {
+  position: relative; /* The parent container should be relative */
+  display: inline-block;
+  margin: 5px;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hint {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8899a8;
+}
+
+.Title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #7d92a1;
+  margin-right: 50px;
+}
+
+.no-border {
+  border: none;
+}
+
+.Number {
+  font-size: 13px;
+  font-weight: 400;
+  margin-left: 10px;
+  color: #346ddb;
+}
+
+.Registration {
+  font-size: 13px;
+  font-weight: 400;
+  margin-left: 10px;
+  color: #346ddb;
+  cursor: pointer;
+}
+
+.custom-select {
+  width: 100%; /* Make the select element width 100% of its container */
+  padding: 8px; /* Add padding to the select */
+  border: 1px solid #ccc; /* Add a border */
+  border-radius: 4px; /* Add rounded corners */
+  background-color: #fff; /* Set background color */
+  font-size: 14px; /* Set font size */
+  color: #333; /* Set text color */
+  text-align: center;
+}
+
+.Detail {
+  width: 100%;
+  height: 65px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  font-weight: 400;
+  margin-right: 5px;
+}
+.dropdown {
+  width: 200px;
+  height: 35px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  font-size: 13px;
+  font-weight: 400;
+}
+::placeholder {
+  color: #8899a8;
+}
+.custom-file-label {
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  font-size: 13px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #7d92a1;
+  cursor: pointer;
+}
+
+.management {
+  width: 60px;
+  text-align: center;
+  color: #7d92a1;
+  border: 1px solid #7d92a1;
+  margin-left: 5px;
+  text-align: center;
+  font-family: Noto Sans KR;
   font-size: 10px;
   font-weight: 500;
   text-align: center;
-  
-  }
-  .Company_name {
-    font-family: Noto Sans KR;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 17px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #346ddb;
-  }
-  .ID {
-    font-family: Noto Sans KR;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 17px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #346ddb;
-    cursor: pointer;
-  }
-  .no-underline {
-    text-decoration: none;
-  }
-  .Member_name {
-    font-family: Noto Sans KR;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 17px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #346ddb;
-  }
-  .Business_status {
-    font-family: Noto Sans KR;
-    font-size: 10px;
-    font-weight: 500;
-    text-align: center;
-    color: #1AA5A2;
-    border-radius: 25px;
-    border: 2px solid #1AA5A2;
-  }
-  .Division {
-    font-family: Noto Sans KR;
-    font-size: 10px;
-    font-weight: 500;
-    text-align: center;
-    color: #fff;
-    border-radius: 25px;
-    background-color: #346DDB;
-  }
-  
-  .row {
-    display: flex;
-    align-items: center;
-    margin-top: 5px;
-  }
-  
-  .col {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 5px;
-    width: 50px;
-  }
-  .col_Break {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 5px;
-    width: auto;
-  }
-  
-  
-  .textarea {
-    width: 100%;
-    height: 100px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    padding: 8px 10px;
-    font-size: 13px;
-  }
-  .exposure {
-     width: 42px;
-   font-family: Noto Sans KR;
-    font-size: 10px;
-    font-weight: 500;
-    color: #1AA5A2;
-    border-radius: 25px;
-    border: 2px solid #1AA5A2;
-  }
-  .Waiting {
-    font-family: Noto Sans KR;
-     font-size: 10px;
-     font-weight: 500;
-     color: #346DDB;
-     background-color: #FFFFFF;
-     border-radius: 6px;
-     padding: 1px;
-     border: 1px solid #346DDB;
-     width: 70px;
-     margin: auto;
-    }
-    .Answer {
-      font-family: Noto Sans KR;
-       font-size: 10px;
-       font-weight: 500;
-       color: #FFFFFF;
-       background-color: #346DDB;
-       border-radius: 6px;
-       padding: 1px;
-       border: 1px solid #346DDB;
-       width: 70px;
-       margin: auto;
-      }
-  .Approval{
-    font-family: Noto Sans KR;
-    font-size: 10px;
-    font-weight: 500;
-    color: #FFFFFF;
-    background-color: #1AA5A2 ;
-    border-radius: 8px;
-    padding: 1px;
-    border: 1px solid #1AA5A2;
-    width: 70px;
-    margin: auto;
-  
-  }
-  
-  
-  .Under {
-    font-family: Noto Sans KR;
-     font-size: 10px;
-     font-weight: 500;
-     color: #1AA5A2;
-     background-color: #FFFFFF 0.2% ;
-     border-radius: 8px;
-     padding: 1px;
-     border: 1px solid #1AA5A2;
-     width: 70px;
-    margin: auto;
-    }
-  .Approval_request {
+}
+.Company_name {
   font-family: Noto Sans KR;
-   font-size: 10px;
-   font-weight: 500;
-   color: #1AA5A2;
-   background-color: #FFFFFF ;
-   border-radius: 8px;
-   padding: 1px;
-   border: 1px solid #1AA5A2;
-   width: 70px;
-    margin: auto;
-  }
-  .Approved {
-    font-family: Noto Sans KR;
-    font-size: 10px;
-    font-weight: 500;
-    color: #FFFFFF;
-    background-color: #7D92A1 ;
-    border-radius: 8px;
-    padding: 1px;
-    width: 70px;
-    margin: auto;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #346ddb;
+}
+.ID {
+  font-family: Noto Sans KR;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #346ddb;
+  cursor: pointer;
+}
+.no-underline {
+  text-decoration: none;
+}
+.Member_name {
+  font-family: Noto Sans KR;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #346ddb;
+}
+.Business_status {
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  color: #1aa5a2;
+  border-radius: 25px;
+  border: 2px solid #1aa5a2;
+}
+.Division {
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  color: #fff;
+  border-radius: 25px;
+  background-color: #346ddb;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  width: 50px;
+}
+.col_Break {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  width: auto;
+}
+
+.textarea {
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+.exposure {
+  width: 42px;
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  color: #1aa5a2;
+  border-radius: 25px;
+  border: 2px solid #1aa5a2;
+}
+.Waiting {
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  color: #346ddb;
+  background-color: #ffffff;
+  border-radius: 6px;
+  padding: 1px;
+  border: 1px solid #346ddb;
+  width: 70px;
+  margin: auto;
+}
+.Answer {
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #346ddb;
+  border-radius: 6px;
+  padding: 1px;
+  border: 1px solid #346ddb;
+  width: 70px;
+  margin: auto;
+}
+.Approval {
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #1aa5a2;
+  border-radius: 8px;
+  padding: 1px;
+  border: 1px solid #1aa5a2;
+  width: 70px;
+  margin: auto;
+}
+
+.Under {
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  color: #1aa5a2;
+  background-color: #ffffff 0.2%;
+  border-radius: 8px;
+  padding: 1px;
+  border: 1px solid #1aa5a2;
+  width: 70px;
+  margin: auto;
+}
+.Approval_request {
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  color: #1aa5a2;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1px;
+  border: 1px solid #1aa5a2;
+  width: 70px;
+  margin: auto;
+}
+.Approved {
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #7d92a1;
+  border-radius: 8px;
+  padding: 1px;
+  width: 70px;
+  margin: auto;
+}
+
+.hiding {
+  width: 42px;
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  color: red;
+  border-radius: 25px;
+  border: 2px solid red;
+}
+.Store_entry {
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  color: #ffffff;
+  width: 42px;
+  border-radius: 25px;
+  background-color: #394956;
+  border: 2px solid #394956;
+}
+
+.Not_in_store {
+  font-family: Noto Sans KR;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  color: #7d92a1;
+  width: 42px;
+  border-radius: 25px;
+  border: 2px solid #e3e8ed;
+  background-color: #e3e8ed;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  background-color: #f3f4f7;
+  border-radius: 10px;
+  height: 53px;
+  border: 1px solid #e3e8ed;
+}
+
+.list-image {
+  width: 35px;
+  height: 35px;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+.item {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 15px;
+}
+.item_c {
+  width: 1120px; /* ปรับความกว้างตามที่คุณต้องการ */
+  height: 40px; /* ปรับความสูงตามที่คุณต้องการ */
+}
+
+.box {
+  margin: 5px;
+  background-color: #ffffff;
+  border: 1px solid #7d92a1;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  width: 45px;
+  height: 36px;
+  text-align: center;
+  padding: 6px;
+}
+.BTN-Save {
+  border: 1px solid #346ddb;
+  color: #346ddb;
+}
+.bt1 {
+  width: 33px;
+  height: 24px;
+  font-family: "Noto Sans KR";
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  border: 1px solid #346ddb !important;
+  color: #346ddb !important;
+}
+.v-field {
+  width: 200px; /* กำหนดความกว้างที่คุณต้องการ */
+  height: 40px; /* กำหนดความสูงที่คุณต้องการ */
+}
+
+.btn2 {
+  width: 54px;
+  height: 32px;
+  padding: 4px 16px;
+  border-radius: 4px;
+  gap: 10px;
+  background-color: #346ddb !important;
+  color: #ffffff !important;
+}
+.search-field-container {
+  max-width: 300px;
+  margin-top: -5px;
+}
+.custom-v-select {
+  height: 60px; /* ปรับความสูงตามที่คุณต้องการ */
+}
+select {
+  width: 200px; /* ปรับความกว้างตามที่คุณต้องการ */
+  height: 30px; /* ปรับความสูงตามที่คุณต้องการ */
+}
+
+option {
+  height: 20px; /* ปรับความสูงตามที่คุณต้องการ */
+}
+
+.image-container {
+  display: flex;
+  gap: 10px; /* ปรับตามความต้องการ */
+}
+.test_PM {
+  width: 250px;
+  margin-left: -20px;
+  border: 2px solid #d5e8f5c7; 
+  border-radius: 4px;
+
+}
+.Proposal_location_text {
+  width: 600px;
+  margin-left: -20px;
+}
+.Proposal_pricing_text {
+  width: 240px;
+  margin-left: -20px;
+  background-color: #ccc;
+}
+.Proposal_pricing_text_contack {
+  width: 100% ;
+  margin-left: -20px;
+  background-color: #cec4c4;
+}
+.text_Edit_IB {
+  width: 150px;
+  height: 30px;
+  border: 1px solid black;
+  margin-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+}
+.text_Edit_IB_1 {
+  width: 120px;
+  height: 30px;
+  border: 1px solid black;
+  margin-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+}
+.text_Edit_IB_2 {
+  width: 100px;
+  height: 30px;
+  border: 1px solid black;
+  margin-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+}
+.checkbox_Edit_IB {
+  gap: 8px;
+  width: 41px;
+  height: 20px;
+  background-color: #1aa5a2;
+  margin: 50px;
+}
+.test_IB {
+  width: 180px;
+}
+.test_BI1{
+  width: 130px;
+  margin-left: -180px;
+}
+.test_BI3{
+  width: 230px;
   
-  }
-  
-  
-  
-  .hiding {
-    width: 42px;
-    font-family: Noto Sans KR;
-     font-size: 10px;
-     font-weight: 500;
-     color: red;
-     border-radius: 25px;
-     border: 2px solid red;
-  }
-  .Store_entry {
-    font-family: Noto Sans KR;
-    font-size: 10px;
-    font-weight: 500;
-    text-align: center;
-    color: #ffffff;
-    width: 42px;
-    border-radius: 25px;
-    background-color: #394956;
-    border: 2px solid #394956;
-  }
-  
-  .Not_in_store {
-    font-family: Noto Sans KR;
-    font-size: 10px;
-    font-weight: 500;
-    text-align: center;
-    color: #7D92A1;
-    width: 42px;
-    border-radius: 25px;
-    border: 2px solid #E3E8ED;
-    background-color: #E3E8ED;
-  }
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  li {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-    background-color: #f3f4f7;
-    border-radius: 10px;
-    height: 53px;
-    border: 1px solid #e3e8ed;
-  }
-  
-  .list-image {
-    width: 35px;
-    height: 35px;
-    margin-left: 20px;
-    margin-right: 10px;
-  }
-  .item {
-    font-size: 14px;
-    font-weight: 700;
-    margin: 15px;
-  }
-  .item_c {
-    width: 1120px; /* ปรับความกว้างตามที่คุณต้องการ */
-    height: 40px; /* ปรับความสูงตามที่คุณต้องการ */
-  }
-  
-  .box {
-    margin: 5px;
-    background-color: #ffffff;
-    border: 1px solid #7d92a1;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-    width: 45px;
-    height: 36px;
-    text-align: center;
-    padding: 6px;
-  }
-  .BTN-Save{
-    border: 1px solid #346DDB;
-    color: #346DDB;
-    
-  }
-  .bt1 {
-    width: 33px ;
-    height: 24px;
-    font-family: 'Noto Sans KR';
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 24px;
-    letter-spacing: -0.01em;
-    text-align: center;
-    border: 1px solid #346DDB!important;
-    color: #346DDB !important; 
-  
-  }
-  .v-field {
-    width: 200px; /* กำหนดความกว้างที่คุณต้องการ */
-    height: 40px; /* กำหนดความสูงที่คุณต้องการ */
-  }
-  
-  .btn2 {
-    width: 54px;
-    height: 32px;
-    padding: 4px 16px;
-    border-radius: 4px;
-    gap: 10px;
-    background-color: #346DDB!important;  
-    color: #ffffff !important; 
-  }
-  .search-field-container{
-    max-width: 300px;
-    margin-top: -5px;
-  }
-  .custom-v-select {
-    height: 60px; /* ปรับความสูงตามที่คุณต้องการ */
-  }
-  select {
-    width: 200px; /* ปรับความกว้างตามที่คุณต้องการ */
-    height: 30px; /* ปรับความสูงตามที่คุณต้องการ */
-  }
-  
-  option {
-    height: 20px; /* ปรับความสูงตามที่คุณต้องการ */
-  }
-  
-  
-  .image-container {
-    display: flex;
-    gap: 10px; /* ปรับตามความต้องการ */
-  }
-  
-  
+}
+.test_BI4{
+  width: 230px;
+  margin-left: -130px;
+}

@@ -14,3 +14,4 @@ createApp(App)
   .use(vuetify)
   .mount('#app')
   .provide('eventBus', EventBus )
+

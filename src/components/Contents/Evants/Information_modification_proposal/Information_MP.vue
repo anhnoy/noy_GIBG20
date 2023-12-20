@@ -1,10 +1,8 @@
-
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <v-app style="background-color: #e3e8ed">
-        <div style="margin-left: 40px; margin-top: 10px;">
-            <p class="Page_name">정비명세서 인증 관리</p>
-            <p class="Page_name_title">콘텐츠 관리 > 이벤트 관리 > 정비명세서 인증 관리</p>
+        <div >
+            <p class="Page_name">정보 수정 제안</p>
+            <p class="Page_name_title">콘텐츠 관리 > 이벤트 관리 > 정보 수정 제안</p>
         </div>
 <br>
         <div class="pb-5">
@@ -37,12 +35,13 @@ const tab = ref(null);
 
 </script>
 <style scoped>
-@import '/src/assets/css/style_noy.css';
+@import '/src/assets/css/style.css';
 
 .Page_name_title1 {
     font-size: 12px;
     font-weight: 500;
     color: #8899a8;
     margin-left: 5%;
+    
 }
 </style>

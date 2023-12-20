@@ -1,37 +1,74 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div>
-    <v-row>
-      <v-col>
-        <select style="width: 200px;">
-    <option value="0">Select car:</option>
-    <option value="1">Audi</option>
-    <option value="2">BMW</option>
-    <option value="3">Citroen</option>
-    <option value="4">Ford</option>
-    <option value="5">Honda</option>
-    <option value="6">Jaguar</option>
-    <option value="7">Land Rover</option>
-    <option value="8">Mercedes</option>
-    <option value="9">Mini</option>
-    <option value="10">Nissan</option>
-    <option value="11">Toyota</option>
-    <option value="12">Volvo</option>
-  </select>
+    <label>
+      <input type="radio" v-model="selectedOption" value="option1" />
+      Option 1
+    </label>
 
-      </v-col>
-      
-    </v-row>
-    
+    <label>
+      <input type="radio" v-model="selectedOption" value="option2" />
+      Option 2
+    </label>
+
+    <label>
+      <input type="radio" v-model="selectedOption" value="option3" />
+      Option 3
+    </label>
+    <label>
+      <input type="radio" v-model="selectedOption" value="option4" />
+      Option 4
+    </label>
+
+    <label>
+      <input type="radio" v-model="selectedOption" value="option5" />
+      Option 5
+    </label>
+
+    <label>
+      <input type="radio" v-model="selectedOption" value="option6" />
+      Option 6
+    </label>
+
+    <v-text-field v-if="selectedOption == 'option1'" label="1" outlined></v-text-field>
+    <v-text-field v-if="selectedOption == 'option2'" label="2" outlined></v-text-field>
+    <v-text-field v-if="selectedOption == 'option2'" label="2" outlined></v-text-field>
+    <v-text-field v-if="selectedOption == 'option3'" label="3" outlined></v-text-field>
+    <v-text-field v-if="selectedOption == 'option4'" label="4" outlined></v-text-field>
+    <v-text-field v-if="selectedOption == 'option4'" label="4" outlined></v-text-field>
+    <v-text-field v-if="selectedOption == 'option5'" label="5" outlined></v-text-field>
+    <v-text-field v-if="selectedOption == 'option6'" label="6" outlined></v-text-field>
+
   </div>
 </template>
 
-<script setup>
-// import { ref } from 'vue';
-
-// const username = ref( localStorage.getItem("username"));
+<script>
+export default {
+  data() {
+    return {
+      selectedOption: "option1",
+      textFieldValue: '',
+    };
+  },
+};
 </script>
 
 <style scoped>
-/* Add your component styles here */
+
+div {
+  margin: 20px;
+}
+
+p {
+  margin-top: 10px;
+}
+
+.v-radio {
+  margin-right: 10px;
+}
+
+.v-text-field {
+  width: 300px;
+}
 </style>
+

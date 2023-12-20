@@ -1,4 +1,54 @@
 <!-- eslint-disable vue/multi-word-component-names -->
+<!-- <template>
+  <div style="display: inline-flex">
+    <span style="padding-top: 8px; margin-right: 10px; cursor: pointer">
+      <v-img width="21" src="../../assets/images/calendar.png">
+      </v-img>
+    </span>
+    <div class="date">
+      <VueDatePicker v-model="picker" locale="ko" :format="DatePickerFormat"
+        placeholder="YYYY-MM-DD" auto-apply >
+        <template #input-icon>
+          <img class="input-slot-image"/>
+        </template>
+        <template #clear-icon>
+            <img class="input-slot-image"/>
+        </template>
+      </VueDatePicker>
+    </div>
+    <div>
+    </div>
+  </div>
+</template>
+ 
+<script setup>
+import { ref, defineExpose } from "vue";
+
+ 
+const picker = ref(new Date());
+ 
+const DatePickerFormat = 'yyyy-MM-dd';
+ 
+defineExpose(
+  {
+    picker
+  }
+)
+</script>
+<style scoped>
+.date {
+  outline: none;
+  width: 160px;
+  height: 33px;
+  color: #242424;
+  font-size: 12px;
+  font-weight: 400;
+}
+ 
+.input-slot-image {
+  display: none;
+}
+</style> -->
 <template>
     <div style="display: inline-flex">
       <span style="padding-top: 8px; margin-right: 10px; cursor: pointer">
@@ -20,24 +70,15 @@
       </span>
     </div>
     <v-dialog v-model="showDatePicker" width="auto">
-      <v-card>
-        <v-card-text>
           <v-date-picker
             @input="selectedDate = $event"
             v-model="picker"
-            locale="ko"
+            @click="showDatePicker = false"
           />
-        </v-card-text>
-        <div style="display: flex; justify-content: flex-end">
-          <v-card-actions>
-            <v-btn @click="showDatePicker = false">Close</v-btn>
-          </v-card-actions>
-        </div>
-      </v-card>
     </v-dialog>
   </template>
   
-  <script setup>
+  <script setup lang="js">
   import { ref, watch } from "vue";
   
   const showDatePicker = ref(false);
@@ -50,12 +91,8 @@
   watch(picker, () => {
     console.log(picker);
     if (picker.value !== undefined && picker.value !== null) {
-      console.log(`==========================`);
-      console.log(picker);
       const date = Date.parse(picker.value);
-      console.log(date);
       valInput.value = convert(new Date(date).toUTCString());
-      console.log(valInput.value);
     }
   });
   
@@ -81,4 +118,3 @@
     outline: none;
   }
   </style>
-  

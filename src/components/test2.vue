@@ -1,59 +1,74 @@
 <!-- eslint-disable vue/multi-word-component-names -->
+
 <template>
-  <div class="text-center">
-    <v-btn color="primary">
-      Open Dialog
+  <v-card>
+    <v-layout>
+      <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
 
-      <v-dialog v-model="dialog" activator="parent" width="400">
-        <v-card width="360" height="170">
-         <div class="pt-8">
-          <v-card-title class="Title_dialog">삭제하시겠습니까?</v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn class="button_dialog_cancel"> 아니오 </v-btn>
-            <v-btn class="button_dialog"> 네 </v-btn>
-            <v-spacer></v-spacer>
-          </v-card-actions>
-         </div>
-        </v-card>
-      </v-dialog>
-    </v-btn>
-  </div>
+      <v-app-bar
+        color="primary"
+        prominent
+      >
+        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+        <v-toolbar-title>My files</v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+        <v-btn variant="text" icon="mdi-magnify"></v-btn>
+
+        <v-btn variant="text" icon="mdi-filter"></v-btn>
+
+        <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
+      </v-app-bar>
+
+      <v-navigation-drawer
+        v-model="drawer"
+        location="bottom"
+        temporary
+      >
+        <v-list
+          :items="items"
+        ></v-list>
+      </v-navigation-drawer>
+
+      <v-main style="height: 500px;">
+        <v-card-text>
+          The navigation drawer will appear from the bottom on smaller size screens.
+        </v-card-text>
+      </v-main>
+    </v-layout>
+  </v-card>
 </template>
-
 <script>
-export default {
-  data() {
-    return {
-      dialog: false,
-      username: "",
-      password: "",
-    };
-  },
-  methods: {
-    login() {
-      // Simulate a successful login (replace this with your actual login logic)
-      if (this.username === "demo" && this.password === "password") {
-        // Save user information to localStorage
-        localStorage.setItem("loggedIn", "true");
-        localStorage.setItem("username", this.username);
+  export default {
+    data: () => ({
+      drawer: false,
+      group: null,
+      items: [
+        {
+          title: 'Foo',
+          value: 'foo',
+        },
+        {
+          title: 'Bar',
+          value: 'bar',
+        },
+        {
+          title: 'Fizz',
+          value: 'fizz',
+        },
+        {
+          title: 'Buzz',
+          value: 'buzz',
+        },
+      ],
+    }),
 
-        // Redirect to the home page or perform any other necessary actions
-        console.log("Login successful");
-      } else {
-        console.log("Login failed. Invalid credentials.");
-      }
+    watch: {
+      group () {
+        this.drawer = false
+      },
     },
-  },
-};
-</script>
-
-<style scoped>
-@import "/src/assets/css/style.css";
-</style>
-
-<script setup>
-// import { ref } from 'vue';
-
-// const selectedOption = ref('');
+  }
 </script>

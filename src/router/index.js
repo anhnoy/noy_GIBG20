@@ -179,6 +179,57 @@ component: () => import('../components/Contents/Evants/Bill.vue')
   name: 'Detail(modify)_PM',
   component: () => import('../components/Contents/Evants/Information_modification_proposal/Detail(modify)_PM.vue')
 },
+{
+  path: '/proposal_closed',
+  name: 'Proposal_closed',
+  component: () => import('../components/Contents/Evants/Information_modification_proposal/Modify/Proposal_data/Proposal_closed.vue')
+},
+{
+  path: '/proposal_location',
+  name: 'Proposal_location',
+  component: () => import('../components/Contents/Evants/Information_modification_proposal/Modify/Proposal_data/Proposal_location.vue')
+},
+{
+  path: '/proposal_pricing',
+  name: 'Proposal_pricing',
+  component: () => import('../components/Contents/Evants/Information_modification_proposal/Modify/Proposal_data/Proposal_pricing.vue')
+},
+{
+  path: '/proposal_Opening',
+  name: 'Proposal_Opening',
+  component: () => import('../components/Contents/Evants/Information_modification_proposal/Modify/Proposal_data/Proposal_Opening.vue')
+},
+{
+  path: '/proposal_Contact',
+  name: 'Proposal_Contact',
+  component: () => import('../components/Contents/Evants/Information_modification_proposal/Modify/Proposal_data/Proposal_Contact.vue')
+},
+{
+  path: '/proposal_Facility',
+  name: 'Proposal_Facility',
+  component: () => import('../components/Contents/Evants/Information_modification_proposal/Modify/Proposal_data/Proposal_Facility.vue')
+},
+{
+  path: '/proposal_payment',
+  name: 'Proposal_payment',
+  component: () => import('../components/Contents/Evants/Information_modification_proposal/Modify/Proposal_data/Proposal_payment.vue')
+},
+{
+  path:'/Edit_BI_Approved',
+  name: 'Edit_BI_Approved',
+  component: () => import ('../components/Contents/Evants/Information_modification_proposal/Modify/Edit_BI_/Edit_BI_Approved.vue')
+},
+{
+  path:'/edit_BI_Open',
+  name: 'edit_BI_Open',
+  component: () => import ('../components/Contents/Evants/Information_modification_proposal/Modify/Edit_BI_/Edit_BI_Open.vue')
+},
+{
+  path:'/Edit_IB_Approval_denied',
+  name: 'Edit_IB_Approval_denied',
+  component: () => import ('../components/Contents/Evants/Information_modification_proposal/Modify/Edit_BI_/Edit_IB_Approval_denied.vue')
+},
+
 
 
 ]
