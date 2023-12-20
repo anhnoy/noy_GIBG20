@@ -49,7 +49,7 @@
             <th>접속IP</th>
             <th>관리</th>
           </tr>
-          <tr v-for="item in admins" :key="item.id">
+          <tr v-for="item in admins" :key="item.admid">
             <td>
               <input
                 type="checkbox"
@@ -81,16 +81,12 @@
               <p
                 class=""
                 :class="{
-                  NO: item.activation === '0',
-                  YES: item.activation === '1',
+                  NO: item.activation === 'N',
+                  YES: item.activation === 'Y',
                 }"
               >
                 {{
-                  item.activation === "0"
-                    ? "미승인"
-                    : item.activation === "1"
-                    ? "승인"
-                    : ""
+                  item.activation === "N" ? "미승인" : item.activation === "Y" ? "승인" : ""
                 }}
               </p>
             </td>
@@ -102,13 +98,42 @@
                   >수정</v-btn
                 ></router-link
               >
-              <v-btn
+              <v-dialog
+        transition="dialog-bottom-transition"
+        width="auto"
+      >
+        <template v-slot:activator="{ props }">
+          <v-btn
                 size="x-small"
                 flat
-                @click="confirmDelete(item)"
                 class="management"
-                >삭제</v-btn
+                v-bind="props"
               >
+                삭제</v-btn>
+        </template>
+        <template v-slot:default="{ isActive }">
+          <v-card width="360" height="170">
+                    <div class="pt-8">
+                      <v-card-title class="Title_dialog"
+                        >삭제하시겠습니까?</v-card-title
+                      >
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn class="button_dialog_cancel" @click="isActive.value = false">
+                          아니오
+                        </v-btn>
+                        <v-btn
+                          class="button_dialog"
+                          @click="confirmDelete(item.admid)"
+                        >
+                          네
+                        </v-btn>
+                        <v-spacer></v-spacer>
+                      </v-card-actions>
+                    </div>
+                  </v-card>
+        </template>
+      </v-dialog>
             </td>
           </tr>
           <template v-if="admins.length === 0">
@@ -118,6 +143,10 @@
           </template>
         </table>
       </div>
+      <div class="mt-5">
+        <label class="custom-file-label">선택 일괄승인</label>
+      <label class="custom-file-label">선택 일괄미승인</label>
+      </div>  
       <v-pagination
         v-model="page"
         :length="pageCount"
@@ -129,15 +158,19 @@
      <script setup lang="js">
      import { ref , computed, defineExpose } from 'vue';
      import AdminService from '@/services/admin.service';
+     import axios from 'axios';
      import moment from 'moment';
+     import { useRouter } from 'vue-router';
+
+     const router = useRouter();
      const page =ref(1);
    const size =ref(10);
-  const items = ref([]);
   const totalItems = ref(0);
   const admins= ref([]);
   const total = ref(0);
 
   const selectAll = ref(false);
+  
   
   const filterAdmins = (params)=>{searchAdmins(params);}
 
@@ -180,27 +213,34 @@
 
 
   const itemSelected = () => {
-    selectAll.value = items.value.every((item) => item.selected);
+    selectAll.value = admins.value.every((item) => item.selected);
   };
   
   const pageCount = computed(() => Math.ceil(totalItems.value / size.value));
   
   const selectAllItems = () => {
-    items.value.forEach((item) => (item.selected = selectAll.value));
+    admins.value.forEach((item) => (item.selected = selectAll.value));
   };
-  const confirmDelete = (item) => {
-    if (window.confirm('Are you sure you want to delete this item?')) {
-      deleteItem(item);
+  const confirmDelete = (admid) => {
+    router.push({ query: { id: admid } });
+    console.log(admid);
+    try {
+      const response = axios.patch(`http://192.168.100.81:5000/api/admin/delete`, {
+        admid: admid,
+        delete_yn: 'Y',
+      });
+      window.location.reload();
+      console.log(response);
+      console.log("helll");
+    } catch (error) {
+      console.error('Error updating member:', error);
     }
-  };
-  
-  const deleteItem = (item) => {
-    items.value = items.value.filter((i) => i !== item);
   };
 
   const formatTime = (day) => {
   return moment(day, "HH:mm:ss").format("YYYY-MM-DD");
 };
+  
      </script>
     <style scoped>
 </style>
