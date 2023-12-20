@@ -21,7 +21,7 @@
               <span class="Title">최종 접속일</span>
             </v-col>
             <v-col>
-              <span >YYYY-MM-DD HH:MM:SS</span>
+              <span >{{  formatTime(member.logintime) }}</span>
             </v-col>
           </v-row>
           <v-row>
@@ -30,20 +30,24 @@
             </v-col>
             <v-col>
               <input
+              v-model="member.marketing_agree"
                 type="radio"
                 id="Agree"
                 name="marketing"
                 class="hidden-radio"
+                :checked="member.marketing_agree === 'Y'"
               />
-              <label for="Agree" class="radio-label">동의  (YYYY-MM-DD)</label>
+              <label for="Agree" class="radio-label">동의  {{ formatTime(member.marketing_agree_date)}}</label>
 
               <input
+              v-model="member.marketing_agree"
                 type="radio"
                 id="Reject"
                 name="marketing"
                 class="hidden-radio"
+                :checked="member.marketing_agree === 'N'"
               />
-              <label for="Reject" class="radio-label">거부  (YYYY-MM-DD)</label>
+              <label for="Reject" class="radio-label">거부  {{ formatTime(member.marketing_agree_date)}}</label>
             </v-col>
           </v-row>
           <v-row>
@@ -52,20 +56,24 @@
             </v-col>
             <v-col>
               <input
+              v-model="member.night_push_agree"
                 type="radio"
                 id="Agree_night"
                 name="Night_notification"
                 class="hidden-radio"
+                :checked="member.night_push_agree === 'Y'"
               />
-              <label for="Agree_night" class="radio-label">동의  (YYYY-MM-DD)</label>
+              <label for="Agree_night" class="radio-label">동의  {{formatTime(night_push_agree_date)}}</label>
 
               <input
+              v-model="member.night_push_agree"
                 type="radio"
                 id="Reject_night"
                 name="Night_notification"
                 class="hidden-radio"
+                :checked="member.night_push_agree === 'N'"
               />
-              <label for="Reject_night" class="radio-label">거부  (YYYY-MM-DD)</label>
+              <label for="Reject_night" class="radio-label">거부 {{formatTime(night_push_agree_date)}}</label>
             </v-col>
           </v-row>
           <v-row>
@@ -74,18 +82,22 @@
             </v-col>
             <v-col>
               <input
+              v-model="member.activation"
                 type="radio"
                 id="Join"
                 name="Division"
                 class="hidden-radio"
+                :checked="member.activation === '1'"
               />
               <label for="Join" class="radio-label">가입</label>
 
               <input
+              v-model="member.activation"
                 type="radio"
                 id="Secession"
                 name="Division"
                 class="hidden-radio"
+                :checked="member.activation === '0'"
               />
               <label for="Secession" class="radio-label">탈퇴</label>
             </v-col>
@@ -95,7 +107,7 @@
               <span class="Title">가입일시</span>
             </v-col>
             <v-col>
-              <span >YYYY-MM-DD HH:MM:SS</span>
+              <span >{{  formatTime(member.writedate) }}</span>
             </v-col>
           </v-row>
           <v-row>
@@ -151,43 +163,73 @@
     </v-expand-transition>
   </v-card>
 </template>
-<script setup lang="js">
-import { ref, onMounted } from 'vue'
-import axios from "axios"
-import { useRoute } from 'vue-router'
 
+<script>
+import axios from 'axios';
+import { useRoute, useRouter } from 'vue-router';
+import moment from 'moment';
 
-const route = useRoute()
-
-const member =ref({
-  email :'',
-  name :'',
-  phone :'',
-  gender :'',
-  Division :'',
-})
-
-const fetch_single_user = async () => {
-try {
-  const response = await axios.get(`http://192.168.100.81:5000/api/member/${route.params.id}`);
-  console.log(response.data)
-  member.value.email = response.data.email
-  member.value.name = response.data.name
-  member.value.phone = response.data.phone
-  member.value.gender = response.data.gender
-  member.value.Division = response.data.device_id
-} catch (err) {
-  console.error(err);
-}
+export default {
+  data() {
+    return {
+      show: false,
+      route: useRoute(),
+      router: useRouter(),
+      member: {
+        night_push_agree: '',
+        night_push_agree_date: '',
+        writedate: '',
+        logintime: '',
+        marketing_agree:'',
+        marketing_agree_date:'',
+        activation:'',
+      },
+    };
+  },
+  methods: {
+    async fetch_single_admin() {
+      try {
+        const response = await axios.get(`http://192.168.100.81:5000/api/member/detail/${this.route.params.id}`);
+        console.log(response.data);
+        this.member.night_push_agree = response.data.night_push_agree;
+        this.member.night_push_agree_date = response.data.night_push_agree_date;
+        this.member.marketing_agree = response.data.marketing_agree;
+        this.member.marketing_agree_date = response.data.marketing_agree_date;
+        this.member.writedate = response.data.writedate;
+        this.member.logintime = response.data.logintime;
+        this.member.activation = response.data.activation;
+        console.log(response.data.writedate)
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    formatTime(day) {
+      return moment(day, "HH:mm:ss").format("YYYY-MM-DD");
+    },
+    // async edit_member() {
+    //   try {
+    //     const response = await axios.patch(`http://192.168.100.81:5000/api/member/update`, {
+    //       mid: this.route.params.id,
+    //       name: this.member.name,
+    //       phone: this.member.phone,
+    //       gender: this.member.gender
+    //     });
+    //     setTimeout(async() => {
+    //       await this.router.push('/member');
+    //     console.log(response);
+    //     }, 100);
+    //   } catch (error) {
+    //     console.error('Error updating member:', error);
+    //   }
+    // },
+  },
+  mounted() {
+    this.fetch_single_admin();
+  },
+  
 };
 
-onMounted(() => {
-fetch_single_user(); // Invoke the function here
-});
-
- const show = ref(false);
-
-
 </script>
+
   <style scoped>
 </style>

@@ -6,14 +6,13 @@
       </p>
       <v-spacer></v-spacer>
       <div class="item_per_page">
-                <select v-model="size" id="size" @update:model-value="size = parseInt($event, 10)">
-                  <option value="5">5 건씩 조회</option>
-                  <option value="10">10 건씩 조회</option>
-                  <option value="30">30 건씩 조회</option>
-                  <option value="50">50 건씩 조회</option>
-                  <option value="100">100 건씩 조회</option>
-                </select>
-            </div>
+        <select v-model="state.size" id="size" @change="handlePageSizeChange">
+          <option value="10">10 건씩 조회</option>
+          <option value="30">30 건씩 조회</option>
+          <option value="50">50 건씩 조회</option>
+          <option value="100">100 건씩 조회</option>
+        </select>
+      </div>
     </v-card-actions>
     <v-container fluid>
       <div>
@@ -30,15 +29,15 @@
             <th>탈퇴일</th>
             <th>관리</th>
           </tr>
-          <tr v-for="item in visibleItems" :key="item.mid">
+          <tr v-for="item in members" :key="item.mid">
             <td>{{ item.mid }}</td>
-            <td>{{ item.device_id }}</td>
+            <td>{{  item.divid === 0 ? "소셜 로그인" : item.divid === 1 ? "일반" : "" }}</td>
             <td>
               <router-link
                 :to="`/modify(member)/${item.mid}`"
                 class="no-underline"
               >
-                <p class="ID">{{ item.email }}</p>
+                <p class="ID">{{ maskID(item.id) }}</p>
               </router-link>
             </td>
             <td>
@@ -46,55 +45,66 @@
                 :to="`/modify(member)/${item.mid}`"
                 class="no-underline"
               >
-                <p class="Member_name">{{ item.name }}</p>
+                <p class="Member_name">{{ maskName(item.name) }}</p>
               </router-link>
             </td>
-            <td>{{ item.phone }}</td>
+            <td>{{ maskPhone(item.phone) }}</td>
             <td>
-              <p>{{ item.Last_access_date }}</p>
+              <p>{{ formatTime(item.logintime) }}</p>
             </td>
+            <td>
+  <p>
+    {{
+      item.activation === 0 ? "탈퇴" :
+      item.activation === 1 ? "" :
+      ""
+    }}
+  </p>
+</td>
             <td>
               <p>
-                {{ item.Situation }}
+                {{ formatTime(item.writedate) }}
               </p>
             </td>
-            <td>
-              <p>
-                {{ item.Join_date }}
-              </p>
-            </td>
-            <td>{{ item.Withdrawal_date }}</td>
+            <td>   {{ formatTime(item.sec_date) }}</td>
             <td>
               <router-link :to="`/modify(member)/${item.mid}`">
                 <v-btn size="x-small" flat class="management"
                   >수정</v-btn
                 ></router-link
               >
-                <v-btn size="x-small" flat class="management" @click="dialog = true">
-                  삭제
-                  <v-dialog v-model="dialog" width="auto">
-                    <v-card width="360" height="170">
-                      <div class="pt-8">
-                        <v-card-title class="Title_dialog"
-                          >삭제하시겠습니까?</v-card-title
+              <v-dialog transition="dialog-bottom-transition" width="auto">
+                <template v-slot:activator="{ props }">
+                  <v-btn size="x-small" flat class="management" v-bind="props"
+                    >삭제</v-btn
+                  >
+                </template>
+                <template v-slot:default="{ isActive }">
+                  <v-card width="360" height="170">
+                    <div class="pt-8">
+                      <v-card-title class="Title_dialog"
+                        >삭제하시겠습니까?</v-card-title
+                      >
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                          class="button_dialog_cancel"
+                          @click="isActive.value = false"
                         >
-                        <v-card-actions>
-                          <v-spacer></v-spacer>
-                          <v-btn class="button_dialog_cancel" @click="close">
-                            아니오
-                          </v-btn>
-                          <v-btn
-                            class="button_dialog"
-                            @click="confirmDelete(item.mid)"
-                          >
-                            네
-                          </v-btn>
-                          <v-spacer></v-spacer>
-                        </v-card-actions>
-                      </div>
-                    </v-card>
-                  </v-dialog>
-                </v-btn>
+                          아니오
+                        </v-btn>
+                        <v-btn
+                          class="button_dialog"
+                          @click="confirmDelete(item.mid)"
+                        >
+                          네
+                        </v-btn>
+                        <v-spacer></v-spacer>
+                      </v-card-actions>
+                    </div>
+                  </v-card>
+                </template>
+              </v-dialog>
             </td>
           </tr>
           <template v-if="members.length === 0">
@@ -104,7 +114,54 @@
           </template>
         </table>
       </div>
-      <v-pagination v-model="page" :length="totalCount" ></v-pagination>
+      <div style="text-align: center; margin: 20px">
+        <button
+          @click="loadPreviousPage"
+          :disabled="state.page === 0"
+          style="
+            width: 50px;
+            height: 50px;
+            border: 1px solid #e3e8ed;
+            cursor: pointer;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+          "
+        >
+          <v-icon :style="{color: state.page === 0 ? '#8899a8' : '#242424' }">mdi-chevron-double-left</v-icon>
+        </button>
+        <span v-for="pageNumber in totalPages" :key="pageNumber">
+  <button
+    @click="goToPage(pageNumber)"
+    style="
+      width: 50px;
+      height: 50px;
+      border: 1px solid #e3e8ed;
+      cursor: pointer;
+      background-color: #e3e8edcc;
+      color: #333333;
+    "
+    :style="{ backgroundColor: pageNumber === state.page+1 ? '#FFFFFF' : '#e3e8edcc', color: pageNumber === state.page+1 ? '#346DDB' : '#242424' }"
+  >
+    {{ pageNumber }}
+  </button>
+</span>
+
+        <button
+          @click="loadNextPage"
+          :disabled="members.length < state.size"
+          style="
+            width: 50px;
+            height: 50px;
+            border: 1px solid #e3e8ed;
+            cursor: pointer;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+          "
+        >
+          <v-icon  :style="{color: members.length < state.size ? '#8899a8' : '#242424' }">mdi-chevron-double-right</v-icon>
+        </button>
+      </div>
+      <!-- <v-pagination v-model="page" :length="totalCount"></v-pagination> -->
     </v-container>
   </v-card>
 </template>
@@ -112,64 +169,100 @@
 <script setup lang="js">
 
   import MemberService from '@/services/member.service'
+  import moment from 'moment';
   import axios from 'axios';
-  import { ref, computed, defineExpose} from 'vue';
+  import { ref, defineExpose, reactive, watch} from 'vue';
   import { useRouter } from 'vue-router';
 
-   const page =ref(1);
-   const size =ref(5);
+  //  const page =ref(1);
+  //  const size =ref(5);
    const router = useRouter();
    const totalCount = ref(0);
    const members= ref([]);
    const mid= ref([]);
-   const dialog = ref(false);
 
-   const visibleItems = computed(() => {
-    const startIndex = (page.value - 1) * size.value;
-    const endIndex = startIndex + size.value;
-    return members.value.slice(startIndex, endIndex);
-  });
-
-
+  const state = reactive({
+      start: '',
+      end: '',
+      status: '',
+      id: '',
+      name: '',
+      phone: '',
+      page: 0,
+      size: 10,
+      type: '',
+    });
 
   const filterMembers = (params)=>{searchMembers(params);}
-
-
-  const loadMembers = async ()=>{
-  const start = '';
-  const end = '';
-  const status = '';
-  const id = '';
-  const name = '';
-  const phone = '';
-  const page = 0;
-  const limit = size.value;
-
-  try{
-    const resp = await MemberService.getMembers(start,end, id,  name, phone, status, page, limit);
-    members.value = resp.data.data;
-    totalCount.value = (resp.data.totalCount+limit-1)/limit;
-   
-    mid.value = resp.data.data.map(item => item.mid);
-    console.log(resp.data.data.map(item => item.mid))
-  }
-  catch(error){
-    console.error('Exception while try to search members',error);}
-  }
   
-  loadMembers();
-
+  
   const searchMembers = async(params)=>{
   try{
-    const resp = await MemberService.getMembers(params.start,params.end,  params.id,  params.name, params.phone, params.status, params.page, params.size);
+    const resp = await MemberService.getMembers(params.start, params.end,  params.id,  params.name, params.phone, params.status, params.page, params.size, params.type);
     members.value = resp.data.data;
     totalCount.value = resp.data.totalCount;
+    console.log(resp.data.data)
   }
   catch(error){
     console.error('Exception  while try to search members',error);}}
 
 
   defineExpose({filterMembers});
+
+
+
+  const loadMembers = async () => {
+      try {
+        const resp = await MemberService.getMembers(
+          state.start,
+          state.end,
+          state.id,
+          state.name,
+          state.phone,
+          state.status,
+          state.page,
+          state.size,
+          state.type,
+        );
+
+        members.value = resp.data.data;
+        totalCount.value = resp.data.totalCount;
+        mid.value = resp.data.data.map(item => item.mid);
+        console.log(resp.data.data.map(item => item.mid));
+      } catch (error) {
+        console.error('Exception while trying to search members', error);
+      }
+    };
+
+    const loadNextPage = () => {
+      state.page++;
+      loadMembers();
+    };
+
+    const loadPreviousPage = () => {
+      if (state.page > 0) {
+        state.page--;
+        loadMembers();
+      }
+    };
+
+    const goToPage = (pageNumber) => {
+  state.page = pageNumber - 1; // Adjust the page number to start from 0
+  loadMembers();
+};
+
+    const handlePageSizeChange = () => {
+  state.page = 0; // Reset to the first page when the page size changes
+  loadMembers();
+};
+
+    // Watch for changes in the total number of members and recalculate total pages
+    const totalPages = ref(0);
+  watch(totalCount, () => {
+  totalPages.value = Math.ceil(totalCount.value / state.size);
+  });
+
+  loadMembers();
 
   const confirmDelete = (mid) => {
     router.push({ query: { id: mid } });
@@ -186,13 +279,26 @@
     }
   };
 
-  const close = () => {
-  dialog.value = false;
-};
-
+  const maskID = (id) => {
+    const firstTwoChars = id.slice(0, 2);
+    const maskedRest = '*'.repeat(Math.max(0, id.length - 2));
+    return `${firstTwoChars}${maskedRest}`;
+  };
   
+  const maskName = (name) => {
+    const firstTwoChars = name.slice(0, 1);
+    const maskedRest = '*'.repeat(Math.max(0, name.length - 1));
+    return `${firstTwoChars}${maskedRest}`;
+  };
+  
+  const maskPhone = (phone) => {
+    const firstTwoChars = phone.slice(0, 8);
+    const maskedRest = '*'.repeat(Math.max(0, phone.length - 8));
+    return `${firstTwoChars}${maskedRest}`;
+  };
 
-
-   </script>
-  <style scoped>
-</style>
+  const formatTime = (day) => {
+  return moment(day, "HH:mm:ss").format("YYYY-MM-DD");
+};
+</script>
+<style scoped></style>

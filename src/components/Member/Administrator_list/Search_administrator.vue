@@ -38,21 +38,21 @@
                   v-model="searchKeywordID"
                   type="text"
                   class="input"
-                  placeholder="검색어를 입력하세요 ID"
+                  placeholder="검색어를 입력하세요"
                 />
                 <input
                   v-if="selectedWord === 'Member'"
                   v-model="searchKeywordName"
                   type="text"
                   class="input"
-                  placeholder="검색어를 입력하세요 Name"
+                  placeholder="검색어를 입력하세요"
                 />
                 <input
                   v-if="selectedWord === 'Phone'"
                   v-model="searchKeywordPhone"
                   type="text"
                   class="input"
-                  placeholder="검색어를 입력하세요 Phone"
+                  placeholder="검색어를 입력하세요"
                 />
                 </div>
               </v-row>
