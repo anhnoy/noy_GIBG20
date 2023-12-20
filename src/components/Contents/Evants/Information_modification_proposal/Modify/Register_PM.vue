@@ -87,6 +87,7 @@
                   @click="performSearch"
                   class="btn2"
                   >조회</v-btn
+                  
                 >
               </v-col>
             </v-row>
