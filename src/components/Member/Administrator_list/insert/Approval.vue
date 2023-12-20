@@ -23,17 +23,21 @@
             </v-col>
             <v-col>
               <input
+                v-model="admin.activation"
                 type="radio"
-                id="Approval"
-                name="store"
+                id="approval"
+                name="approval"
+                value="Y"
                 class="hidden-radio"
               />
-              <label for="Approval" class="radio-label">승인</label>
+              <label for="approval" class="radio-label">승인</label>
 
               <input
+                v-model="admin.activation"
                 type="radio"
                 id="Not_approved"
-                name="store"
+                name="Not_approved"
+                value="N"
                 class="hidden-radio"
               />
               <label for="Not_approved" class="radio-label">미승인</label>
@@ -44,12 +48,38 @@
     </v-expand-transition>
   </v-card>
 </template>
-         <script setup lang="js">
-         import { ref } from 'vue';
-         
-         const show = ref(false);
-  
-         </script>
-        <style scoped>
+<script >
+import axios from "axios";
+import { useRoute, useRouter } from "vue-router";
+
+export default {
+  data() {
+    return {
+      show: false,
+      route: useRoute(),
+      router: useRouter(),
+      admin: {
+        activation: "Y",
+      },
+    };
+  },
+  methods: {
+    async add_admin() {
+      try {
+        const response = await axios.post(`http://192.168.100.81:5000/api/admin/add`, {
+          activation: this.admin.activation,
+        });
+        setTimeout(async() => {
+          await this.router.push('/administrator');
+        console.log(response);
+        }, 100);
+      } catch (error) {
+        console.error('Error updating member:', error);
+      }
+    },
+  },
+};
+</script>
+<style scoped>
 
 </style>

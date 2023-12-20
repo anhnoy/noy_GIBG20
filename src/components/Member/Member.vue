@@ -12,7 +12,6 @@
         <div class="pb-5">
           <Member_table ref="memberTable"/>
         </div>
-  
       </div>
     </v-app>
   </template>
@@ -28,7 +27,6 @@
     console.log(params);
     memberTable.value.filterMembers(params);
   }
-
   
   </script>
   <style scoped>

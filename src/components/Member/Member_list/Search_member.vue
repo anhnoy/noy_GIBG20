@@ -26,6 +26,7 @@
                 <span class="Title mt-5">검색어</span>
                 <div class="dropdown">
                   <select v-model="selectedWord" @change="clearInput">
+                    <option value="All">전체</option>
                     <option value="ID">아이디</option>
                     <option value="Member">회원명</option>
                     <option value="Phone">휴대폰번호</option>
@@ -34,25 +35,32 @@
 
                 <div class="ml-10 mt-3">
                   <input
+                  v-if="selectedWord === 'All'"
+                  v-model="searchKeywordAll"
+                  type="text"
+                  class="input"
+                  placeholder="검색어를 입력하세요"
+                />
+                  <input
                   v-if="selectedWord === 'ID'"
                   v-model="searchKeywordID"
                   type="text"
                   class="input"
-                  placeholder="검색어를 입력하세요 ID"
+                  placeholder=" 아이디를 입력하세요."
                 />
                 <input
                   v-if="selectedWord === 'Member'"
                   v-model="searchKeywordName"
                   type="text"
                   class="input"
-                  placeholder="검색어를 입력하세요 Name"
+                  placeholder="회원명을 입력하세요."
                 />
                 <input
                   v-if="selectedWord === 'Phone'"
                   v-model="searchKeywordPhone"
                   type="text"
                   class="input"
-                  placeholder="검색어를 입력하세요 Phone"
+                  placeholder="휴대폰번호를 입력하세요."
                 />
                 </div>
               </v-row>
@@ -98,7 +106,7 @@
           </v-row>
           <v-row>
             <v-col align="center" justify="center">
-              <v-btn variant="outlined" color="#346DDB" class="button">
+              <v-btn variant="outlined" color="#346DDB" class="button" @click="resetForm">
                 초기화
               </v-btn>
               <v-btn
@@ -123,7 +131,8 @@ import {ref,defineEmits} from 'vue';
  const show = ref(false);
 // Your existing data properties
 const selectedStatus = ref('');
-const selectedWord = ref('ID');
+const selectedWord = ref('All');
+const searchKeywordAll = ref('');
 const searchKeywordID = ref('');
 const searchKeywordName = ref('');
 const searchKeywordPhone = ref('');
@@ -134,6 +143,19 @@ const clearInput = () => {
   searchKeywordID.value = '';
   searchKeywordName.value = '';
   searchKeywordPhone.value = '';
+  searchKeywordAll.value = '';
+};
+
+const resetForm = () => {
+  startDate.value = '';
+  endDate.value = '';
+  searchKeywordAll.value = '';
+  searchKeywordID.value = '';
+  searchKeywordName.value = '';
+  searchKeywordPhone.value = '';
+  selectedStatus.value = '';
+  selectedWord.value = 'All';
+  clearInput();
 };
 
 const emit = defineEmits([
@@ -143,6 +165,7 @@ const emit = defineEmits([
 const searchMembers = () => {
   const start = startDate.value;
   const end = endDate.value;
+  const type = searchKeywordAll.value;
   const id = searchKeywordID.value;
   const name = searchKeywordName.value;
   const phone = searchKeywordPhone.value;
@@ -157,7 +180,8 @@ const searchMembers = () => {
     phone:phone,
     status:status,
     page:page,
-    size:size
+    size:size,
+    type:type,
   };
   emit('filterMembers', params);
 

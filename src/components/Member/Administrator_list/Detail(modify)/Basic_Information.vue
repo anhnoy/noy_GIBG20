@@ -119,6 +119,22 @@ export default {
         console.error(err);
       }
     },
+    async edit_admin() {
+      try {
+        const response = await axios.patch(`http://192.168.100.81:5000/api/admin/update`, {
+          admid: this.route.params.id,
+          name: this.admin.name,
+          phone: this.admin.phone,
+          type: this.admin.type
+        });
+        setTimeout(async() => {
+          await this.router.push('/administrator');
+        console.log(response);
+        }, 100);
+      } catch (error) {
+        console.error('Error updating member:', error);
+      }
+    },
   },
   mounted() {
     this.fetch_single_admin();

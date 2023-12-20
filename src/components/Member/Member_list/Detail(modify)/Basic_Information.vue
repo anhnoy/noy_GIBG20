@@ -26,9 +26,9 @@
                 type="radio"
                 id="common"
                 name="common"
-                value="일반"
+                value="1"
                 class="hidden-radio"
-                :checked="member.Division === '일반'"
+                :checked="member.Division === '1'"
               />
               <label for="common" class="radio-label">일반</label>
 
@@ -36,10 +36,10 @@
                 v-model="member.Division"
                 type="radio"
                 id="Social"
-                value="소셜 로그인"
+                value="0"
                 name="Social"
                 class="hidden-radio"
-                :checked="member.Division === '소셜 로그인'"
+                :checked="member.Division === '2'"
               />
               <label for="Social" class="radio-label">소셜 로그인</label>
             </v-col>
@@ -130,11 +130,12 @@ export default {
         name: '',
         phone: '',
         gender: '',
+        Division: '',
       },
     };
   },
   methods: {
-    async fetch_single_user() {
+    async fetch_single_member() {
       try {
         const response = await axios.get(`http://192.168.100.81:5000/api/member/detail/${this.route.params.id}`);
         console.log(response.data);
@@ -142,7 +143,7 @@ export default {
         this.member.name = response.data.name;
         this.member.phone = response.data.phone;
         this.member.gender = response.data.gender;
-        this.member.Division = response.data.device_id;
+        this.member.Division = response.data.divid;
       } catch (err) {
         console.error(err);
       }
@@ -153,7 +154,8 @@ export default {
           mid: this.route.params.id,
           name: this.member.name,
           phone: this.member.phone,
-          gender: this.member.gender
+          gender: this.member.gender,
+          divid: this.member.Division
         });
         setTimeout(async() => {
           await this.router.push('/member');
@@ -165,7 +167,7 @@ export default {
     },
   },
   mounted() {
-    this.fetch_single_user();
+    this.fetch_single_member();
   },
 };
 </script>

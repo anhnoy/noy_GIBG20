@@ -9,32 +9,63 @@
         </p>
       </div>
       <div class="pb-5">
-        <Basic_Information />
+        <Basic_Information ref="Basic_Information"/>
       </div>
       <div class="pb-5">
-        <Approval />
+        <Approval ref="Approval"/>
       </div>
       <div class="pb-5">
-        <Permission />
+        <Permission ref="Permission"/>
       </div>
       <v-row>
         <v-col align="center" justify="center">
-          <v-btn variant="outlined" color="#346DDB" class="button" @click="this.$router.push({ path: '/administrator' })" >
-            목록
+          <form @submit.prevent="edit_admin">
+          <v-btn
+            variant="outlined"
+            color="#346DDB"
+            class="button"
+            @click="this.$router.push({ path: '/administrator' })"
+          >
+          목록
           </v-btn>
-          <v-btn elevation="0" color="#346DDB" class="button">
+          <v-btn
+              type="submit"
+              color="#346DDB" class="button"
+            >
             수정
-          </v-btn>
+            </v-btn>
+          </form>
         </v-col>
       </v-row>
     </div>
   </v-app>
 </template>
-<script setup lang="js">
+<script >
 import Basic_Information from "@/components/Member/Administrator_list/Detail(modify)/Basic_Information.vue";
 import Approval from "@/components/Member/Administrator_list/Detail(modify)/Approval.vue";
 import Permission from "@/components/Member/Administrator_list/Detail(modify)/Permission.vue";
 
+export default {
+  data() {
+    return {};
+  },
+  components: {
+    Basic_Information,
+    Approval,
+    Permission,
+  },
+  methods: {
+    edit_admin() {
+      if (this.$refs.Basic_Information) {
+        this.$refs.Basic_Information.edit_admin();
+        this.$refs.Approval.edit_admin();
+        this.$refs.Permission.edit_admin();
+      } else {
+        console.error("Unable to find the test2 component.");
+      }
+    },
+  },
+};
 
 </script>
   <style scoped>
