@@ -100,7 +100,7 @@
               <v-row>
                 <p class="Title">구분</p>
                 <span class="mt-1"> </span>
-                <input
+                <input 
                   type="checkbox"
                   id="entire_MP"
                   name="entire_name"
@@ -181,7 +181,7 @@
               <v-row>
                 <p class="Title">상태</p>
                 <span class="mt-1"> </span>
-                <input
+                <input 
                   type="radio"
                   id="entire"
                   name="hidden"
